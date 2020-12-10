@@ -57,6 +57,13 @@ public class ZTestController {
         return 0;
     }
 
+
+    public void testGitHub(){
+
+        System.out.println("测试 git hub");
+    }
+
+
     public void test(){
         System.out.println("  测试github");
     }
