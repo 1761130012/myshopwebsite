@@ -67,4 +67,8 @@ public class ZTestController {
 
     }
 
+
+    public void test(){
+        System.out.println("  测试github");
+    }
 }

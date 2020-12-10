@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="maven-custom-service" />
+        <module name="maven-custom-web" />
+        <module name="maven-custom-dao" />
+        <module name="maven-custom-common" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="maven-custom-common" target="8" />
+      <module name="maven-custom-dao" target="1.7" />
+      <module name="maven-custom-service" target="1.7" />
+      <module name="maven-custom-web" target="1.7" />
+      <module name="myshopwebsite" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/maven-custom-common/maven-custom-common.iml" filepath="$PROJECT_DIR$/maven-custom-common/maven-custom-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/maven-custom-dao/maven-custom-dao.iml" filepath="$PROJECT_DIR$/maven-custom-dao/maven-custom-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/maven-custom-service/maven-custom-service.iml" filepath="$PROJECT_DIR$/maven-custom-service/maven-custom-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/maven-custom-web/maven-custom-web.iml" filepath="$PROJECT_DIR$/maven-custom-web/maven-custom-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/myshopwebsite.iml" filepath="$PROJECT_DIR$/myshopwebsite.iml" />
+    </modules>
+  </component>
+</project>
