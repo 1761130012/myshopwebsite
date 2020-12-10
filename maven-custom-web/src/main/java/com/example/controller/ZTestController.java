@@ -56,4 +56,11 @@ public class ZTestController {
         System.out.println("值："+integers);
         return 0;
     }
+
+
+    public void testGitHub(){
+
+        System.out.println("测试 git hub");
+    }
+
 }
