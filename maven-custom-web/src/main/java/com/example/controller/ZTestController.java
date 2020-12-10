@@ -64,6 +64,12 @@ public class ZTestController {
     }
 
 
+    public void testGitHubsdfv(){
+
+        System.out.println("测试 sdfsdfsfgit hub");
+    }
+
+
     public void test(){
         System.out.println("  测试github");
     }
