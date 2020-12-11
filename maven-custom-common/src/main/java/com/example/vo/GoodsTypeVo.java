@@ -15,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -31,7 +31,7 @@ public class GoodsTypeVo implements Serializable {
     private Integer typeId;
 
     /**
-     * 商品类型名
+     * 商品名
      */
     @TableField("name")
     private String name;

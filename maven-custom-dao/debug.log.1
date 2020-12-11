@@ -1,19 +1,20 @@
-2020-12-10 09:25:58  [ main:1963 ] - [ DEBUG ]  ====> Parameters: 1(Integer)
-2020-12-10 09:25:58  [ main:1966 ] - [ DEBUG ]  <====      Total: 1
-2020-12-10 09:25:58  [ main:1969 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@45bd4753]
-2020-12-10 09:29:38  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
-2020-12-10 09:29:39  [ main:1096 ] - [ DEBUG ]  Creating a new SqlSession
-2020-12-10 09:29:39  [ main:1103 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@25fd6d1e] was not registered for synchronization because synchronization is not active
-2020-12-10 09:29:39  [ main:1184 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-12-10 09:29:39  [ main:1814 ] - [ INFO ]  {dataSource-1} inited
-2020-12-10 09:29:39  [ main:1818 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@4f20b022] will not be managed by Spring
-2020-12-10 09:29:39  [ main:1826 ] - [ DEBUG ]  ==>  Preparing: SELECT * FROM goods
-2020-12-10 09:29:39  [ main:1851 ] - [ DEBUG ]  ==> Parameters: 
-2020-12-10 09:29:40  [ main:1877 ] - [ DEBUG ]  ====>  Preparing: SELECT type_id,name FROM goods_type WHERE type_id=?
-2020-12-10 09:29:40  [ main:1878 ] - [ DEBUG ]  ====> Parameters: 1(Integer)
-2020-12-10 09:29:40  [ main:1882 ] - [ DEBUG ]  <====      Total: 1
-2020-12-10 09:29:40  [ main:1884 ] - [ DEBUG ]  <==      Total: 1
-2020-12-10 09:29:40  [ main:1884 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@25fd6d1e]
-2020-12-10 11:33:21  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
-2020-12-10 11:33:23  [ main:1374 ] - [ DEBUG ]  Creating a new SqlSession
-2020-12-10 11:33:23  [ main:1382 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@144ee8a7] was not registered for synchronization because synchronization is not active
+2020-12-10 11:33:23  [ main:1474 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-12-10 11:33:23  [ main:2118 ] - [ INFO ]  {dataSource-1} inited
+2020-12-10 11:33:23  [ main:2122 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@3c7d8a4] will not be managed by Spring
+2020-12-10 11:33:23  [ main:2131 ] - [ DEBUG ]  ==>  Preparing: SELECT goods_id,name,type_id,price,remark FROM goods
+2020-12-10 11:33:23  [ main:2156 ] - [ DEBUG ]  ==> Parameters: 
+2020-12-10 11:33:24  [ main:2182 ] - [ DEBUG ]  <==      Total: 7
+2020-12-10 11:33:24  [ main:2184 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@144ee8a7]
+2020-12-11 14:11:16  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2020-12-11 14:11:16  [ main:695 ] - [ WARN ]  Can not find table primary key in Class: "com.example.vo.TAreaVo".
+2020-12-11 14:11:17  [ main:718 ] - [ WARN ]  Can not find table primary key in Class: "com.example.vo.TCityVo".
+2020-12-11 14:11:17  [ main:740 ] - [ WARN ]  Can not find table primary key in Class: "com.example.vo.TProvinceVo".
+2020-12-11 14:11:17  [ main:1508 ] - [ DEBUG ]  Creating a new SqlSession
+2020-12-11 14:11:17  [ main:1514 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57bdceaa] was not registered for synchronization because synchronization is not active
+2020-12-11 14:11:17  [ main:1604 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-12-11 14:11:18  [ main:2363 ] - [ INFO ]  {dataSource-1} inited
+2020-12-11 14:11:18  [ main:2367 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@55d99dc3] will not be managed by Spring
+2020-12-11 14:11:18  [ main:2376 ] - [ DEBUG ]  ==>  Preparing: SELECT goods_id,name,type_id,price,remark FROM goods
+2020-12-11 14:11:18  [ main:2400 ] - [ DEBUG ]  ==> Parameters: 
+2020-12-11 14:11:18  [ main:2425 ] - [ DEBUG ]  <==      Total: 7
+2020-12-11 14:11:18  [ main:2429 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@57bdceaa]

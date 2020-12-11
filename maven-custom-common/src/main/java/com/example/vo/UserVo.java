@@ -1,6 +1,5 @@
 package com.example.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -9,6 +8,7 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -28,11 +28,11 @@ public class UserVo implements Serializable {
     /**
      * 用户id
      */
-    @TableId(value = "user_id", type = IdType.AUTO)
+    @TableId("user_id")
     private Integer userId;
 
     /**
-     * 用户登录名  （账号：英文字符串或加数字）zhangsan123
+     * 用户登录名
      */
     @TableField("login_name")
     private String loginName;
@@ -59,7 +59,7 @@ public class UserVo implements Serializable {
      * 创建时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
 
 }

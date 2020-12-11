@@ -15,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -37,7 +37,7 @@ public class WarehouseShopVo implements Serializable {
     private Integer warehouseId;
 
     /**
-     * 商品id 一个仓库 唯一商品id
+     * 商品id
      */
     @TableField("goods_id")
     private Integer goodsId;
@@ -46,13 +46,13 @@ public class WarehouseShopVo implements Serializable {
      * 商品出厂价
      */
     @TableField("factory_price")
-    private Float factoryPrice;
+    private Double factoryPrice;
 
     /**
      * 商品存量
      */
-    @TableField("count")
-    private Integer count;
+    @TableField("goods_count")
+    private Integer goodsCount;
 
 
 }

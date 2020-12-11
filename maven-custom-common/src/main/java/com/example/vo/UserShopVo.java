@@ -15,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -39,11 +39,11 @@ public class UserShopVo implements Serializable {
     /**
      * 商品id
      */
-    @TableField("shop_id")
-    private Integer shopId;
+    @TableField("goods_id")
+    private Integer goodsId;
 
     /**
-     * 状态 0 显示  1 默认选中
+     * 状态
      */
     @TableField("state")
     private Integer state;

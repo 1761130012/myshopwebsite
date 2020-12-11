@@ -8,7 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -16,7 +17,7 @@ import java.time.LocalDate;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -46,26 +47,26 @@ public class PurchaseShopVo implements Serializable {
     /**
      * 商品编号
      */
-    @TableField("shop_id")
-    private Integer shopId;
+    @TableField("goods_id")
+    private Integer goodsId;
 
     /**
      * 商品数量
      */
-    @TableField("shop_count")
-    private Integer shopCount;
+    @TableField("goods_count")
+    private Integer goodsCount;
 
     /**
      * 出厂价
      */
     @TableField("factory_price")
-    private Float factoryPrice;
+    private Double factoryPrice;
 
     /**
      * 生产日期
      */
     @TableField("create_time")
-    private LocalDate createTime;
+    private Date createTime;
 
     /**
      * 保质期

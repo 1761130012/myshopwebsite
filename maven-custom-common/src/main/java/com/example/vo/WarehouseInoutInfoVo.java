@@ -15,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -31,19 +31,19 @@ public class WarehouseInoutInfoVo implements Serializable {
     private Integer id;
 
     /**
-     * 仓库编号 
+     * 仓库编号
      */
     @TableField("warehouse_id")
     private Integer warehouseId;
 
     /**
-     * 采购编号 与订单编号 选一 没有默认0
+     * 采购编号
      */
     @TableField("pur_id")
     private String purId;
 
     /**
-     * 订单编号  与采购编号 选一 没有默认0
+     * 订单编号
      */
     @TableField("order_id")
     private String orderId;
@@ -57,8 +57,8 @@ public class WarehouseInoutInfoVo implements Serializable {
     /**
      * 商品出厂价
      */
-    @TableField("goods_price")
-    private Float goodsPrice;
+    @TableField("factory_price")
+    private Double factoryPrice;
 
     /**
      * 进出库量
@@ -67,7 +67,7 @@ public class WarehouseInoutInfoVo implements Serializable {
     private Integer count;
 
     /**
-     * 状态 0 入库 1 出库
+     * 状态
      */
     @TableField("state")
     private Integer state;

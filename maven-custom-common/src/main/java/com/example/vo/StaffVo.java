@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -68,7 +69,7 @@ public class StaffVo implements Serializable {
     private String phone;
 
     /**
-     * 员工性别 0男 1 女 
+     * 员工性别
      */
     @TableField("sex")
     private Integer sex;
@@ -77,7 +78,7 @@ public class StaffVo implements Serializable {
      * 创建时间
      */
     @TableField("create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
 
 }

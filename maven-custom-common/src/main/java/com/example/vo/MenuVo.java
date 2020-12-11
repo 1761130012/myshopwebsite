@@ -15,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -43,13 +43,13 @@ public class MenuVo implements Serializable {
     private String url;
 
     /**
-     * 菜单类型 （M目录 C菜单 F按钮）
+     * 菜单类型
      */
     @TableField("type")
     private String type;
 
     /**
-     * 权限标识 例如：（system:user:add）
+     * 权限标识
      */
     @TableField("perms")
     private String perms;

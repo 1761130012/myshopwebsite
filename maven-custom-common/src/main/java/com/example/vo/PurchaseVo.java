@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -46,16 +47,16 @@ public class PurchaseVo implements Serializable {
      * 采购日期
      */
     @TableField("data_time")
-    private LocalDateTime dataTime;
+    private Date dataTime;
 
     /**
      * 采购总金额
      */
     @TableField("money")
-    private Float money;
+    private Double money;
 
     /**
-     * 采购状态 0待审批,1通过 ,2驳回
+     * 采购状态
      */
     @TableField("state")
     private Integer state;
@@ -63,17 +64,17 @@ public class PurchaseVo implements Serializable {
     /**
      * 审批人
      */
-    @TableField("approval_staff_id")
-    private Integer approvalStaffId;
+    @TableField("apr_staff_id")
+    private Integer aprStaffId;
 
     /**
      * 审批日期
      */
-    @TableField("approval_date")
-    private LocalDateTime approvalDate;
+    @TableField("apr_date")
+    private Date aprDate;
 
     /**
-     * 删除状态 0:显示,1: 已经删除,隐藏
+     * 删除状态
      */
     @TableField("is_delete")
     private Integer isDelete;

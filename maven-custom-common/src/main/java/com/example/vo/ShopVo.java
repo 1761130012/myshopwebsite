@@ -15,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -37,7 +37,25 @@ public class ShopVo implements Serializable {
     private String name;
 
     /**
-     * 店铺地址
+     * 省
+     */
+    @TableField("province_id")
+    private Integer provinceId;
+
+    /**
+     * 市
+     */
+    @TableField("city_id")
+    private Integer cityId;
+
+    /**
+     * 区/县
+     */
+    @TableField("area_id")
+    private Integer areaId;
+
+    /**
+     * 店铺详细地址
      */
     @TableField("address")
     private String address;
@@ -61,7 +79,7 @@ public class ShopVo implements Serializable {
     private Integer userId;
 
     /**
-     * 状态 0 未审核 1 通过 2 驳回 	3上线 4 下线
+     * 状态
      */
     @TableField("state")
     private Integer state;

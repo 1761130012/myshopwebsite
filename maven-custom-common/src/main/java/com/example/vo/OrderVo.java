@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -40,7 +40,7 @@ public class OrderVo implements Serializable {
      * 订单时间
      */
     @TableField("time")
-    private LocalDateTime time;
+    private Date time;
 
     /**
      * 订单总金额
@@ -55,13 +55,13 @@ public class OrderVo implements Serializable {
     private String remark;
 
     /**
-     * 物流状态 0 未发货 1 已发货 2 到达商户 3 已收货
+     * 物流状态
      */
     @TableField("state")
     private Integer state;
 
     /**
-     * 删除状态 0:显示,1: 已经删除,隐藏
+     * 删除状态
      */
     @TableField("is_delete")
     private Integer isDelete;

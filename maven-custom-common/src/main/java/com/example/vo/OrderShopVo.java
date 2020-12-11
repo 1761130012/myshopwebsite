@@ -15,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -46,7 +46,7 @@ public class OrderShopVo implements Serializable {
      * 单价
      */
     @TableField("goods_price")
-    private Float goodsPrice;
+    private Integer goodsPrice;
 
     /**
      * 购买数量

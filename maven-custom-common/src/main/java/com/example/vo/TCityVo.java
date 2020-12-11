@@ -1,8 +1,6 @@
 package com.example.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 角色菜单表
+ * 市
  * </p>
  *
  * @author LLY
@@ -19,25 +17,28 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("role_menu")
-public class RoleMenuVo implements Serializable {
+@TableName("t_city")
+public class TCityVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    /**
+     * 市id
+     */
+    @TableField("city_id")
+    private Integer cityId;
 
     /**
-     * 角色id
+     * 市名
      */
-    @TableField("role_id")
-    private Integer roleId;
+    @TableField("city_name")
+    private String cityName;
 
     /**
-     * 菜单id
+     * 省id
      */
-    @TableField("menu_id")
-    private Integer menuId;
+    @TableField("province_id")
+    private Integer provinceId;
 
 
 }

@@ -15,7 +15,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author LLY
- * @since 2020-12-10
+ * @since 2020-12-11
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -37,7 +37,25 @@ public class WarehouseVo implements Serializable {
     private String name;
 
     /**
-     * 仓库地址
+     * 省
+     */
+    @TableField("province_id")
+    private Integer provinceId;
+
+    /**
+     * 市
+     */
+    @TableField("city_id")
+    private Integer cityId;
+
+    /**
+     * 区/县
+     */
+    @TableField("area_id")
+    private Integer areaId;
+
+    /**
+     * 仓库详细地址
      */
     @TableField("address")
     private String address;
