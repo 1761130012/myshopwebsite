@@ -71,6 +71,4 @@ public class WarehouseVo implements Serializable {
      */
     @TableField("max_count")
     private Integer maxCount;
-
-
 }

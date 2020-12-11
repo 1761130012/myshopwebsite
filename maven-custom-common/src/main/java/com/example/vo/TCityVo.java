@@ -39,6 +39,4 @@ public class TCityVo implements Serializable {
      */
     @TableField("province_id")
     private Integer provinceId;
-
-
 }

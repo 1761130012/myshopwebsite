@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-12-11
  */
 @RestController
-@RequestMapping("/example/t-city-vo")
+@RequestMapping("/tCity")
 public class TCityController {
 
 }

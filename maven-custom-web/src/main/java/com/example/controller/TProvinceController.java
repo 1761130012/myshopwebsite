@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-12-11
  */
 @RestController
-@RequestMapping("/example/t-province-vo")
+@RequestMapping("/tProvince")
 public class TProvinceController {
 
 }

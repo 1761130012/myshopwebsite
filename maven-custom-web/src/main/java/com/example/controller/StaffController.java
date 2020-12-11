@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-12-08
  */
 @RestController
-@RequestMapping("/example/staff-vo")
+@RequestMapping("/staff")
 public class StaffController {
 
 }

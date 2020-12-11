@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2020-12-11
  */
 @RestController
-@RequestMapping("/example/t-area-vo")
+@RequestMapping("/tArea")
 public class TAreaController {
 
 }
