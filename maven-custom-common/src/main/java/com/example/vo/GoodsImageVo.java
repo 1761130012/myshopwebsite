@@ -41,6 +41,4 @@ public class GoodsImageVo implements Serializable {
      */
     @TableField("adders")
     private String adders;
-
-
 }

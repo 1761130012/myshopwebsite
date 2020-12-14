@@ -1,7 +1,7 @@
 package com.example.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.vo.TProvinceVo;
+import com.example.vo.GpsProvinceVo;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.example.vo.TProvinceVo;
  * </p>
  *
  * @author LLY
- * @since 2020-12-11
+ * @since 2020-12-13
  */
-public interface TProvinceService extends IService<TProvinceVo> {
+public interface GpsProvinceService extends IService<GpsProvinceVo> {
 
 }

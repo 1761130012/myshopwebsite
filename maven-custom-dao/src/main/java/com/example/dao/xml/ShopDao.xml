@@ -2,4 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.ShopDao">
 
+    <sql id="allFiled">
+        shop_id,name,province_id,city_id,area_id,address,phone,join_name,user_id,state
+    </sql>
+
+    <sql id="tableName">
+        shop
+    </sql>
+
+    <resultMap id="selectPageVoMap" type="com.example.vo.ShopVo">
+        <id property="shopId" column="shop_id"/>
+        <result property="userId" column="user_id"/>
+        <association property="userVo" javaType="com.example.vo.UserVo" column="user_id"
+                     select="com.example.dao.UserDao.selectById"/>
+        <association property="provinceVo" javaType="com.example.vo.GpsProvinceVo" column="province_id"
+                     select="com.example.dao.GpsProvinceDao.selectById"/>
+        <association property="cityVo" javaType="com.example.vo.GpsCityVo" column="city_id"
+                     select="com.example.dao.GpsCityDao.selectById"/>
+        <association property="areaVo" javaType="com.example.vo.GpsAreaVo" column="area_id"
+                     select="com.example.dao.GpsAreaDao.selectById"/>
+    </resultMap>
+
+    <!--Page<ShopVo> selectPageVo(@Param("page") Page<ShopVo> page, @Param("shopVo") ShopVo shopVo);  -->
+    <select id="selectPageVo" resultMap="selectPageVoMap">
+        select
+        <include refid="allFiled"/>
+        from
+        <include refid="tableName"/>
+        <where>
+            <if test="shopVo !=null ">
+                <if test="shopVo.name != null and shopVo.name !='' ">and name like concat('%',#{shopVo.name},'%')</if>
+                <if test="shopVo.state != null and shopVo.state > -1 ">and state = #{shopVo.state}</if>
+            </if>
+            and state in (0,1,2)
+        </where>
+        order by state asc
+    </select>
+
+
 </mapper>

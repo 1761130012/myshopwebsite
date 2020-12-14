@@ -1,6 +1,7 @@
 package com.example.controller;
 
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,10 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author LLY
- * @since 2020-12-11
+ * @since 2020-12-13
  */
 @RestController
-@RequestMapping("/tCity")
-public class TCityController {
+@RequestMapping("/gpsCity")
+@CrossOrigin
+public class GpsCityController {
 
 }

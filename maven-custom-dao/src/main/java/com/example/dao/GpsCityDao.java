@@ -1,7 +1,7 @@
 package com.example.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.vo.TCityVo;
+import com.example.vo.GpsCityVo;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.example.vo.TCityVo;
  * </p>
  *
  * @author LLY
- * @since 2020-12-11
+ * @since 2020-12-13
  */
-public interface TCityDao extends BaseMapper<TCityVo> {
+public interface GpsCityDao extends BaseMapper<GpsCityVo> {
 
 }

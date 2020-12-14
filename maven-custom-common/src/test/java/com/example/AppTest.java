@@ -1,47 +1,30 @@
 package com.example;
 
+import com.example.utils.DelSpaceEmpty;
+import com.example.utils.ServiceImplUtil;
+import com.example.vo.MenuVo;
+import com.example.vo.UserVo;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Bounds
  * Unit test for simple App.
  */
 public class AppTest {
-
-
-    // 未柯里化
-    static String uncurried(String a, String b) {
-        return a + b;
-    }
-
     @Test
     public void test1() {
-        /*//柯里化
-        Function<String, Function<String, String>> sum = a -> b -> a + b;
 
-        //柯里化
-        Function<String, String> hi = sum.apply("hi");
-        System.out.println(hi.apply("ho"));
+        ArrayList<MenuVo> list = new ArrayList<>();
+        list.add(new MenuVo(1, "张三", 0));
+        list.add(new MenuVo(2, "张三1", 1));
+        list.add(new MenuVo(3, "张三2", 3));
 
-        //未柯里化
-        System.out.println(uncurried("hi", "ho"));
-
-
-        System.out.println(hi.apply("ho"));
-
-        Function<String, String> hup = sum.apply("Hup");
-        System.out.println(hup.apply("ho"));
-        System.out.println(hup.apply("hey"));*/
+        List<MenuVo> menuVos = new ServiceImplUtil().menuIterationAll(list, 0);
+         menuVos.forEach(System.out::println);
     }
-
-
-    @Test
-    public void test2() {
-        File file=new File("/C:/Users/LLY/Desktop/%e9%a1%b9%e7%9b%ae/myshopwebsite/maven-custom-common/target/classes/com/example/vo");
-        System.out.println(file.listFiles());
-    }
-
-
 }

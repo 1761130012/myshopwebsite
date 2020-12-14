@@ -1,6 +1,7 @@
 package com.example.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,26 +14,26 @@ import java.io.Serializable;
  * </p>
  *
  * @author LLY
- * @since 2020-12-11
+ * @since 2020-12-13
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("t_area")
-public class TAreaVo implements Serializable {
+@TableName("gps_area")
+public class GpsAreaVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 区/县id
      */
-    @TableField("area_id")
+    @TableId("area_id")
     private Integer areaId;
 
     /**
      * 区/县名
      */
-    @TableField("area_name")
-    private String areaName;
+    @TableField("name")
+    private String name;
 
     /**
      * 市id

@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/test")
+@CrossOrigin
 public class ZTestController {
 
     /**
@@ -16,7 +17,6 @@ public class ZTestController {
      * @return
      */
     @RequestMapping("/loginTest")
-    @CrossOrigin
     public int loginTest(){
         System.out.println("登录测试成功！");
         return 0;
@@ -50,7 +50,6 @@ public class ZTestController {
      * 用 Map<String,Object> 接收
      */
     @RequestMapping("/setList")
-    @CrossOrigin
     public int setList(@RequestBody List<Integer> integers){
         System.out.println("--------监测---------");
         System.out.println("值："+integers);

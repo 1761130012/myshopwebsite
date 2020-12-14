@@ -2,6 +2,10 @@ package com.example.dao;
 
 import com.example.vo.RoleMenuVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -13,4 +17,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface RoleMenuDao extends BaseMapper<RoleMenuVo> {
 
+    void deleteRoleId(@Param("roleId") Integer roleId);
+
+    int insertRoleIdMenusBath(@Param("roleId") Integer roleId, @Param("menus") List<Integer> menus);
 }

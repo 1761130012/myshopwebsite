@@ -7,7 +7,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.awt.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -23,6 +25,15 @@ import java.io.Serializable;
 public class MenuVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    public MenuVo() {
+    }
+
+    public MenuVo(Integer menuId, String name, Integer parentId ) {
+        this.menuId = menuId;
+        this.name = name;
+        this.parentId = parentId;
+    }
 
     /**
      * 菜单id
@@ -43,7 +54,7 @@ public class MenuVo implements Serializable {
     private String url;
 
     /**
-     * 菜单类型
+     * 菜单类型  （M目录 C菜单 F按钮）
      */
     @TableField("type")
     private String type;
@@ -66,5 +77,9 @@ public class MenuVo implements Serializable {
     @TableField("parent_id")
     private Integer parentId;
 
-
+    /**
+     * 子集合
+     */
+    @TableField(exist = false)
+    private List<MenuVo> children;
 }

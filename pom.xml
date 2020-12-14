@@ -190,7 +190,18 @@
       <version>2.5.0</version>
     </dependency>
 
+    <dependency>
+      <groupId>com.alipay.sdk</groupId>
+      <artifactId>alipay-sdk-java</artifactId>
+      <version>4.10.167.ALL</version>
+    </dependency>
 
+    <!-- guava 转换 类-->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>30.0-jre</version>
+    </dependency>
   </dependencies>
 
   <build>

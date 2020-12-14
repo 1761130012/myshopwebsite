@@ -1,16 +1,16 @@
 package com.example.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.vo.TAreaVo;
+import com.example.vo.GpsCityVo;
 
 /**
  * <p>
- * 区/县 服务类
+ * 市 服务类
  * </p>
  *
  * @author LLY
- * @since 2020-12-11
+ * @since 2020-12-13
  */
-public interface TAreaService extends IService<TAreaVo> {
+public interface GpsCityService extends IService<GpsCityVo> {
 
 }

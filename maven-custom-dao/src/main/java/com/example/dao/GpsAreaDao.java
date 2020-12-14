@@ -1,7 +1,7 @@
 package com.example.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.example.vo.TAreaVo;
+import com.example.vo.GpsAreaVo;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.example.vo.TAreaVo;
  * </p>
  *
  * @author LLY
- * @since 2020-12-11
+ * @since 2020-12-13
  */
-public interface TAreaDao extends BaseMapper<TAreaVo> {
+public interface GpsAreaDao extends BaseMapper<GpsAreaVo> {
 
 }

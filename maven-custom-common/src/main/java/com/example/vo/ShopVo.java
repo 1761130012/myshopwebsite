@@ -67,7 +67,7 @@ public class ShopVo implements Serializable {
     private String phone;
 
     /**
-     * 联系人
+     * 联系人  0 未审核 1 通过 2 驳回  3上线 4 下线
      */
     @TableField("join_name")
     private String joinName;
@@ -85,4 +85,15 @@ public class ShopVo implements Serializable {
     private Integer state;
 
 
+    @TableField(exist = false)
+    private UserVo userVo;
+
+    @TableField(exist = false)
+    private GpsProvinceVo provinceVo;
+
+    @TableField(exist = false)
+    private GpsCityVo cityVo;
+
+    @TableField(exist = false)
+    private GpsAreaVo areaVo;
 }

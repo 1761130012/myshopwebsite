@@ -19,7 +19,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("order")
+@TableName("order_goods")
 public class OrderVo implements Serializable {
 
     private static final long serialVersionUID = 1L;

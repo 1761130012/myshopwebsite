@@ -2,4 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.RoleMenuDao">
 
+    <sql id="allFiledId">
+        id,role_id,menu_id
+    </sql>
+
+    <sql id="tableName">
+        role_menu
+    </sql>
+
+    <!-- int insertRoleIdMenusBath; -->
+    <insert id="insertRoleIdMenusBath">
+        insert into
+        <include refid="tableName"/>
+        (role_id,menu_id)
+        values
+        <foreach collection="menus" item="menuId" open="" separator="," close="">
+            (#{roleId},#{menuId})
+        </foreach>
+    </insert>
+
+    <!-- void deleteRoleId(@Param("roleId") Integer roleId); -->
+    <delete id="deleteRoleId">
+        delete from
+        <include refid="tableName"/>
+        where role_id =#{roleId}
+    </delete>
 </mapper>

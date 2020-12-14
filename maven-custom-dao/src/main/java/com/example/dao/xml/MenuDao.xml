@@ -2,4 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.MenuDao">
 
+    <sql id="allFiledSql">
+        menu_id,name,url,type,perms,icon,parent_id
+    </sql>
+    <sql id="tableNameSql">
+        menu
+    </sql>
+
+
+    <!-- List<MenuVo> selectPartIdNameAll(); -->
+    <select id="selectPartIdNameAll" resultType="com.example.vo.MenuVo">
+        select menu_id,name,parent_id from
+        <include refid="tableNameSql"/>
+
+    </select>
+
+    <!-- List<Integer> selectMenuIdsByRoleId(@Param("roleId") Integer roleId); -->
+    <select id="selectMenuIdsByRoleId" resultType="java.lang.Integer">
+        select menu_id from role_menu where role_id = #{roleId}
+    </select>
 </mapper>

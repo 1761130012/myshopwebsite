@@ -3,6 +3,8 @@ package com.example.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.vo.MenuVo;
 
+import java.util.List;
+
 /**
  * <p>
  * 菜单表 服务类
@@ -13,4 +15,7 @@ import com.example.vo.MenuVo;
  */
 public interface MenuService extends IService<MenuVo> {
 
+    List<MenuVo> queryAll();
+
+    List<Integer> selectMenuIdsByRoleId(Integer roleId);
 }
