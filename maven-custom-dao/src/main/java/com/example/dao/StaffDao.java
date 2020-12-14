@@ -1,7 +1,9 @@
 package com.example.dao;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.vo.StaffVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * <p>
@@ -13,4 +15,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface StaffDao extends BaseMapper<StaffVo> {
 
+    Page<StaffVo> selectPageVo(@Param("staffVoPage") Page<StaffVo> staffVoPage,
+                               @Param("staffVo") StaffVo staffVo);
 }
