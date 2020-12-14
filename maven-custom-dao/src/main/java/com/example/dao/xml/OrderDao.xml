@@ -2,4 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.OrderDao">
 
+    <resultMap id="joinType" type="com.example.vo.OrderVo">
+        <id property="orderId" column="order_id"/>
+        <association property="userVo" column="user_id"
+                     select="com.example.dao.UserDao.selectById"/>
+    </resultMap>
+
+    <select id="selectPageVo" resultMap="joinType" >
+        SELECT * FROM `order` o INNER JOIN `user` u ON o.user_id = u.user_id
+        <where>
+            <if test="orderVo!=null">
+                <if test="orderVo.userVo!=null">
+                    <if test="orderVo.userVo.name!=null">and u.name like concat ('%',#{orderVo.userVo.name},'%')</if>
+                </if>
+                <if test="orderVo.state!=null">and o.state = #{orderVo.state}</if>
+            </if>
+        </where>
+    </select>
 </mapper>

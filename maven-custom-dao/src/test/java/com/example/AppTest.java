@@ -1,10 +1,13 @@
 package com.example;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.dao.GoodsDao;
-import com.example.dao.GpsProvinceDao;
+import com.example.vo.GoodsVo;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.List;
 
 /**
  * Unit test for simple App.
@@ -15,8 +18,10 @@ public class AppTest {
         ApplicationContext context =
                 new ClassPathXmlApplicationContext("applicationContext-dao.xml");
 
-        GpsProvinceDao goodsDao = context.getBean(GpsProvinceDao.class);
+        GoodsDao goodsDao = context.getBean(GoodsDao.class);
 
-        System.out.println(goodsDao.selectById(1));
+
+        Page<GoodsVo> goodsVos = goodsDao.selectPageVo(new Page<GoodsVo>(1,2),null);
+        System.out.println(goodsVos.getRecords().size());
     }
 }

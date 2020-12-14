@@ -13,4 +13,6 @@ import com.example.vo.GoodsVo;
  */
 public interface GoodsService extends IService<GoodsVo> {
 
+
+
 }

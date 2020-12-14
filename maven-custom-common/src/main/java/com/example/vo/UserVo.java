@@ -1,8 +1,11 @@
 package com.example.vo;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,7 +19,7 @@ import java.util.Date;
  * </p>
  *
  * @author LLY
- * @since 2020-12-11
+ * @since 2020-12-10
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -28,11 +31,11 @@ public class UserVo implements Serializable {
     /**
      * 用户id
      */
-    @TableId("user_id")
+    @TableId(value = "user_id", type = IdType.AUTO)
     private Integer userId;
 
     /**
-     * 用户登录名
+     * 用户登录名  （账号：英文字符串或加数字）zhangsan123
      */
     @TableField("login_name")
     private String loginName;
@@ -59,6 +62,8 @@ public class UserVo implements Serializable {
      * 创建时间
      */
     @TableField("create_time")
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date createTime;
 
 

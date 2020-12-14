@@ -1,7 +1,9 @@
 package com.example.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.vo.OrderVo;
+import com.example.vo.SupplierVo;
 
 /**
  * <p>
@@ -13,4 +15,5 @@ import com.example.vo.OrderVo;
  */
 public interface OrderService extends IService<OrderVo> {
 
+    Page<OrderVo> selectPageVo(Page<OrderVo> orderVoPage, OrderVo orderVo);
 }

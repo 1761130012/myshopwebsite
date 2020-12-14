@@ -2,4 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.GoodsDao">
 
+    <resultMap id="joinType" type="com.example.vo.GoodsVo">
+        <id property="goodsId" column="goods_id"/>
+        <association property="goodsTypeVo" column="type_id"
+            select="com.example.dao.GoodsTypeDao.selectById"/>
+    </resultMap>
+
+    <!--  -->
+    <select id="selectPageVo" resultType="com.example.vo.GoodsVo">
+        
+        select * from goods
+        <where>
+        </where>
+    </select>
+
 </mapper>

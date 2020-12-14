@@ -1,9 +1,7 @@
 package com.example.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -11,7 +9,6 @@ import java.util.List;
 @RequestMapping("/test")
 @CrossOrigin
 public class ZTestController {
-
     /**
      * 登录测试
      * @return
