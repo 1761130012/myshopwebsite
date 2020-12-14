@@ -43,9 +43,6 @@ public class StaffController {
 
     @RequestMapping("/updata")
     public boolean updata(@RequestBody StaffVo staffVo) {
-
-        System.out.println(staffVo);
-
         return staffService.updateById(staffVo);
     }
 

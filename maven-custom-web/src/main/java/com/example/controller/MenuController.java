@@ -35,4 +35,7 @@ public class MenuController {
     public List<Integer> queryMenuIdsByRoleId(Integer roleId) {
         return menuService.selectMenuIdsByRoleId(roleId);
     }
+
+
+
 }

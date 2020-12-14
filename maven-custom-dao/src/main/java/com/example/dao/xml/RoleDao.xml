@@ -2,4 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.RoleDao">
 
+    <select id="selectPageVo" resultType="com.example.vo.RoleVo">
+        select * from role
+        <where>
+            <if test="roleVo.name != null ">and name like concat(#{roleVo.name},'%')</if>
+        </where>
+    </select>
 </mapper>
