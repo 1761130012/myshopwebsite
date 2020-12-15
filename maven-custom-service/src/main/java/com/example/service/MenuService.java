@@ -18,4 +18,6 @@ public interface MenuService extends IService<MenuVo> {
     List<MenuVo> queryAll();
 
     List<Integer> selectMenuIdsByRoleId(Integer roleId);
+
+    public List<MenuVo> selectMenuList(MenuVo menuVo);
 }

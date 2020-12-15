@@ -3,12 +3,12 @@
 <mapper namespace="com.example.dao.MenuDao">
 
     <sql id="allFiledSql">
-        menu_id,name,url,type,perms,icon,parent_id
+        menu_id
+        ,name,url,type,perms,icon,parent_id
     </sql>
     <sql id="tableNameSql">
         menu
     </sql>
-
 
     <!-- List<MenuVo> selectPartIdNameAll(); -->
     <select id="selectPartIdNameAll" resultType="com.example.vo.MenuVo">
@@ -19,6 +19,18 @@
 
     <!-- List<Integer> selectMenuIdsByRoleId(@Param("roleId") Integer roleId); -->
     <select id="selectMenuIdsByRoleId" resultType="java.lang.Integer">
-        select menu_id from role_menu where role_id = #{roleId}
+        select menu_id
+        from role_menu
+        where role_id = #{roleId}
     </select>
+
+    <select id="selectMenuList" resultType="com.example.vo.MenuVo">
+        select * from menu
+        <where>
+            <if test="menuVo.name != null"> and name like concat(#{menuVo.name},'%')</if>
+        </where>
+        order by parent_id
+    </select>
+
+
 </mapper>

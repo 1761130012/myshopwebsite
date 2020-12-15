@@ -36,6 +36,9 @@ public class MenuController {
         return menuService.selectMenuIdsByRoleId(roleId);
     }
 
-
+    @RequestMapping("/querymenu")
+    public List<MenuVo> querymenu(MenuVo menuVo){
+        return menuService.selectMenuList(menuVo);
+    }
 
 }
