@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.vo.MenuVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,4 +20,6 @@ public interface MenuDao extends BaseMapper<MenuVo> {
     List<MenuVo> selectPartIdNameAll();
 
     List<Integer> selectMenuIdsByRoleId(@Param("roleId") Integer roleId);
+
+    public List<MenuVo> selectMenuList(@Param("menuVo") MenuVo menuVo);
 }

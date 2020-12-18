@@ -1,13 +1,11 @@
 package com.example.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.service.RoleService;
 import com.example.vo.RoleVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,5 +36,37 @@ public class RoleController {
     @RequestMapping("/updateRoleMenuId")
     public boolean updateRoleMenuId(@RequestBody Map<String, Object> map) {
         return roleService.updateRoleMenuId(map);
+    }
+
+    @RequestMapping("/queryPageVo")
+    public Page<RoleVo> queryPageVo(@RequestParam("page") int page,
+                                    @RequestParam("rows") int rows,
+                                    RoleVo roleVo){
+        return roleService.selectPageVo(new Page<RoleVo>(page,rows),roleVo);
+
+    }
+
+    @RequestMapping("/add")
+    public boolean add(@RequestBody RoleVo roleVo){
+        return roleService.save(roleVo);
+    }
+
+    @RequestMapping("/querybid")
+    public RoleVo querybid(int id){
+        return roleService.getById(id);
+    }
+
+    @RequestMapping("/updata")
+    public boolean updata(@RequestBody RoleVo roleVo){
+        return roleService.updateById(roleVo);
+    }
+
+    @RequestMapping("/delete")
+    public boolean delete(@RequestBody Integer[] ids) {
+        boolean bool = false;
+        for (int i = 0; i < ids.length; i++) {
+            bool = roleService.removeById(ids[i]);
+        }
+        return bool;
     }
 }

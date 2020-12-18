@@ -38,4 +38,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, MenuVo> implements Men
     public List<Integer> selectMenuIdsByRoleId(Integer roleId) {
         return menuDao.selectMenuIdsByRoleId(roleId);
     }
+
+    @Override
+    public List<MenuVo> selectMenuList(MenuVo menuVo) {
+        List<MenuVo> menuList=menuDao.selectMenuList(menuVo);
+        return menuList;
+    }
+
+
 }

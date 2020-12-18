@@ -2,4 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.UserDao">
 
+    <select id="selectPageVo" resultType="com.example.vo.UserVo">
+        select * from user
+        <where>
+            <if test="userVo.name !=null ">and name like concat(#{userVo.name},'%')</if>
+            <if test="userVo.phone !=null "> and phone like concat(#{userVo.phone},'%')</if>
+        </where>
+    </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.example.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.vo.StaffVo;
 
@@ -13,4 +14,5 @@ import com.example.vo.StaffVo;
  */
 public interface StaffService extends IService<StaffVo> {
 
+    Page<StaffVo> selectPageVo(Page<StaffVo> staffVoPage, StaffVo staffVo);
 }

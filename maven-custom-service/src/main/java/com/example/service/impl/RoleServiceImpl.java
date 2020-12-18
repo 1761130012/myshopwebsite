@@ -1,11 +1,13 @@
 package com.example.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dao.RoleDao;
 import com.example.dao.RoleMenuDao;
 import com.example.service.RoleService;
 import com.example.vo.RoleMenuVo;
 import com.example.vo.RoleVo;
+import com.example.vo.StaffVo;
 import com.google.common.primitives.Ints;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, RoleVo> implements Rol
 
     @Autowired
     private RoleMenuDao roleMenuDao;
+    @Autowired
+    private RoleDao roleDao;
 
     @Override
     public boolean updateRoleMenuId(Map<String, Object> map) {
@@ -35,4 +39,11 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, RoleVo> implements Rol
         //进行 批量添加
         return roleMenuDao.insertRoleIdMenusBath((Integer) map.get("roleId"), (List<Integer>) map.get("menus")) > 0;
     }
+
+    @Override
+    public Page<RoleVo> selectPageVo(Page<RoleVo> roleVoPage, RoleVo roleVo) {
+        return roleDao.selectPageVo(roleVoPage,roleVo);
+    }
+
+
 }
