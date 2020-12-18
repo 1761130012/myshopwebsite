@@ -16,4 +16,10 @@ import com.example.vo.SupplierVo;
 public interface OrderService extends IService<OrderVo> {
 
     Page<OrderVo> selectPageVo(Page<OrderVo> orderVoPage, OrderVo orderVo);
+
+    int delete(String id);
+
+    int update(OrderVo orderVo);
+
+    int add(OrderVo orderVo);
 }

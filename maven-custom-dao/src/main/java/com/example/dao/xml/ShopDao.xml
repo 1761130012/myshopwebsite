@@ -23,6 +23,21 @@
                      select="com.example.dao.GpsAreaDao.selectById"/>
     </resultMap>
 
+    <!--  -->
+    <select id="selectPage" resultMap="selectPageVoMap">
+        select * from shop
+        <where>
+            <if test="shopVo!=null">
+                <if test="shopVo.name!=null">
+                    and name like concat ('%',#{shopVo.name},'%')
+                </if>
+                <if test="shopVo.state!=null">
+                    and state = #{shopVo.state}
+                </if>
+            </if>
+        </where>
+    </select>
+
     <!--Page<ShopVo> selectPageVo(@Param("page") Page<ShopVo> page, @Param("shopVo") ShopVo shopVo);  -->
     <select id="selectPageVo" resultMap="selectPageVoMap">
         select

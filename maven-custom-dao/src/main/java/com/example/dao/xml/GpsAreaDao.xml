@@ -2,4 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.GpsAreaDao">
 
+    <select id="select" resultType="com.example.vo.GpsAreaVo">
+          select * from gps_area where city_id=#{cityId}
+    </select>
 </mapper>

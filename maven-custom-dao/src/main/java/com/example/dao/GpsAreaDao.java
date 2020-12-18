@@ -3,6 +3,8 @@ package com.example.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.vo.GpsAreaVo;
 
+import java.util.List;
+
 /**
  * <p>
  * 区/县 Mapper 接口
@@ -13,4 +15,5 @@ import com.example.vo.GpsAreaVo;
  */
 public interface GpsAreaDao extends BaseMapper<GpsAreaVo> {
 
+    List<GpsAreaVo> select(GpsAreaVo gpsAreaVo);
 }

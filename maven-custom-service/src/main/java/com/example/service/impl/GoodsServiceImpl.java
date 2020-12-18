@@ -1,10 +1,18 @@
 package com.example.service.impl;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dao.GoodsDao;
+import com.example.dao.GoodsTypeDao;
+import com.example.dao.ShopCartDao;
 import com.example.service.GoodsService;
+import com.example.vo.GoodsTypeVo;
 import com.example.vo.GoodsVo;
+import com.example.vo.ShopCartVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -16,5 +24,40 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements GoodsService {
+
+    @Autowired
+    GoodsDao goodsDao;
+
+    @Autowired
+    GoodsTypeDao goodsTypeDao;
+
+    @Autowired
+    ShopCartDao shopCartDao;
+
+    @Override
+    public Page<GoodsVo> query(Page<GoodsVo> page, GoodsVo goodsVo) {
+        return goodsDao.selectPageVo(page,goodsVo);
+    }
+
+    @Override
+    public List<GoodsTypeVo> queryType() {
+        return goodsTypeDao.select();
+    }
+
+    @Override
+    public int addCar(ShopCartVo shopCartVo) {
+        return shopCartDao.insert(shopCartVo);
+    }
+
+    @Override
+    public List<ShopCartVo> select(ShopCartVo shopCartVo) {
+        return shopCartDao.select(shopCartVo);
+    }
+
+    @Override
+    public void updateCar(ShopCartVo shopCartVo) {
+        shopCartDao.updateCar(shopCartVo);
+    }
+
 
 }

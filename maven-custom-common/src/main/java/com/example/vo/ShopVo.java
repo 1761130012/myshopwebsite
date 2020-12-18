@@ -19,7 +19,7 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("shop")
+@TableName(value = "shop",resultMap = "selectPageVoMap")
 public class ShopVo implements Serializable {
 
     private static final long serialVersionUID = 1L;

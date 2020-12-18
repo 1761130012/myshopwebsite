@@ -5,14 +5,23 @@
     <resultMap id="joinType" type="com.example.vo.GoodsVo">
         <id property="goodsId" column="goods_id"/>
         <association property="goodsTypeVo" column="type_id"
-            select="com.example.dao.GoodsTypeDao.selectById"/>
+                     select="com.example.dao.GoodsTypeDao.selectById"/>
     </resultMap>
 
     <!--  -->
-    <select id="selectPageVo" resultType="com.example.vo.GoodsVo">
-        
+    <select id="selectPageVo" resultMap="joinType">
         select * from goods
         <where>
+            <if test="goodsVo!=null">
+                <if test="goodsVo.typeId!=null">
+                    <if test="goodsVo.typeId!=0">
+                        and type_id = #{goodsVo.typeId}
+                    </if>
+                </if>
+                <if test="goodsVo.name!=null">
+                    and name like concat ('%',#{goodsVo.name},'%')
+                </if>
+            </if>
         </where>
     </select>
 

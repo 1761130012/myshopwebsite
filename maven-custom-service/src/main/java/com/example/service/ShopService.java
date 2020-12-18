@@ -15,4 +15,12 @@ import com.example.vo.ShopVo;
 public interface ShopService extends IService<ShopVo> {
 
     Page<ShopVo> selectPageVo(Page<ShopVo> page, ShopVo shopVo);
+
+    Page<ShopVo> selectPage(Page<ShopVo> page, ShopVo shopVo);
+
+    int delete(String id);
+
+    int update(ShopVo shopVo);
+
+    int add(ShopVo shopVo);
 }

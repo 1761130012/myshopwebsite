@@ -1,7 +1,10 @@
 package com.example.service;
 
+
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.vo.GpsAreaVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.example.vo.GpsAreaVo;
  */
 public interface GpsAreaService extends IService<GpsAreaVo> {
 
+    List<GpsAreaVo> select(GpsAreaVo gpsAreaVo);
 }

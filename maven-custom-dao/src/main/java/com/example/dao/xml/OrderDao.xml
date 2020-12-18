@@ -9,7 +9,7 @@
     </resultMap>
 
     <select id="selectPageVo" resultMap="joinType" >
-        SELECT * FROM `order` o INNER JOIN `user` u ON o.user_id = u.user_id
+        SELECT * FROM order_goods o INNER JOIN `user` u ON o.user_id = u.user_id
         <where>
             <if test="orderVo!=null">
                 <if test="orderVo.userVo!=null">

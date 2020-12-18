@@ -19,7 +19,7 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("order_shop")
+@TableName(value = "order_shop",resultMap = "joinType")
 public class OrderShopVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,5 +54,10 @@ public class OrderShopVo implements Serializable {
     @TableField("pay_number")
     private Integer payNumber;
 
+    /**
+     *   商品详情
+     */
+    @TableField(exist = false)
+    private GoodsVo goodsVo;
 
 }

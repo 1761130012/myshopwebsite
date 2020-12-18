@@ -3,6 +3,8 @@ package com.example.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.vo.GpsProvinceVo;
 
+import java.util.List;
+
 /**
  * <p>
  * 省 服务类
@@ -13,4 +15,5 @@ import com.example.vo.GpsProvinceVo;
  */
 public interface GpsProvinceService extends IService<GpsProvinceVo> {
 
+    List<GpsProvinceVo> select(GpsProvinceVo gpsProvinceVo);
 }

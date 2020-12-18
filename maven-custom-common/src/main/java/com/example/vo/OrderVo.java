@@ -1,13 +1,16 @@
 package com.example.vo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -19,8 +22,7 @@ import java.time.LocalDateTime;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName(value = "order",resultMap = "joinType")
-@TableName("order_goods")
+@TableName(value = "order_goods",resultMap = "joinType")
 public class OrderVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,7 +43,9 @@ public class OrderVo implements Serializable {
      * 订单时间
      */
     @TableField("time")
-    private LocalDateTime time;
+    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    private Date time;
 
     /**
      * 订单总金额
@@ -67,5 +71,7 @@ public class OrderVo implements Serializable {
     @TableField("is_delete")
     private Integer isDelete;
 
+    @TableField(exist = false)
+    private UserVo userVo;
 
 }

@@ -20,4 +20,5 @@ public interface GoodsDao extends BaseMapper<GoodsVo> {
 
 
     Page<GoodsVo> selectPageVo(@Param("goodsVoPage") Page<GoodsVo> goodsVoPage, @Param("goodsVo") GoodsVo goodsVo);
+
 }

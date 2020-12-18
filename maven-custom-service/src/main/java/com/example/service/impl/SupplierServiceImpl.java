@@ -29,4 +29,20 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierDao, SupplierVo> im
     public Page<SupplierVo> selectPageVo(Page<SupplierVo> supplierVoPage, SupplierVo supplierVo) {
         return supplierDao.selectPageVo(supplierVoPage,supplierVo);
     }
+
+    @Override
+    public int delete(int id) {
+        return supplierDao.deleteById(id);
+    }
+
+    @Override
+    public int update(SupplierVo supplierVo) {
+        return supplierDao.updateById(supplierVo);
+    }
+
+    @Override
+    public int add(SupplierVo supplierVo) {
+        return supplierDao.insert(supplierVo);
+    }
+
 }

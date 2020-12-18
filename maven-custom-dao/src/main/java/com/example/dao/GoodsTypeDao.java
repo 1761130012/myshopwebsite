@@ -3,6 +3,8 @@ package com.example.dao;
 import com.example.vo.GoodsTypeVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+
 /**
  * <p>
  * 商品类型表 Mapper 接口
@@ -13,4 +15,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface GoodsTypeDao extends BaseMapper<GoodsTypeVo> {
 
+    List<GoodsTypeVo> select();
 }

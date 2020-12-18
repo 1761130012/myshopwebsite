@@ -2,4 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.ShopCartDao">
 
+    <resultMap id="joinType" type="com.example.vo.ShopCartVo">
+        <association property="goodsVo" column="goods_id"
+                     select="com.example.dao.GoodsDao.selectById"/>
+        <association property="userVo" column="user_id"
+                     select="com.example.dao.UserDao.selectById"/>
+    </resultMap>
+
+    <select id="select" resultMap="joinType">
+        select * from shop_cart
+        <where>
+            <if test="userId!=null">
+                and user_id = #{userId}
+            </if>
+            <if test="goodsId!=null">
+                and goods_id = #{goodsId}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateCar" parameterType="shopCartVo">
+        update shop_cart set goods_count = goods_count+1
+        <where>
+            <if test="userId!=null">
+                and user_id = #{userId}
+            </if>
+            <if test="goodsId!=null">
+                and goods_id = #{goodsId}
+            </if>
+        </where>
+    </update>
+
 </mapper>

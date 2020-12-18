@@ -2,4 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.OrderShopDao">
 
+    <resultMap id="joinType" type="com.example.vo.OrderShopVo">
+        <association property="goodsVo" column="goods_id"
+                     select="com.example.dao.GoodsDao.selectById"/>
+    </resultMap>
+
+    <select id="select" resultMap="joinType">
+        select * from order_shop where order_id=#{orderId}
+    </select>
 </mapper>

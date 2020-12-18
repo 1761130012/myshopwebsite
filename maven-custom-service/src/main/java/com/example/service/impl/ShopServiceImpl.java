@@ -26,4 +26,25 @@ public class ShopServiceImpl extends ServiceImpl<ShopDao, ShopVo> implements Sho
     public Page<ShopVo> selectPageVo(Page<ShopVo> page, ShopVo shopVo) {
         return shopDao.selectPageVo(page, shopVo);
     }
+
+    @Override
+    public Page<ShopVo> selectPage(Page<ShopVo> page, ShopVo shopVo) {
+        return shopDao.selectPage(page, shopVo);
+    }
+
+
+    @Override
+    public int delete(String id) {
+        return shopDao.deleteById(id);
+    }
+
+    @Override
+    public int update(ShopVo shopVo) {
+        return shopDao.updateById(shopVo);
+    }
+
+    @Override
+    public int add(ShopVo shopVo) {
+        return shopDao.insert(shopVo);
+    }
 }

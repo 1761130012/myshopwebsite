@@ -37,10 +37,10 @@ public class UserShopVo implements Serializable {
     private Integer userId;
 
     /**
-     * 商品id
+     * 商铺id
      */
-    @TableField("goods_id")
-    private Integer goodsId;
+    @TableField("shop_id")
+    private Integer shopId;
 
     /**
      * 状态

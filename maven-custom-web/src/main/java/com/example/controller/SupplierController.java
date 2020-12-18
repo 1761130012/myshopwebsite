@@ -26,14 +26,25 @@ public class SupplierController {
     SupplierService supplierService;
 
     @RequestMapping("/selectSupplierVo")
-    @CrossOrigin
     public Page<SupplierVo> select(@RequestParam(value = "page", defaultValue = "1") int page,
                                    @RequestParam(value = "rows", defaultValue = "5") int rows
                                     , SupplierVo supplierVo) {
-
-
         return supplierService.selectPageVo(new Page<SupplierVo>(page,rows),supplierVo);
     }
 
+
+    @RequestMapping("/deleteSupplierVo")
+    public int delete(@RequestParam(value = "id", defaultValue = "0")Integer id) {
+        return supplierService.delete(id);
+    }
+
+    @RequestMapping("/updateSupplierVo")
+    public int delete(SupplierVo supplierVo) {
+        return supplierService.update(supplierVo);
+    }
+
+    @RequestMapping("/addSupplierVo")
+    public int add(SupplierVo supplierVo) { return supplierService.add(supplierVo);
+    }
 
 }

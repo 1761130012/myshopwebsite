@@ -16,4 +16,10 @@ public interface SupplierService extends IService<SupplierVo> {
 
 
     Page<SupplierVo> selectPageVo(Page<SupplierVo> supplierVoPage, SupplierVo supplierVo);
+
+    int delete(int id);
+
+    int update(SupplierVo supplierVo);
+
+    int add(SupplierVo supplierVo);
 }

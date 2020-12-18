@@ -3,11 +3,17 @@ package com.example.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.service.GoodsService;
+import com.example.vo.GoodsTypeVo;
 import com.example.vo.GoodsVo;
+import com.example.vo.ShopCartVo;
+import com.example.vo.ShopVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -25,8 +31,28 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @RequestMapping("/queryPageVo")
-    public void queryPageVo(Page<GoodsVo> page,GoodsVo goodsVo){
-
+    @RequestMapping("/queryGoodsVo")
+    public Page<GoodsVo> queryPageVo(@RequestParam(value = "page", defaultValue = "1") int page,
+                                     @RequestParam(value = "rows", defaultValue = "6") int rows,
+                                     GoodsVo goodsVo){
+        return goodsService.query(new Page<GoodsVo>(page, rows),goodsVo);
     }
+
+    @RequestMapping("/queryGoodsTypeVo")
+    public List<GoodsTypeVo> queryTypeVo(){
+        return goodsService.queryType();
+    }
+
+
+    @RequestMapping("/addCar")
+    public void addCar(ShopCartVo shopCartVo){
+        int num = goodsService.select(shopCartVo).size();
+
+        if(num!=0){
+            goodsService.updateCar(shopCartVo);
+        }else {
+            goodsService.addCar(shopCartVo);
+        }
+    }
+
 }

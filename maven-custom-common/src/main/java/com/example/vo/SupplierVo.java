@@ -19,7 +19,7 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("supplier")
+@TableName(value = "supplier",resultMap = "joinType")
 public class SupplierVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -72,5 +72,22 @@ public class SupplierVo implements Serializable {
     @TableField("join_name")
     private String joinName;
 
+    /**
+     *省
+     */
+    @TableField(exist = false)
+    private GpsProvinceVo gpsProvinceVo;
+
+    /**
+     *市
+     */
+    @TableField(exist = false)
+    private GpsCityVo gpsCityVo;
+
+    /**
+     *县
+     */
+    @TableField(exist = false)
+    private GpsAreaVo gpsAreaVo;
 
 }

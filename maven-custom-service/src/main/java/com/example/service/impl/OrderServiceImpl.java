@@ -28,4 +28,19 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
 
         return orderDao.selectPageVo(orderVoPage,orderVo);
     }
+
+    @Override
+    public int delete(String id) {
+        return orderDao.deleteById(id);
+    }
+
+    @Override
+    public int update(OrderVo orderVo) {
+        return orderDao.updateById(orderVo);
+    }
+
+    @Override
+    public int add(OrderVo orderVo) {
+        return orderDao.insert(orderVo);
+    }
 }
