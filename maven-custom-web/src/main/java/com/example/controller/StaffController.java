@@ -6,7 +6,13 @@ import com.example.service.StaffService;
 import com.example.vo.StaffVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import sun.plugin2.util.SystemUtil;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <p>
@@ -53,6 +59,21 @@ public class StaffController {
             bool = staffService.removeById(ids[i]);
         }
         return bool;
+    }
+
+    @RequestMapping("/adds.action")
+    public Map addGoods(StaffVo staffVo, @RequestParam("img") MultipartFile img) throws IOException {
+        Map<String,String> map =new HashMap<String,String>();
+        staffVo.setHeadImage("./src/assets/"+img.getOriginalFilename());  //保存到数据库的【相对路径】
+        System.out.println(staffVo);
+        System.out.println(img.getBytes().length);
+        //将上传的文件保存到服务器上的前端项目的【绝对路径】
+        img.transferTo(new File("E:\\guiguidea\\homework\\vueproject\\project-web\\src\\assets\\"+img.getOriginalFilename()));
+
+        map.put("code","0");
+        map.put("msg","添加成功");
+
+        return map;
     }
 
 }
