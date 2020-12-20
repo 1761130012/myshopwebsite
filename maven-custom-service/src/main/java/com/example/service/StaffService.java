@@ -15,4 +15,15 @@ import com.example.vo.StaffVo;
 public interface StaffService extends IService<StaffVo> {
 
     Page<StaffVo> selectPageVo(Page<StaffVo> staffVoPage, StaffVo staffVo);
+
+
+    /**
+     * 查询 所有 员工 进行 分页
+     *
+     * @param page
+     * @param value
+     * @return
+     */
+    Page<StaffVo> selectAllPageVo(Page<StaffVo> page, String value);
 }
+

@@ -69,4 +69,9 @@ public class RoleController {
         }
         return bool;
     }
+
+    @RequestMapping("/queryRoleVoByStaffId")
+    public List<Integer> queryRoleVoByStaffId(Integer staffId) {
+        return roleService.selectRoleVoByStaffId(staffId);
+    }
 }

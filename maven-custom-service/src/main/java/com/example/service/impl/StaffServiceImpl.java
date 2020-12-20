@@ -26,4 +26,9 @@ public class StaffServiceImpl extends ServiceImpl<StaffDao, StaffVo> implements 
     public Page<StaffVo> selectPageVo(Page<StaffVo> staffVoPage, StaffVo staffVo) {
         return staffDao.selectPageVo(staffVoPage,staffVo);
     }
+
+    @Override
+    public Page<StaffVo> selectAllPageVo(Page<StaffVo> page, String value) {
+        return staffDao.selectAllPageVo(page, value);
+    }
 }

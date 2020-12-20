@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -83,7 +84,7 @@ public class AlipayController {
 
     //支付宝服务器同步通知页面
     @GetMapping("/returnUrl")
-    public String returnUrl(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, AlipayApiException {
+    public ModelAndView returnUrl(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, AlipayApiException {
         //获取支付宝GET过来反馈信息
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String[]> requestParams = request.getParameterMap();
@@ -101,7 +102,6 @@ public class AlipayController {
         }
 
         boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfigUtil.alipay_public_key, AlipayConfigUtil.charset, AlipayConfigUtil.sign_type); //调用SDK验证签名
-
         //——请在这里编写您的程序（以下代码仅作参考）——
         if (signVerified) {
             //商户订单号
@@ -114,9 +114,18 @@ public class AlipayController {
             String total_amount = new String(request.getParameter("total_amount").getBytes("ISO-8859-1"), "UTF-8");
 
             //返回地址
-            return ("trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount);
+            //return ("trade_no:" + trade_no + "<br/>out_trade_no:" + out_trade_no + "<br/>total_amount:" + total_amount);
+
+            //修改 状态
+            orderService.updatePayStateByOrderId(out_trade_no);
+
+            //进行 设置 设置 已支付
+            return new ModelAndView("redirect:http://localhost:8081/#/index/payMoney/" + out_trade_no);
         } else {
-            return "验签失败";
+            //modelAndView.addObject("flog", false);
+            //预留
+            //modelAndView.setViewName("redirect:http://localhost:8081/#/index/payMoney/");
+            return null;
         }
     }
 

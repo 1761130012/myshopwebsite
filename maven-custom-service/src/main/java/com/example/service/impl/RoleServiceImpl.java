@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dao.RoleDao;
 import com.example.dao.RoleMenuDao;
+import com.example.dao.StaffRoleDao;
 import com.example.service.RoleService;
 import com.example.vo.RoleMenuVo;
 import com.example.vo.RoleVo;
@@ -31,6 +32,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, RoleVo> implements Rol
     private RoleMenuDao roleMenuDao;
     @Autowired
     private RoleDao roleDao;
+    @Autowired
+    private StaffRoleDao staffRoleDao;
 
     @Override
     public boolean updateRoleMenuId(Map<String, Object> map) {
@@ -45,5 +48,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleDao, RoleVo> implements Rol
         return roleDao.selectPageVo(roleVoPage,roleVo);
     }
 
-
+    @Override
+    public List<Integer> selectRoleVoByStaffId(Integer staffId) {
+        return staffRoleDao.selectRoleIdByStaffId(staffId);
+    }
 }

@@ -3,10 +3,15 @@ package com.example.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dao.ShopDao;
+import com.example.dao.UserDao;
+import com.example.dao.UserShopDao;
 import com.example.service.ShopService;
 import com.example.vo.ShopVo;
+import com.example.vo.UserShopVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -21,6 +26,15 @@ public class ShopServiceImpl extends ServiceImpl<ShopDao, ShopVo> implements Sho
 
     @Autowired
     private ShopDao shopDao;
+
+    @Autowired
+    private UserDao userDao;
+
+    @Autowired
+    private UserShopDao userShopDao;
+
+
+
 
     @Override
     public Page<ShopVo> selectPageVo(Page<ShopVo> page, ShopVo shopVo) {
@@ -46,5 +60,23 @@ public class ShopServiceImpl extends ServiceImpl<ShopDao, ShopVo> implements Sho
     @Override
     public int add(ShopVo shopVo) {
         return shopDao.insert(shopVo);
+    }
+
+
+    @Override
+    public List<UserShopVo> selectAllShopVoByLoginName(String loginName) {
+        //根据 登录编号 进行 查询
+        Integer userId = userDao.selectIdByLoginName(loginName);
+        //根据 登录 编号 进行 查询 有 什么
+        return userShopDao.selectAllByUserId(userId);
+    }
+
+    @Override
+    public ShopVo selectShopVoByLoginName(String loginName) {
+        //根据 登录编号 进行 查询
+        Integer userId = userDao.selectIdByLoginName(loginName);
+        //根据 登录 id 查询 用户商户表 默认地址 商户 id  1 是 默认商户
+        Integer shopId = userShopDao.selectShopVoByState(userId, 1);
+        return shopDao.selectById(shopId);
     }
 }

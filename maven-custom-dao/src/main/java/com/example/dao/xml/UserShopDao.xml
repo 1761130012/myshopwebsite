@@ -1,5 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.UserShopDao">
+    <sql id="tableName">
+        user_shop
+    </sql>
 
+    <sql id="allFiledSql">
+        id,user_id,shop_id,state
+    </sql>
+
+
+    <resultMap id="selectAllByUserIdMap" type="com.example.vo.UserShopVo">
+        <association property="shopVo" column="shop_id"
+                     select="com.example.dao.ShopDao.selectShopInfoById"/>
+    </resultMap>
+
+    <!--List<UserShopVo> selectAllByUserId(@Param("userId") Integer userId);-->
+    <select id="selectAllByUserId" resultMap="selectAllByUserIdMap">
+        select shop_id,state from
+        <include refid="tableName"/>
+        where user_id = #{userId}
+    </select>
+
+    <!--  Integer selectShopVoByState(@Param("userId") Integer userId, @Param("state") int state);-->
+    <select id="selectShopVoByState" resultType="java.lang.Integer">
+        select shop_id from
+        <include refid="tableName"/>
+        where user_id =#{userId} and state = #{state}
+    </select>
 </mapper>

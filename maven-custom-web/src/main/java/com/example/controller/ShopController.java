@@ -4,11 +4,15 @@ package com.example.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.service.ShopService;
 import com.example.vo.ShopVo;
+import com.example.vo.UserShopVo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <p>
@@ -50,4 +54,29 @@ public class ShopController {
         return shopService.add(shopVo);
     }
 
+    @RequestMapping("/queryPageVo")
+    public Page<ShopVo> queryPageVo(Page<ShopVo> page, ShopVo shopVo) {
+        //进行 数据 处理
+        if (shopVo != null && StringUtils.isNotEmpty(shopVo.getName())) {
+            shopVo.setName(shopVo.getName().trim());
+        }
+        return shopService.selectPageVo(page, shopVo);
+    }
+
+
+    /**
+     * 传输 根据 用户id 查询 的 商铺 id
+     *
+     * @return
+     */
+    @RequestMapping("/queryAllShopVoByLoginName")
+    public List<UserShopVo> queryAllShopVoByLoginName(@RequestParam("loginName") String loginName) {
+        return shopService.selectAllShopVoByLoginName(loginName);
+    }
+
+    //默认 查询 状态 为 默认 选择 的
+    @RequestMapping("/queryShopVoByLoginName")
+    public ShopVo queryShopVoByLoginName(String loginName) {
+        return shopService.selectShopVoByLoginName(loginName);
+    }
 }

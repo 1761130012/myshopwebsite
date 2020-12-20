@@ -9,4 +9,30 @@
             <if test="staffVo.sex !=null ">and sex=#{staffVo.sex}</if>
         </where>
     </select>
+
+    <sql id="tableName">
+        staff
+    </sql>
+    <sql id="allFiledSql">
+        staff_id,login_name,password,name,head_image,email,phone,sex,create_time
+    </sql>
+
+    <!--  Integer selectIdByLoginName(String loginName); -->
+    <select id="selectIdByLoginName" resultType="java.lang.Integer">
+        select staff_id from
+        <include refid="tableName"/>
+        where login_name=#{loginName}
+    </select>
+
+
+    <!--  @Param("page") Page<StaffVo> page, @Param("value") String value -->
+    <select id="selectAllPageVo" resultType="com.example.vo.StaffVo">
+        select * from staff
+        <where>
+            <if test="value !=null and value !=''">
+                and login_name like concat('%',#{value},'%')
+                and name like concat('%',#{value},'%')
+            </if>
+        </where>
+    </select>
 </mapper>

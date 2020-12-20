@@ -75,5 +75,9 @@ public class StaffController {
 
         return map;
     }
+    @RequestMapping("/queryAllPageVo")
+    public Page<StaffVo> queryAllPageVo(Page<StaffVo> page, String value) {
+        return staffService.selectAllPageVo(page, value);
 
+    }
 }

@@ -8,11 +8,14 @@ import com.example.service.SupplierService;
 import com.example.vo.OrderShopVo;
 import com.example.vo.OrderVo;
 import com.example.vo.SupplierVo;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -63,5 +66,54 @@ public class OrderController {
         return orderShopService.select(orderShopVo);
     }
 
+    @RequestMapping("/queryOrderShopById")
+    public List<OrderShopVo> queryOrderShopById(String orderId) {
+        return orderService.selectOrderShopById(orderId);
+    }
 
+
+    @RequestMapping("/deleteOrderShopById")
+    public boolean deleteOrderShopById(String orderShopId) {
+        return orderService.deleteOrderShopById(orderShopId);
+    }
+
+    @RequestMapping("/deleteBathOrderShopByIds")
+    public boolean deleteBathOrderShopByIds(@RequestBody List<Integer> list) {
+        return orderService.deleteBathOrderShopByIds(list);
+    }
+
+    @RequestMapping("/queryCountMoneyByOrderId")
+    public Float queryCountMoneyByOrderId(String orderId) {
+        return orderService.selectCountMoneyByOrderId(orderId);
+    }
+
+    @RequestMapping("/queryPayStateByOrderId")
+    public OrderVo queryPayStateByOrderId(String orderId) {
+        return orderService.selectPayStateByOrderId(orderId);
+    }
+
+    @RequestMapping("/queryPageVoByOrderId")
+    public Page<OrderShopVo> queryPageVoByOrderId(Page<OrderShopVo> page, String orderId) {
+        return orderService.selectPageVoByOrderId(page, orderId);
+    }
+
+    @RequestMapping("/updateStateByOrderId")
+    public boolean updateStateByOrderId(String orderId) {
+        return orderService.updateStateByOrderId(orderId);
+    }
+
+    @RequestMapping("/updatePayNumberByOrderShopId")
+    public boolean updatePayNumberByOrderShopId(@RequestBody List<OrderShopVo> orderShopVos) {
+        return orderService.updatePayNumberByOrderShopId(orderShopVos);
+    }
+
+    @RequestMapping("/queryTimeCountMoneyByTime")
+    public List<OrderVo> queryTimeCountMoneyByTime(@RequestBody Map<String, Object> map) throws ParseException {
+        OrderVo orderVo = new OrderVo();
+        //设置为收货
+        orderVo.setState(3);
+        orderVo.setStartTime(DateUtils.parseDate((String) map.get("startTime"),"yyyy-MM-dd"));
+        orderVo.setEndTime(DateUtils.parseDate((String) map.get("endTime"),"yyyy-MM-dd"));
+        return orderService.queryTimeCountMoneyByTime((String) map.get("userLoginName"), orderVo);
+    }
 }

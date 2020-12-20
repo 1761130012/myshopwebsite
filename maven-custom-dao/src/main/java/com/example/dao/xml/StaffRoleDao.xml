@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.StaffRoleDao">
+    <sql id="tableName">
+        staff_role
+    </sql>
+    <sql id="allFileSql">
+        id,staff_id,role_id
+    </sql>
 
+    <!-- List<Integer> selectRoleIdByStaffId(@Param("staffId") Integer staffId); -->
+    <select id="selectRoleIdByStaffId" resultType="java.lang.Integer">
+        select role_id from
+        <include refid="tableName"/>
+        where staff_id=#{staffId}
+    </select>
 </mapper>

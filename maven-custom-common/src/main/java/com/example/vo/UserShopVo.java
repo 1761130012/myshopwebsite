@@ -48,5 +48,7 @@ public class UserShopVo implements Serializable {
     @TableField("state")
     private Integer state;
 
+    @TableField(exist = false)
+    private ShopVo shopVo;
 
 }
