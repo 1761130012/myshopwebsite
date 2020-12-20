@@ -19,4 +19,12 @@ public interface ShopDao extends BaseMapper<ShopVo> {
 
     Page<ShopVo> selectPage(@Param("page") Page<ShopVo> page, @Param("shopVo") ShopVo shopVo);
 
+    ShopVo selectShopInfoById(@Param("id") Integer id);
+
+    /**
+     * 根据 用户 id 查询 商户 id
+     * @param userId 用户 id
+     * @return
+     */
+    Integer selectIdByUserId(@Param("userId") Integer userId);
 }

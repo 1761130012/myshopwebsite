@@ -5,7 +5,9 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.example.service.OrderService;
 import com.example.utils.AlipayConfigUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,8 @@ import java.util.Map;
 @RequestMapping("/alipay")
 @CrossOrigin
 public class AlipayController {
+    @Autowired
+    private OrderService orderService;
 
     /**
      * 支付界面
@@ -36,28 +40,30 @@ public class AlipayController {
      * @throws AlipayApiException
      */
     @RequestMapping("/payUrl")
-    public String payOrder() throws AlipayApiException {
+    public String payOrder(String orderId) throws AlipayApiException {
         //获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfigUtil.gatewayUrl, AlipayConfigUtil.app_id, AlipayConfigUtil.merchant_private_key, "json", AlipayConfigUtil.charset, AlipayConfigUtil.alipay_public_key, AlipayConfigUtil.sign_type);
-        System.out.println("经过........");
         //设置请求参数
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
         alipayRequest.setReturnUrl(AlipayConfigUtil.return_url);
         alipayRequest.setNotifyUrl(AlipayConfigUtil.notify_url);
 
-        //商户订单号，商户网站订单系统中唯一订单号，必填
-        String out_trade_no = new String("1002010".getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        /*
+         * 商户订单号，商户网站订单系统中唯一订单号，必填
+         * String out_trade_no = new String(orderId.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+         */
         //付款金额，必填
-        String total_amount = new String("99".getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
-        //订单名称，必填
-        String subject = new String("测试".getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
-        //商品描述，可空
-        String body = new String("测试".getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        String totalAmount = orderService.selectCountMoneyByOrderId(orderId) + "";
 
-        alipayRequest.setBizContent("{\"out_trade_no\":\"" + out_trade_no + "\","
-                + "\"total_amount\":\"" + total_amount + "\","
+        //订单名称，必填
+        String subject = "购物信息";
+        //商品描述，可空
+        //String body = new String("测试".getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+
+        alipayRequest.setBizContent("{\"out_trade_no\":\"" + orderId + "\","
+                + "\"total_amount\":\"" + totalAmount + "\","
                 + "\"subject\":\"" + subject + "\","
-                + "\"body\":\"" + body + "\","
+                // + "\"body\":\"" + body + "\","
                 + "\"timeout_express\":\"5m\","
                 + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
 

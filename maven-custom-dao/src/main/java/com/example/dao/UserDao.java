@@ -14,5 +14,12 @@ import org.apache.ibatis.annotations.Param;
  * @since 2020-12-10
  */
 public interface UserDao extends BaseMapper<UserVo> {
+    /**
+     * 根据 登录名  获取  id
+     *
+     * @param loginName
+     * @return
+     */
+    Integer selectIdByLoginName(@Param("loginName") String loginName);
     Page<UserVo> selectPageVo(@Param("userVoPage") Page<UserVo> userVoPage, @Param("userVo") UserVo userVo);
 }

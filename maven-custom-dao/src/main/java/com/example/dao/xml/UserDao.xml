@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.UserDao">
 
+    <sql id="tableName">
+        user
+    </sql>
+
+    <sql id="allFiledSql">
+        user_id,login_name,password,name,phone,create_time
+    </sql>
+
     <select id="selectPageVo" resultType="com.example.vo.UserVo">
         select * from user
         <where>
@@ -9,4 +17,12 @@
             <if test="userVo.phone !=null "> and phone like concat(#{userVo.phone},'%')</if>
         </where>
     </select>
+
+    <!--Integer selectIdByLoginName(@Param("loginName") String loginName);  -->
+    <select id="selectIdByLoginName" resultType="java.lang.Integer">
+        select user_id from
+        <include refid="tableName"/>
+        where login_name=#{loginName}
+    </select>
+
 </mapper>

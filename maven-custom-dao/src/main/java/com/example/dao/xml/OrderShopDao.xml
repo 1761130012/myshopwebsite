@@ -10,4 +10,45 @@
     <select id="select" resultMap="joinType">
         select * from order_shop where order_id=#{orderId}
     </select>
+
+
+    <sql id="tableName">
+        order_shop
+    </sql>
+
+    <sql id="allFiledId">
+        id,order_id,goods_id,goods_price,pay_number
+    </sql>
+
+    <resultMap id="selectListByOrderIdMap" type="com.example.vo.OrderShopVo">
+        <id property="id" column="id"/>
+        <result property="goodsId" column="goods_id"/>
+        <association property="goodsVo" column="goods_id"
+                     select="com.example.dao.GoodsDao.selectById"/>
+    </resultMap>
+
+    <!-- List<OrderShopVo> selectListByOrderId(@Param("orderId") String orderId); -->
+    <select id="selectListByOrderId" resultMap="selectListByOrderIdMap">
+        select
+        <include refid="allFiledId"/>
+        from
+        <include refid="tableName"/>
+        where order_id = #{orderId}
+    </select>
+
+    <!-- Float selectCountMoneyByOrderId(@Param("orderId") String orderId); -->
+    <select id="selectCountMoneyByOrderId" resultType="java.lang.Float">
+        select FORMAT(sum(goods_price * pay_number),2) from
+        <include refid="tableName"/>
+        where order_id = #{orderId}
+    </select>
+
+    <!-- Page<OrderShopVo> selectPageVoByOrderId(@Param("page") Page<OrderShopVo> page, @Param("orderId") String orderId); -->
+    <select id="selectPageVoByOrderId" resultMap="selectListByOrderIdMap">
+        select
+        <include refid="allFiledId"/>
+        from
+        <include refid="tableName"/>
+        where order_id = #{orderId}
+    </select>
 </mapper>

@@ -54,5 +54,30 @@
         order by state asc
     </select>
 
+    <resultMap id="shopVoMap" type="com.example.vo.ShopVo">
+        <id property="shopId" column="shop_id"/>
+        <association property="provinceVo" javaType="com.example.vo.GpsProvinceVo" column="province_id"
+                     select="com.example.dao.GpsProvinceDao.selectById"/>
+        <association property="cityVo" javaType="com.example.vo.GpsCityVo" column="city_id"
+                     select="com.example.dao.GpsCityDao.selectById"/>
+        <association property="areaVo" javaType="com.example.vo.GpsAreaVo" column="area_id"
+                     select="com.example.dao.GpsAreaDao.selectById"/>
+    </resultMap>
+
+    <!--  ShopVo selectShopInfoById(@Param("id") Integer id); -->
+    <select id="selectShopInfoById" resultMap="selectPageVoMap">
+        select
+        <include refid="allFiled"/>
+        from
+        <include refid="tableName"/>
+        where shop_id = #{id} and state = 3
+    </select>
+
+    <!-- Integer selectIdByUserId(@Param("selectIdByLoginName") Integer selectIdByLoginName); -->
+    <select id="selectIdByUserId" resultType="java.lang.Integer">
+        select shop_id from
+        <include refid="tableName"/>
+        where user_id = #{userId};
+    </select>
 
 </mapper>

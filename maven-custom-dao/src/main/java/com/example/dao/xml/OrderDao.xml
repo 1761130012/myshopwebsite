@@ -19,4 +19,44 @@
             </if>
         </where>
     </select>
+
+    <sql id="tableName">
+        order_goods
+    </sql>
+
+    <sql id="allFiledSql">
+        order_id,user_id,shop_id,start_time,end_time,money,remark,pay_state,state,is_delete
+    </sql>
+
+    <!-- void updateCountMoneyById(@Param("orderId") String orderId, @Param("countMoney") Float countMoney); -->
+    <update id="updateCountMoneyById">
+        update money=#{countMoney} where order_id=#{orderId}
+    </update>
+    <select id="selectPayStateByOrderId" resultType="com.example.vo.OrderVo">
+        select pay_state,state from order_goods
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </select>
+
+    <!-- List<OrderVo> selectTimeCountMoneyByTime(@Param("shopId") Integer shopId,
+                                             @Param("orderVo") OrderVo orderVo); -->
+    <select id="selectTimeCountMoneyByTime" resultType="com.example.vo.OrderVo">
+        select end_time,money from
+        <include refid="tableName"/>
+        <where>
+            <choose>
+                <when test="orderVo.startTime !=null and orderVo.endTime !=null ">
+                    and end_time >= #{orderVo.startTime} and #{orderVo.endTime} >=
+                    end_time
+                </when>
+                <when test="orderVo.startTime != null ">
+                    and end_time = #{orderVo.startTime}
+                </when>
+                <when test="orderVo.endTime != null ">
+                    and end_time = #{orderVo.endTime}
+                </when>
+            </choose>
+            and state= #{orderVo.state}
+        </where>
+        order by end_time asc
+    </select>
 </mapper>
