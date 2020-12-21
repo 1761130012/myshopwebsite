@@ -2,11 +2,12 @@ package com.example.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.vo.OrderShopVo;
-import com.example.vo.OrderVo;
-import com.example.vo.SupplierVo;
+import com.example.vo.*;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -105,8 +106,25 @@ public interface OrderService extends IService<OrderVo> {
      * 进行 查询 类型 所 对应的 商品 数量 完成的  条件
      *
      * @param userLoginName 用户登录名
-     * @param orderVo 条件
+     * @param orderVo       条件
      * @return
      */
     List<OrderVo> queryTimeCountMoneyByTime(String userLoginName, OrderVo orderVo);
+
+    /**
+     * 根据类型 id 查询 商品名称 和 销售数量
+     *
+     * @param typeId
+     * @return
+     */
+    List<GoodsVo> selectGoodsNameNumberTypeId(Date startTime, Date endTime, Integer typeId);
+
+    /**
+     * 根据 时间 查询 商品 类型  和 类型id 和 数量
+     *
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    List<GoodsTypeVo> selectGoodTypeNumByTime(Date startTime, Date endTime);
 }

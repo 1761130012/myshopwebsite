@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.GoodsDao">
 
+    <sql id="allFiledSql">
+        goods_id,name,type_id,price,remark
+    </sql>
+
+    <sql id="tableName">
+        goods
+    </sql>
+
     <resultMap id="joinType" type="com.example.vo.GoodsVo">
         <id property="goodsId" column="goods_id"/>
         <association property="goodsTypeVo" column="type_id"
@@ -25,4 +33,10 @@
         </where>
     </select>
 
+    <!-- @Param("typeId") Integer typeId -->
+    <select id="selectShopIdByTypeId" resultType="com.example.vo.GoodsVo">
+        select goods_id from
+        <include refid="tableName"/>
+        where type_id = #{typeId}
+    </select>
 </mapper>

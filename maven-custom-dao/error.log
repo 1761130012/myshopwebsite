@@ -9,3 +9,7 @@
 2020-12-13 13:39:05  [ main:1940 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
 2020-12-13 13:39:33  [ main:1777 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
 2020-12-13 13:42:14  [ main:1376 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-12-21 11:28:37  [ main:1897 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-12-21 13:22:31  [ main:1802 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-12-21 13:23:29  [ main:1771 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-12-21 13:33:20  [ main:2395 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set

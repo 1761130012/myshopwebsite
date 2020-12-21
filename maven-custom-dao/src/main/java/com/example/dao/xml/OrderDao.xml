@@ -2,13 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.OrderDao">
 
+    <sql id="allFiledSql">
+        order_id,user_id,shop_id,start_time,end_time,money,remark,pay_state,state,is_delete
+    </sql>
+
+
+    <sql id="tableName">
+        order_goods
+    </sql>
+
+
     <resultMap id="joinType" type="com.example.vo.OrderVo">
         <id property="orderId" column="order_id"/>
         <association property="userVo" column="user_id"
                      select="com.example.dao.UserDao.selectById"/>
     </resultMap>
 
-    <select id="selectPageVo" resultMap="joinType" >
+    <select id="selectPageVo" resultMap="joinType">
         SELECT * FROM order_goods o INNER JOIN `user` u ON o.user_id = u.user_id
         <where>
             <if test="orderVo!=null">
@@ -20,13 +30,6 @@
         </where>
     </select>
 
-    <sql id="tableName">
-        order_goods
-    </sql>
-
-    <sql id="allFiledSql">
-        order_id,user_id,shop_id,start_time,end_time,money,remark,pay_state,state,is_delete
-    </sql>
 
     <!-- void updateCountMoneyById(@Param("orderId") String orderId, @Param("countMoney") Float countMoney); -->
     <update id="updateCountMoneyById">
@@ -58,5 +61,19 @@
             and state= #{orderVo.state}
         </where>
         order by end_time asc
+    </select>
+
+    <!-- @Param("startTime") Date startTime, @Param("endTime") Date endTime -->
+    <select id="selectOrderIdByTime" resultType="java.lang.String">
+        select order_id from
+        <include refid="tableName"/>
+        <where>
+            <choose>
+                <when test="startTime != null and endTime != null ">
+                    and end_time >= #{startTime}
+                    and #{endTime} >= end_time
+                </when>
+            </choose>
+        </where>
     </select>
 </mapper>

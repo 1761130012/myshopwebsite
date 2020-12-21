@@ -19,24 +19,25 @@
     <!-- 或 静态资源放行 -->
     <mvc:default-servlet-handler/>
 
-    <!-- 配置 日期 处理 -->
-    <!-- 注册处理器映射器 添加 conversion-service  -->
+    <mvc:annotation-driven/>
+   <!-- &lt;!&ndash; 配置 日期 处理 &ndash;&gt;
+    &lt;!&ndash; 注册处理器映射器 添加 conversion-service  &ndash;&gt;
     <mvc:annotation-driven conversion-service="myConversionService">
         <mvc:message-converters register-defaults="true">
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <constructor-arg value="UTF-8" />
             </bean>
-            <!--处理时区问题-->
+            &lt;!&ndash;处理时区问题&ndash;&gt;
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="objectMapper">
                     <bean class="com.fasterxml.jackson.databind.ObjectMapper">
-                        <!-- 处理responseBody 里面日期类型 -->
+                        &lt;!&ndash; 处理responseBody 里面日期类型 &ndash;&gt;
                         <property name="dateFormat">
                             <bean class="java.text.SimpleDateFormat">
                                 <constructor-arg type="java.lang.String" value="yyyy-MM-dd HH:mm:ss" />
                             </bean>
                         </property>
-                        <!-- 时区指定 -->
+                        &lt;!&ndash; 时区指定 &ndash;&gt;
                         <property name="timeZone" value="GMT+8" />
                     </bean>
                 </property>
@@ -44,7 +45,7 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
-    <!-- 创建bean 类中实现 convert -->
+    &lt;!&ndash; 创建bean 类中实现 convert &ndash;&gt;
     <bean id="dateConvertUtil" class="com.example.utils.DateConvertUtil">
         <property name="parsePatterns">
             <array>
@@ -59,7 +60,7 @@
         </property>
     </bean>
 
-    <!-- 创建FormattingConversionServiceFactoryBean bean  -->
+    &lt;!&ndash; 创建FormattingConversionServiceFactoryBean bean  &ndash;&gt;
     <bean id="myConversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="converters">
             <set>
@@ -67,7 +68,7 @@
             </set>
         </property>
     </bean>
-
+-->
    <!-- &lt;!&ndash; 自定义视图解析器  InternalResourceViewResolver&ndash;&gt;
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         &lt;!&ndash;&lt;!&ndash; 前缀 &ndash;&gt;

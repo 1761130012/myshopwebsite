@@ -22,4 +22,20 @@ public interface MenuDao extends BaseMapper<MenuVo> {
     List<Integer> selectMenuIdsByRoleId(@Param("roleId") Integer roleId);
 
     public List<MenuVo> selectMenuList(@Param("menuVo") MenuVo menuVo);
+
+    /**
+     * 根据 菜单 id 查询
+     *
+     * @param menuIds
+     * @return
+     */
+    List<String> selectMenuPermsByIds(@Param("menuIds") List<Integer> menuIds);
+
+    /**
+     * 进行 查询 所有
+     *
+     * @return
+     */
+    List<MenuVo> selectAllNotButton(@Param("menuIds") List<Integer> menuIds);
+
 }

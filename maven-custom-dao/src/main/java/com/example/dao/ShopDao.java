@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.vo.ShopVo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  * 店铺表 Mapper 接口
@@ -27,4 +29,6 @@ public interface ShopDao extends BaseMapper<ShopVo> {
      * @return
      */
     Integer selectIdByUserId(@Param("userId") Integer userId);
+
+
 }

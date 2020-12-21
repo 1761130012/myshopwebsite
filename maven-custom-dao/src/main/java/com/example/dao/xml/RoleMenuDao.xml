@@ -27,4 +27,14 @@
         <include refid="tableName"/>
         where role_id =#{roleId}
     </delete>
+
+    <!-- List<Integer> selectMenuIdByRoleId(@Param("roleIds") List<Integer> roleIds); -->
+    <select id="selectMenuIdByRoleId" resultType="java.lang.Integer">
+        select distinct menu_id from
+        <include refid="tableName"/>
+        where role_id in
+        <foreach collection="roleIds" item="roleId" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </select>
 </mapper>

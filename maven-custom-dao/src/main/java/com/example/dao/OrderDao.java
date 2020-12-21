@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.vo.SupplierVo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,7 +19,8 @@ import java.util.List;
  */
 public interface OrderDao extends BaseMapper<OrderVo> {
 
-    Page<OrderVo> selectPageVo(@Param("orderVoPage")Page<OrderVo> orderVoPage, @Param("orderVo")OrderVo orderVo);
+    Page<OrderVo> selectPageVo(@Param("orderVoPage") Page<OrderVo> orderVoPage, @Param("orderVo") OrderVo orderVo);
+
     /**
      * 根据订单id 查询 两种 状态
      *
@@ -39,8 +41,18 @@ public interface OrderDao extends BaseMapper<OrderVo> {
 
     /**
      * 根据 订单 id 进行 修改 总 金额
+     *
      * @param orderId
      * @param countMoney
      */
     void updateCountMoneyById(@Param("orderId") String orderId, @Param("countMoney") Float countMoney);
+
+    /**
+     * 限定 结束 时间 范围
+     *
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    List<String> selectOrderIdByTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime);
 }

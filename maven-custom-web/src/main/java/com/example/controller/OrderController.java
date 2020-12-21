@@ -5,15 +5,15 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.service.OrderService;
 import com.example.service.OrderShopService;
 import com.example.service.SupplierService;
-import com.example.vo.OrderShopVo;
-import com.example.vo.OrderVo;
-import com.example.vo.SupplierVo;
+import com.example.vo.*;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -112,8 +112,22 @@ public class OrderController {
         OrderVo orderVo = new OrderVo();
         //设置为收货
         orderVo.setState(3);
-        orderVo.setStartTime(DateUtils.parseDate((String) map.get("startTime"),"yyyy-MM-dd"));
-        orderVo.setEndTime(DateUtils.parseDate((String) map.get("endTime"),"yyyy-MM-dd"));
+        orderVo.setStartTime(DateUtils.parseDate((String) map.get("startTime"), "yyyy-MM-dd"));
+        orderVo.setEndTime(DateUtils.parseDate((String) map.get("endTime"), "yyyy-MM-dd"));
         return orderService.queryTimeCountMoneyByTime((String) map.get("userLoginName"), orderVo);
+    }
+
+    @RequestMapping("/queryGoodTypeNumByTime")
+    public List<GoodsTypeVo> queryGoodTypeNumByTime(@DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,
+                                                    @DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime) {
+        return orderService.selectGoodTypeNumByTime(startTime, endTime);
+    }
+
+    @RequestMapping("/queryGoodsNameNumberTypeId")
+    public List<GoodsVo> queryGoodsNameNumberTypeId(@DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,
+                                                    @DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime,
+                                                    Integer typeId) {
+
+        return orderService.selectGoodsNameNumberTypeId(startTime, endTime, typeId);
     }
 }

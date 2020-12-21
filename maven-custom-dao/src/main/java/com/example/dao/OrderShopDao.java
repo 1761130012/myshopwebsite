@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -21,6 +22,7 @@ public interface OrderShopDao extends BaseMapper<OrderShopVo> {
 
     /**
      * 根据 订单id查询 信息
+     *
      * @param orderId
      * @return
      */
@@ -44,4 +46,11 @@ public interface OrderShopDao extends BaseMapper<OrderShopVo> {
      */
     Page<OrderShopVo> selectPageVoByOrderId(@Param("page") Page<OrderShopVo> page, @Param("orderId") String orderId);
 
+    /**
+     * 根据 订单 id 进行 查询 商品 id 和 数量
+     *
+     * @param orderIds
+     * @return
+     */
+    List<Map<String, Integer>> selectGoodsIdCountByOrderId(@Param("orderIds") List<String> orderIds);
 }

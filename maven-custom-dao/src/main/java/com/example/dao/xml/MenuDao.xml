@@ -32,5 +32,25 @@
         order by parent_id
     </select>
 
+    <!-- List<String> selectMenuPermsByIds(@Param("menuIds") List<Integer> menuIds); -->
+    <select id="selectMenuPermsByIds" resultType="java.lang.String">
+        select perms from
+        <include refid="tableNameSql"/>
+        where menu_id in
+        <foreach collection="menuIds" item="menuId" open="(" separator="," close=")">
+            #{menuId}
+        </foreach>
+    </select>
+
+    <select id="selectAllNotButton" resultType="com.example.vo.MenuVo">
+        select
+        <include refid="allFiledSql"/>
+        from
+        <include refid="tableNameSql"/>
+        where type != 'F' and menu_id in
+        <foreach collection="menuIds" item="menuId" open="(" separator="," close=")">
+            #{menuId}
+        </foreach>
+    </select>
 
 </mapper>

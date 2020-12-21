@@ -1,17 +1,9 @@
-2020-12-13 13:39:33  [ main:1777 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-12-13 13:39:34  [ main:2452 ] - [ INFO ]  {dataSource-1} inited
-2020-12-13 13:39:34  [ main:2456 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@3a72e2e8] will not be managed by Spring
-2020-12-13 13:39:34  [ main:2465 ] - [ DEBUG ]  ==>  Preparing: SELECT province_id,name FROM gps_province WHERE null=?
-2020-12-13 13:39:34  [ main:2490 ] - [ DEBUG ]  ==> Parameters: 1(Integer)
-2020-12-13 13:39:34  [ main:2514 ] - [ DEBUG ]  <==      Total: 0
-2020-12-13 13:39:34  [ main:2517 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5a0f87e5]
-2020-12-13 13:42:13  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
-2020-12-13 13:42:14  [ main:1313 ] - [ DEBUG ]  Creating a new SqlSession
-2020-12-13 13:42:14  [ main:1319 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5a0f87e5] was not registered for synchronization because synchronization is not active
-2020-12-13 13:42:14  [ main:1376 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-12-13 13:42:15  [ main:1964 ] - [ INFO ]  {dataSource-1} inited
-2020-12-13 13:42:15  [ main:1968 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@3a72e2e8] will not be managed by Spring
-2020-12-13 13:42:15  [ main:1975 ] - [ DEBUG ]  ==>  Preparing: SELECT province_id,name FROM gps_province WHERE province_id=?
-2020-12-13 13:42:15  [ main:1999 ] - [ DEBUG ]  ==> Parameters: 1(Integer)
-2020-12-13 13:42:15  [ main:2022 ] - [ DEBUG ]  <==      Total: 1
-2020-12-13 13:42:15  [ main:2024 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@5a0f87e5]
+2020-12-21 13:33:20  [ main:2266 ] - [ DEBUG ]  Creating a new SqlSession
+2020-12-21 13:33:20  [ main:2274 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39f9b4fc] was not registered for synchronization because synchronization is not active
+2020-12-21 13:33:20  [ main:2395 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-12-21 13:33:21  [ main:3483 ] - [ INFO ]  {dataSource-1} inited
+2020-12-21 13:33:21  [ main:3488 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@33246f17] will not be managed by Spring
+2020-12-21 13:33:21  [ main:3501 ] - [ DEBUG ]  ==>  Preparing: select goods_id goodsId,sum(pay_number) countNum from order_shop where order_id in ( ? ) GROUP BY goods_id
+2020-12-21 13:33:21  [ main:3540 ] - [ DEBUG ]  ==> Parameters: 2020121011051(String)
+2020-12-21 13:33:21  [ main:3574 ] - [ DEBUG ]  <==      Total: 2
+2020-12-21 13:33:21  [ main:3577 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39f9b4fc]

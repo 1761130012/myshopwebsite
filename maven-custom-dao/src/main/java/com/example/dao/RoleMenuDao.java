@@ -20,4 +20,11 @@ public interface RoleMenuDao extends BaseMapper<RoleMenuVo> {
     void deleteRoleId(@Param("roleId") Integer roleId);
 
     int insertRoleIdMenusBath(@Param("roleId") Integer roleId, @Param("menus") List<Integer> menus);
+    /**
+     * 根据 角色id 查询 菜单 id
+     *
+     * @param roleIds
+     * @return
+     */
+    List<Integer> selectMenuIdByRoleId(@Param("roleIds") List<Integer> roleIds);
 }

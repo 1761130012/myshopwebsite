@@ -2,6 +2,9 @@ package com.example.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dao.MenuDao;
+import com.example.dao.RoleMenuDao;
+import com.example.dao.StaffDao;
+import com.example.dao.StaffRoleDao;
 import com.example.service.MenuService;
 import com.example.utils.ServiceImplUtil;
 import com.example.vo.MenuVo;
@@ -27,6 +30,13 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, MenuVo> implements Men
     @Autowired
     private MenuDao menuDao;
 
+    @Autowired
+    private StaffDao staffDao;
+    @Autowired
+    private StaffRoleDao staffRoleDao;
+    @Autowired
+    private RoleMenuDao roleMenuDao;
+
 
     @Override
     public List<MenuVo> queryAll() {
@@ -46,4 +56,28 @@ public class MenuServiceImpl extends ServiceImpl<MenuDao, MenuVo> implements Men
     }
 
 
+    @Override
+    public List<MenuVo> queryAllNotButton(String loginName) {
+        //查询 员工id
+        Integer staffId = staffDao.selectIdByLoginName(loginName);
+        //根据 员工id 进行 查询 角色id
+        List<Integer> roleIds = staffRoleDao.selectRoleIdByStaffId(staffId);
+        //根据 角色id 查询 菜单 id
+        List<Integer> menuIds = roleMenuDao.selectMenuIdByRoleId(roleIds);
+        //根据 菜单id 进行 限制查询
+        List<MenuVo> menuVos = menuDao.selectAllNotButton(menuIds);
+        return serviceImplUtil.menuIterationAll(menuVos, 0);
+    }
+
+    @Override
+    public List<String> selectMenuPermsByIds(String loginName) {
+        //查询 员工id
+        Integer staffId = staffDao.selectIdByLoginName(loginName);
+        //根据 员工id 进行 查询 角色id
+        List<Integer> roleIds = staffRoleDao.selectRoleIdByStaffId(staffId);
+        //根据 角色id 查询 菜单 id
+        List<Integer> menuIds = roleMenuDao.selectMenuIdByRoleId(roleIds);
+        //进行 查询
+        return menuDao.selectMenuPermsByIds(menuIds);
+    }
 }

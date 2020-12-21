@@ -1,22 +1,16 @@
-2020-12-10 18:40:24  [ main:2405 ] - [ DEBUG ]  ==> Parameters: 2(Long)
-2020-12-10 18:40:24  [ main:2414 ] - [ DEBUG ]  ====>  Preparing: SELECT type_id,name FROM goods_type WHERE type_id=?
-2020-12-10 18:40:24  [ main:2414 ] - [ DEBUG ]  ====> Parameters: 1(Integer)
-2020-12-10 18:40:24  [ main:2414 ] - [ DEBUG ]  <====      Total: 1
-2020-12-10 18:40:24  [ main:2414 ] - [ DEBUG ]  <==      Total: 2
-2020-12-10 18:40:24  [ main:2414 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@141bb6b8]
-2020-12-10 18:40:52  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
-2020-12-10 18:40:53  [ main:1391 ] - [ DEBUG ]  Creating a new SqlSession
-2020-12-10 18:40:53  [ main:1409 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@141bb6b8] was not registered for synchronization because synchronization is not active
-2020-12-10 18:40:53  [ main:1488 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-12-10 18:40:54  [ main:2430 ] - [ INFO ]  {dataSource-1} inited
-2020-12-10 18:40:54  [ main:2430 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@b808af5] will not be managed by Spring
-2020-12-10 18:40:54  [ main:2440 ] - [ DEBUG ]  JsqlParserCountOptimize sql=SELECT  *  FROM goods
-2020-12-10 18:40:54  [ main:2470 ] - [ DEBUG ]  ==>  Preparing: SELECT COUNT(1) FROM goods
-2020-12-10 18:40:54  [ main:2491 ] - [ DEBUG ]  ==> Parameters: 
-2020-12-10 18:40:54  [ main:2521 ] - [ DEBUG ]  ==>  Preparing: SELECT * FROM goods LIMIT ?
-2020-12-10 18:40:54  [ main:2521 ] - [ DEBUG ]  ==> Parameters: 2(Long)
-2020-12-10 18:40:54  [ main:2531 ] - [ DEBUG ]  ====>  Preparing: SELECT type_id,name FROM goods_type WHERE type_id=?
-2020-12-10 18:40:54  [ main:2531 ] - [ DEBUG ]  ====> Parameters: 1(Integer)
-2020-12-10 18:40:54  [ main:2531 ] - [ DEBUG ]  <====      Total: 1
-2020-12-10 18:40:54  [ main:2531 ] - [ DEBUG ]  <==      Total: 2
-2020-12-10 18:40:54  [ main:2531 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@141bb6b8]
+2020-12-21 13:22:32  [ main:2669 ] - [ DEBUG ]  ==> Parameters: 2020121011051(String)
+2020-12-21 13:22:32  [ main:2716 ] - [ DEBUG ]  <==      Total: 2
+2020-12-21 13:22:32  [ main:2719 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39f9b4fc]
+2020-12-21 13:23:28  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2020-12-21 13:23:28  [ main:755 ] - [ WARN ]  [com.example.dao.ShopDao.selectPage] Has been loaded by XML or SqlProvider or Mybatis's Annotation, so ignoring this injection for [class com.baomidou.mybatisplus.core.injector.methods.SelectPage]
+2020-12-21 13:23:29  [ main:1684 ] - [ DEBUG ]  Creating a new SqlSession
+2020-12-21 13:23:29  [ main:1691 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39f9b4fc] was not registered for synchronization because synchronization is not active
+2020-12-21 13:23:29  [ main:1771 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-12-21 13:23:30  [ main:2432 ] - [ INFO ]  {dataSource-1} inited
+2020-12-21 13:23:30  [ main:2436 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@33246f17] will not be managed by Spring
+2020-12-21 13:23:30  [ main:2444 ] - [ DEBUG ]  ==>  Preparing: select goods_id goodsId,sum(pay_number) countNum from order_shop where order_id in ( ? ) GROUP BY goods_id
+2020-12-21 13:23:30  [ main:2468 ] - [ DEBUG ]  ==> Parameters: 2020121011051(String)
+2020-12-21 13:23:30  [ main:2492 ] - [ DEBUG ]  <==      Total: 2
+2020-12-21 13:23:30  [ main:2494 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39f9b4fc]
+2020-12-21 13:33:17  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2020-12-21 13:33:18  [ main:968 ] - [ WARN ]  [com.example.dao.ShopDao.selectPage] Has been loaded by XML or SqlProvider or Mybatis's Annotation, so ignoring this injection for [class com.baomidou.mybatisplus.core.injector.methods.SelectPage]

@@ -67,4 +67,20 @@ public class MenuController {
         return bool;
     }
 
+    @RequestMapping("/queryAllMenuNotButton")
+    public List<MenuVo> queryAllMenuNotButton(String loginName) {
+        return menuService.queryAllNotButton(loginName);
+    }
+
+    /**
+     * 权限 可以 用这里
+     *
+     * @param loginName
+     * @return
+     */
+    @RequestMapping("/queryPower")
+    public List<String> queryPower(String loginName) {
+        return menuService.selectMenuPermsByIds(loginName);
+    }
+
 }

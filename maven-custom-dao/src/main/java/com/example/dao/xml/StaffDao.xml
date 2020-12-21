@@ -31,7 +31,7 @@
         <where>
             <if test="value !=null and value !=''">
                 and login_name like concat('%',#{value},'%')
-                and name like concat('%',#{value},'%')
+                or name like concat('%',#{value},'%')
             </if>
         </where>
     </select>
