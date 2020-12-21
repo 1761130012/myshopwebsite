@@ -3,6 +3,8 @@ package com.example.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.vo.ShopVo;
+import com.example.vo.UserShopVo;
+import com.example.vo.UserVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -31,4 +33,5 @@ public interface ShopDao extends BaseMapper<ShopVo> {
     Integer selectIdByUserId(@Param("userId") Integer userId);
 
 
+    ShopVo queryShopVo(UserVo userVos);
 }

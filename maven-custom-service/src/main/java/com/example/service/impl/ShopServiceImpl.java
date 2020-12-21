@@ -8,6 +8,7 @@ import com.example.dao.UserShopDao;
 import com.example.service.ShopService;
 import com.example.vo.ShopVo;
 import com.example.vo.UserShopVo;
+import com.example.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,5 +79,10 @@ public class ShopServiceImpl extends ServiceImpl<ShopDao, ShopVo> implements Sho
         //根据 登录 id 查询 用户商户表 默认地址 商户 id  1 是 默认商户
         Integer shopId = userShopDao.selectShopVoByState(userId, 1);
         return shopDao.selectById(shopId);
+    }
+
+    @Override
+    public ShopVo queryShopVo(UserVo userVos) {
+        return shopDao.queryShopVo(userVos);
     }
 }

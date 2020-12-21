@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.vo.ShopVo;
 import com.example.vo.UserShopVo;
+import com.example.vo.UserVo;
 
 import java.util.List;
 
@@ -30,4 +31,6 @@ public interface ShopService extends IService<ShopVo> {
     List<UserShopVo> selectAllShopVoByLoginName(String loginName);
 
     ShopVo selectShopVoByLoginName(String loginName);
+
+    ShopVo queryShopVo(UserVo userVos);
 }

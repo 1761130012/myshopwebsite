@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.vo.GoodsTypeVo;
 import com.example.vo.GoodsVo;
 import com.example.vo.ShopCartVo;
+import com.example.vo.UserVo;
 
 import java.util.List;
 
@@ -28,4 +29,6 @@ public interface GoodsService extends IService<GoodsVo> {
     List<ShopCartVo> select(ShopCartVo shopCartVo);
 
     void updateCar(ShopCartVo shopCartVo);
+
+    UserVo queryUser(UserVo userVo);
 }
