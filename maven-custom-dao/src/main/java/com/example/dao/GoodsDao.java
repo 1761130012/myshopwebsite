@@ -27,4 +27,11 @@ public interface GoodsDao extends BaseMapper<GoodsVo> {
      * @return
      */
     List<GoodsVo> selectShopIdByTypeId(@Param("typeId") Integer typeId);
+
+    /**
+     * 根据 商品id 查询 类型 id
+     * @param goodsId
+     * @return
+     */
+    Integer selectGoodsTypeIdByGoodsId(@Param("goodsId") Integer goodsId);
 }

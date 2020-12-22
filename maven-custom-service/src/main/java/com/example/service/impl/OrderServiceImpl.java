@@ -4,17 +4,17 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dao.*;
 import com.example.service.OrderService;
+import com.example.utils.ServiceImplUtil;
 import com.example.vo.GoodsTypeVo;
 import com.example.vo.GoodsVo;
 import com.example.vo.OrderShopVo;
 import com.example.vo.OrderVo;
+import org.apache.commons.lang3.StringUtils;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -26,6 +26,9 @@ import java.util.Map;
  */
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements OrderService {
+
+    @Autowired
+    private ServiceImplUtil serviceImplUtil;
 
     @Autowired
     private OrderDao orderDao;
@@ -129,10 +132,15 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
     }
 
     @Override
-    public List<OrderVo> queryTimeCountMoneyByTime(String userLoginName, OrderVo orderVo) {
+    public List<OrderVo> queryTimeCountMoneyByTime(String userLoginName, Date startTime, Date endTime) {
         //根据 登录 名 进行 查询  商户 id
         Integer shopId = shopDao.selectIdByUserId(userDao.selectIdByLoginName(userLoginName));
-        return orderDao.selectTimeCountMoneyByTime(shopId, orderVo);
+        List<OrderVo> orderVos = orderDao.selectTimeCountMoneyByTime(shopId, startTime, endTime);
+        for (OrderVo vo : orderVos) {
+            //0.005 是 用 代收 费
+            vo.setMoney(vo.getMoney() * 0.05);
+        }
+        return orderVos;
     }
 
     @Override
@@ -143,20 +151,22 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
         //根据 时间 段查询 出 有 哪些 订单 出货
         List<String> orderIds = orderDao.selectOrderIdByTime(startTime, endTime);
 
+        //有可能 没 订单
+        if (orderIds.size() == 0) {
+            return null;
+        }
+
         //根据 订单 id 进行 查询 商品 id 和  数量
-        List<Map<String, Integer>> mapList = orderShopDao.selectGoodsIdCountByOrderId(orderIds);
+        List<Map<String, Object>> mapList = orderShopDao.selectGoodsIdCountByOrderId(orderIds);
 
         //提取 出来
-        //Map<Integer(商品编号), Integer(数量)>
-        Map<Integer, Integer> goodsVoMap = new HashMap<>();
-        for (Map<String, Integer> map : mapList) {
-            //goodsId  countNum 依照数据库 查询 语句 定
-            goodsVoMap.put(map.get("goodsId"), map.get("countNum"));
-        }
+        Map<Object, Object> goodsVoMap = serviceImplUtil.getMapIdAndNum(mapList, "goodsId", "countNum");
 
         //在 根据 商品 id 进行 匹配 id 是否 所属
         for (GoodsVo goodsVo : goodsVos) {
-            goodsVo.setCountNum(goodsVoMap.get(goodsVo.getGoodsId()));
+            if (goodsVoMap.containsKey(goodsVo.getGoodsId())) {
+                goodsVo.setCountNum(Integer.parseInt((goodsVoMap.get(goodsVo.getGoodsId())).toString()));
+            }
         }
 
         //获取
@@ -167,13 +177,59 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
     public List<GoodsTypeVo> selectGoodTypeNumByTime(Date startTime, Date endTime) {
         //查询 出 所有 类型 id 和  类型 名
         List<GoodsTypeVo> goodsTypeVos = goodsTypeDao.select();
+        Map<Integer, GoodsTypeVo> goodsTypeVoMap = new HashMap<>();
+        //进行 打包 根据 id 进行  打包 成map
+        for (GoodsTypeVo goodsTypeVo : goodsTypeVos) {
+            goodsTypeVoMap.put(goodsTypeVo.getTypeId(), goodsTypeVo);
+        }
+
 
         //根据 时间  查询 出 订单 id
-        List<String> orders = orderDao.selectOrderIdByTime(startTime, endTime);
+        List<String> orderIds = orderDao.selectOrderIdByTime(startTime, endTime);
 
-        //在 根据
+        //有可能 没 订单
+        if (orderIds.size() == 0) {
+            return null;
+        }
 
 
-        return null;
+        //在 根据 订单 id 查询 商品 id 和 数量
+        List<Map<String, Object>> mapList = orderShopDao.selectGoodsIdCountByOrderId(orderIds);
+        //提取 出来  商品 id : 数量
+        Map<Object, Object> goodsVoMap = serviceImplUtil.getMapIdAndNum(mapList, "goodsId", "countNum");
+        //循环 根据 商品 id 查询 类型 id
+        for (Object goodsId : goodsVoMap.keySet()) {
+            //查询 返回 类型 id
+            Integer typeId = goodsDao.selectGoodsTypeIdByGoodsId((Integer) goodsId);
+            if (goodsTypeVoMap.containsKey(typeId)) {
+                //获取 对象
+                GoodsTypeVo goodsTypeVo = goodsTypeVoMap.get(typeId);
+                //赋予 数据
+                goodsTypeVo.setCountNum(Integer.parseInt((goodsVoMap.get(typeId)).toString()));
+            }
+        }
+        return new ArrayList<>(goodsTypeVoMap.values());
+    }
+
+    @Override
+    public Map<Object, Object> queryIncomeByTime(Date startTime, Date endTime) {
+        //根据 时间 查询 订单 id 和 时间 和 金额
+        List<Map<String, Object>> mapList = orderDao.selectOrderTimeCountNumByTime(startTime, endTime);
+
+        //进行 提取
+        return serviceImplUtil.getMapIdAndNum(mapList, "endTime", "money");
+    }
+
+    @Override
+    public Page<OrderVo> queryAllOrderByShopIdState(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        //根据 登录 id 进行 查询 用户 id  根据 用户 id 查询 商户 id
+        Integer shopId = shopDao.selectIdByUserId(userDao.selectIdByLoginName(loginName));
+        orderVo.setShopId(shopId);
+        return orderDao.selectAllOrderByShopIdState(page, orderVo);
+    }
+
+    @Override
+    public Page<OrderShopVo> queryOrderShopByOrderId(Page<OrderShopVo> page, String orderId) {
+        return orderShopDao.selectPageVoByOrderId(page, orderId);
     }
 }

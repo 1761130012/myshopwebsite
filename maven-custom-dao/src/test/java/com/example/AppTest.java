@@ -19,15 +19,8 @@ import java.util.Map;
 public class AppTest {
     @Test
     public void test1() {
-        ApplicationContext context =
-                new ClassPathXmlApplicationContext("applicationContext-dao.xml");
 
-        OrderShopDao orderShopDao = context.getBean(OrderShopDao.class);
 
-        List<Map<String, Integer>> list = orderShopDao.selectGoodsIdCountByOrderId(new ArrayList<String>(Arrays.asList("2020121011051")));
 
-        for (Map<String, Integer> map : list) {
-            System.out.println(map);
-        }
     }
 }

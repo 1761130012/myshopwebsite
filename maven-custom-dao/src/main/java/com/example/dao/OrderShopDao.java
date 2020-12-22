@@ -52,5 +52,6 @@ public interface OrderShopDao extends BaseMapper<OrderShopVo> {
      * @param orderIds
      * @return
      */
-    List<Map<String, Integer>> selectGoodsIdCountByOrderId(@Param("orderIds") List<String> orderIds);
+    List<Map<String, Object>> selectGoodsIdCountByOrderId(@Param("orderIds") List<String> orderIds);
+
 }

@@ -108,18 +108,16 @@ public class OrderController {
     }
 
     @RequestMapping("/queryTimeCountMoneyByTime")
-    public List<OrderVo> queryTimeCountMoneyByTime(@RequestBody Map<String, Object> map) throws ParseException {
-        OrderVo orderVo = new OrderVo();
-        //设置为收货
-        orderVo.setState(3);
-        orderVo.setStartTime(DateUtils.parseDate((String) map.get("startTime"), "yyyy-MM-dd"));
-        orderVo.setEndTime(DateUtils.parseDate((String) map.get("endTime"), "yyyy-MM-dd"));
-        return orderService.queryTimeCountMoneyByTime((String) map.get("userLoginName"), orderVo);
+    public List<OrderVo> queryTimeCountMoneyByTime(@DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,
+                                                   @DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime,
+                                                   String loginName) throws ParseException {
+        return orderService.queryTimeCountMoneyByTime(loginName, startTime, endTime);
     }
 
     @RequestMapping("/queryGoodTypeNumByTime")
     public List<GoodsTypeVo> queryGoodTypeNumByTime(@DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,
                                                     @DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime) {
+
         return orderService.selectGoodTypeNumByTime(startTime, endTime);
     }
 
@@ -129,5 +127,24 @@ public class OrderController {
                                                     Integer typeId) {
 
         return orderService.selectGoodsNameNumberTypeId(startTime, endTime, typeId);
+    }
+
+
+    @RequestMapping("/queryIncomeByTime")
+    public Map<Object, Object> queryIncomeByTime(@DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,
+                                                 @DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime) {
+        return orderService.queryIncomeByTime(startTime, endTime);
+    }
+
+    @RequestMapping("/queryAllOrderByShopId")
+    public Page<OrderVo> queryAllOrderByShopId(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        //设置 为 -1 也就是 所有
+        orderVo.setState(-1);
+        return orderService.queryAllOrderByShopIdState(page, orderVo, loginName);
+    }
+
+    @RequestMapping("/queryOrderShopByOrderId")
+    public Page<OrderShopVo> queryOrderShopByOrderId(Page<OrderShopVo> page, String orderId) {
+        return orderService.queryOrderShopByOrderId(page, orderId);
     }
 }
