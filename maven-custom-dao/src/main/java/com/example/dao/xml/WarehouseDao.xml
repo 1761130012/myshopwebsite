@@ -2,4 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.WarehouseDao">
 
+    <resultMap id="warehouseMap" type="com.example.vo.WarehouseVo">
+        <association property="gpsCityVo" column="city_id"
+                     select="com.example.dao.GpsCityDao.selectById"/>
+
+        <association property="gpsProvinceVo" column="province_id"
+                     select="com.example.dao.GpsProvinceDao.selectById"/>
+
+        <association property="gpsAreaVo" column="area_id"
+                     select="com.example.dao.GpsAreaDao.selectById"/>
+    </resultMap>
+
+    <select id="selectPageVo" resultMap="warehouseMap">
+        select * from warehouse
+        <where>
+            <if test="warehouseVo !=null ">
+                <if test="warehouseVo.name!=null and warehouseVo.name!=''">and `name` like concat
+                    ('%',#{warehouseVo.name},'%')
+                </if>
+            </if>
+        </where>
+    </select>
 </mapper>

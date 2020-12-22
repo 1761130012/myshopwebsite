@@ -2,9 +2,11 @@ package com.example.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.service.GoodsService;
 import com.example.service.ShopService;
 import com.example.vo.ShopVo;
 import com.example.vo.UserShopVo;
+import com.example.vo.UserVo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -30,9 +32,13 @@ public class ShopController {
     @Autowired
     private ShopService shopService;
 
+    @Autowired
+    GoodsService goodsService;
+
+
     @RequestMapping("/selectShopVo")
     public Page<ShopVo> select(@RequestParam(value = "page", defaultValue = "1") int page,
-                                @RequestParam(value = "rows", defaultValue = "5") int rows
+                               @RequestParam(value = "rows", defaultValue = "5") int rows
             , ShopVo shopVo) {
 
         return shopService.selectPage(new Page<ShopVo>(page, rows), shopVo);
@@ -45,7 +51,9 @@ public class ShopController {
     }
 
     @RequestMapping("/updateShopVo")
-    public int delete(ShopVo shopVo) {
+    public int delete(ShopVo shopVo, UserVo userVo) {
+        UserVo userVos = goodsService.queryUser(userVo);
+        shopVo.setUserId(userVos.getUserId());
         return shopService.update(shopVo);
     }
 
@@ -73,6 +81,20 @@ public class ShopController {
     public List<UserShopVo> queryAllShopVoByLoginName(@RequestParam("loginName") String loginName) {
         return shopService.selectAllShopVoByLoginName(loginName);
     }
+
+    /**
+     * 传输 根据 用户id 查询 商铺信息
+     *
+     * @param userVo
+     * @return
+     */
+    @RequestMapping("/queryShopVo")
+    public ShopVo queryShopVo(UserVo userVo) {
+        UserVo userVos = goodsService.queryUser(userVo);
+
+        return shopService.queryShopVo(userVos);
+    }
+
 
     //默认 查询 状态 为 默认 选择 的
     @RequestMapping("/queryShopVoByLoginName")

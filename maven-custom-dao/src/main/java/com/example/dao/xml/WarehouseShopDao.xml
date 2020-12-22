@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.dao.WarehouseShopDao">
-
+    <resultMap id="warehouseShopMap" type="com.example.vo.WarehouseShopVo">
+        <association property="goodsVo" column="goods_id"
+                     select="com.example.dao.GoodsDao.selectById"/>
+        <association property="warehouseVo" column="warehouse_id"
+                     select="com.example.dao.WarehouseDao.selectById"/>
+    </resultMap>
+    <select id="selectPageVo" resultMap="warehouseShopMap">
+        SELECT ws.*,g.name FROM warehouse_shop ws INNER JOIN goods g ON g.goods_id=ws.goods_id
+        <where>
+            <if test="warehouseShopVo!=null">
+                <if test="warehouseShopVo.goodsVo!=null">
+                    <if test="warehouseShopVo.goodsVo.name!=null and warehouseShopVo.goodsVo.name!=''">and g.`name` like concat ('%',#{warehouseShopVo.goodsVo.name},'%') </if>
+                </if>
+            </if>
+            and warehouse_id=#{warehouseShopVo.warehouseId}
+        </where>
+    </select>
 </mapper>

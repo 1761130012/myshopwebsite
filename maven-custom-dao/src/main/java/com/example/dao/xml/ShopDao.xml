@@ -80,6 +80,10 @@
         where user_id = #{userId};
     </select>
 
+    <select id="queryShopVo" resultType="com.example.vo.ShopVo">
+        select * from shop
+        where user_id = #{userId}
+    </select>
 
 
 </mapper>

@@ -3,10 +3,17 @@ package com.example.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.service.UserService;
-import com.example.vo.StaffVo;
+import com.example.vo.UserShopVo;
 import com.example.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 
 /**
  * <p>
@@ -33,6 +40,7 @@ public class UserController {
 
     @RequestMapping("/add")
     public boolean add(@RequestBody UserVo userVo) {
+        userVo.setCreateTime(new Date());
         return userService.save(userVo);
     }
 
@@ -49,11 +57,26 @@ public class UserController {
     @RequestMapping("/delete")
     public boolean delete(String ids) {
         String[] nums = ids.split(",");
-        boolean bool=false;
+        boolean bool = false;
         for (int i = 0; i < nums.length; i++) {
-            bool= userService.removeById(Integer.parseInt(nums[i]));
+            bool = userService.removeById(Integer.parseInt(nums[i]));
         }
         return bool;
+    }
+
+    @RequestMapping("/edit")
+    public Map addGoods(UserVo userVo, @RequestParam("img") MultipartFile img) throws IOException {
+        Map<String,String> map =new HashMap<String,String>();
+        userVo.setPicture("./src/assets/"+img.getOriginalFilename());  //保存到数据库的【相对路径】
+        System.out.println(userVo);
+        System.out.println(img.getBytes().length);
+        //将上传的文件保存到服务器上的前端项目的【绝对路径】
+        img.transferTo(new File("E:\\新建文件夹\\myshopwebsitepage\\src\\assets\\"+img.getOriginalFilename()));
+        boolean bool=userService.updateById(userVo);
+        if(bool){
+            map.put("msg","添加成功");
+        }
+        return map;
     }
 
 }
