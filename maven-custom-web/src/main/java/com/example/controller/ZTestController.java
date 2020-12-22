@@ -1,8 +1,11 @@
 package com.example.controller;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -71,5 +74,11 @@ public class ZTestController {
 
     public void test(){
         System.out.println("  测试github");
+    }
+
+    @Test
+    public void test1(){
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
     }
 }

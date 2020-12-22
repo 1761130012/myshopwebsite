@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import net.sf.jsqlparser.expression.DateTimeLiteralExpression;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -31,7 +33,7 @@ public class UserVo implements Serializable {
     /**
      * 用户id
      */
-    @TableId("user_id")
+    @TableId(value = "user_id", type = IdType.AUTO)
     private Integer userId;
 
     /**
@@ -55,15 +57,21 @@ public class UserVo implements Serializable {
     /**
      * 电话
      */
+    @TableField("picture")
+    private String picture;
+
     @TableField("phone")
     private String phone;
 
+    @TableField("signature")
+    private String signature;
     /**
      * 创建时间
      */
     @TableField("create_time")
-    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
 

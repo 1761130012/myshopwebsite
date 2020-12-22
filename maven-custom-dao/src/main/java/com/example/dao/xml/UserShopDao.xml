@@ -28,4 +28,5 @@
         <include refid="tableName"/>
         where user_id =#{userId} and state = #{state}
     </select>
+
 </mapper>
