@@ -19,7 +19,7 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("warehouse_shop")
+@TableName(value = "warehouse_shop",resultMap = "warehouseShopMap")
 public class WarehouseShopVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,6 +53,12 @@ public class WarehouseShopVo implements Serializable {
      */
     @TableField("goods_count")
     private Integer goodsCount;
+
+    @TableField(exist = false)
+    private GoodsVo goodsVo;
+
+    @TableField(exist = false)
+    private WarehouseVo warehouseVo;
 
 
 }

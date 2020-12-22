@@ -19,7 +19,7 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("warehouse")
+@TableName(value = "warehouse",resultMap = "warehouseMap")
 public class WarehouseVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,4 +71,15 @@ public class WarehouseVo implements Serializable {
      */
     @TableField("max_count")
     private Integer maxCount;
+
+    @TableField(exist = false)
+    private GpsProvinceVo gpsProvinceVo;
+
+    @TableField(exist = false)
+    private GpsCityVo gpsCityVo;
+
+
+    @TableField(exist = false)
+    private GpsAreaVo gpsAreaVo;
+
 }
