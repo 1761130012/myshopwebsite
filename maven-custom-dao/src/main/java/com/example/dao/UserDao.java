@@ -22,4 +22,6 @@ public interface UserDao extends BaseMapper<UserVo> {
      */
     Integer selectIdByLoginName(@Param("loginName") String loginName);
     Page<UserVo> selectPageVo(@Param("userVoPage") Page<UserVo> userVoPage, @Param("userVo") UserVo userVo);
+
+    UserVo query(UserVo userVo);
 }

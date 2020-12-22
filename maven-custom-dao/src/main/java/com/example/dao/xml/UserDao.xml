@@ -25,4 +25,9 @@
         where login_name=#{loginName}
     </select>
 
+    <select id="query" resultType="com.example.vo.UserVo">
+        select * from user
+        where login_name = #{loginName}
+    </select>
+
 </mapper>

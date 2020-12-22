@@ -5,10 +5,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dao.GoodsDao;
 import com.example.dao.GoodsTypeDao;
 import com.example.dao.ShopCartDao;
+import com.example.dao.UserDao;
 import com.example.service.GoodsService;
 import com.example.vo.GoodsTypeVo;
 import com.example.vo.GoodsVo;
 import com.example.vo.ShopCartVo;
+import com.example.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
     @Autowired
     ShopCartDao shopCartDao;
 
+    @Autowired
+    UserDao userDao;
+
     @Override
     public Page<GoodsVo> query(Page<GoodsVo> page, GoodsVo goodsVo) {
         return goodsDao.selectPageVo(page,goodsVo);
@@ -57,6 +62,11 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
     @Override
     public void updateCar(ShopCartVo shopCartVo) {
         shopCartDao.updateCar(shopCartVo);
+    }
+
+    @Override
+    public UserVo queryUser(UserVo userVo) {
+        return userDao.query(userVo);
     }
 
 
