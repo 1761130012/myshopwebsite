@@ -2,11 +2,9 @@ package com.example.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.dao.UserDao;
 import com.example.service.GoodsService;
-import com.example.vo.GoodsTypeVo;
-import com.example.vo.GoodsVo;
-import com.example.vo.ShopCartVo;
-import com.example.vo.ShopVo;
+import com.example.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,9 +43,13 @@ public class GoodsController {
 
 
     @RequestMapping("/addCar")
-    public void addCar(ShopCartVo shopCartVo){
-        int num = goodsService.select(shopCartVo).size();
+    public void addCar(ShopCartVo shopCartVo,UserVo userVo){
 
+        UserVo userVos = goodsService.queryUser(userVo);
+
+        shopCartVo.setUserId(userVos.getUserId());
+
+        int num = goodsService.select(shopCartVo).size();
         if(num!=0){
             goodsService.updateCar(shopCartVo);
         }else {
