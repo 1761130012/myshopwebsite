@@ -22,7 +22,7 @@
         <where>
             <if test="goodsVo!=null">
                 <if test="goodsVo.typeId!=null">
-                    <if test="goodsVo.typeId!=0">
+                    <if test="goodsVo.typeId!=0 and goodsVo.typeId!=null">
                         and type_id = #{goodsVo.typeId}
                     </if>
                 </if>
