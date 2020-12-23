@@ -106,10 +106,11 @@ public interface OrderService extends IService<OrderVo> {
      * 进行 查询 类型 所 对应的 商品 数量 完成的  条件
      *
      * @param userLoginName 用户登录名
-     * @param orderVo       条件
+     * @param startTime     初始时间
+     * @param endTime       初始时间
      * @return
      */
-    List<OrderVo> queryTimeCountMoneyByTime(String userLoginName, OrderVo orderVo);
+    List<OrderVo> queryTimeCountMoneyByTime(String userLoginName, Date startTime, Date endTime);
 
     /**
      * 根据类型 id 查询 商品名称 和 销售数量
@@ -127,4 +128,30 @@ public interface OrderService extends IService<OrderVo> {
      * @return
      */
     List<GoodsTypeVo> selectGoodTypeNumByTime(Date startTime, Date endTime);
+
+    /**
+     * 根据 时间 进行 查询 计算 总收入
+     *
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    Map<Object, Object> queryIncomeByTime(Date startTime, Date endTime);
+
+    /**
+     * 查询 所有 的 订单 根据 商户 id 和 状态查询
+     *
+     * @param page
+     * @param loginName
+     * @return
+     */
+    Page<OrderVo> queryAllOrderByShopIdState(Page<OrderVo> page, OrderVo orderVo, String loginName);
+
+    /**
+     * 根据 订单 id 查询 商品
+     *
+     * @param orderId
+     * @return
+     */
+    Page<OrderShopVo> queryOrderShopByOrderId(Page<OrderShopVo> page, String orderId);
 }

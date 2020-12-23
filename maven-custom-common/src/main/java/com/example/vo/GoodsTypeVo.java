@@ -36,5 +36,9 @@ public class GoodsTypeVo implements Serializable {
     @TableField("name")
     private String name;
 
-
+    /**
+     * 商品 数量 0 默认 值
+     */
+    @TableField(exist = false)
+    private Integer countNum = 0;
 }
