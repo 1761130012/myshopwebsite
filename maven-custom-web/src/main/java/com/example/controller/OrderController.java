@@ -2,9 +2,11 @@ package com.example.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.service.GoodsService;
 import com.example.service.OrderService;
 import com.example.service.OrderShopService;
 import com.example.service.SupplierService;
+import com.example.utils.TimeGroupUtil;
 import com.example.vo.*;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,9 @@ public class OrderController {
     OrderService orderService;
 
     @Autowired
+    GoodsService goodsService;
+
+    @Autowired
     OrderShopService orderShopService;
 
     @RequestMapping("/selectOrderVo")
@@ -60,6 +65,23 @@ public class OrderController {
         return orderService.add(orderVo);
     }
 
+    @RequestMapping("/addCarOrderShopVo")
+    public int addCarOrderShopVo(OrderShopVo orderShopVo){
+        return orderShopService.add(orderShopVo);
+    }
+
+    @RequestMapping("/addCarOrderVo")
+    public String addCarOrderVo(OrderVo orderVo,UserVo userVo){
+        UserVo userVos = goodsService.queryUser(userVo);
+        orderVo.setUserId(userVos.getUserId());
+        orderVo.setOrderId(TimeGroupUtil.getTimeGroupId());
+        orderVo.setStartTime(new Date());
+        orderVo.setPayState(0);
+        orderVo.setState(0);
+        orderVo.setIsDelete(0);
+        orderService.add(orderVo);
+        return orderVo.getOrderId();
+    }
 
     @RequestMapping("/selectOrderShopVo")
     public List<OrderShopVo> select(OrderShopVo orderShopVo) {
@@ -117,7 +139,6 @@ public class OrderController {
     @RequestMapping("/queryGoodTypeNumByTime")
     public List<GoodsTypeVo> queryGoodTypeNumByTime(@DateTimeFormat(pattern = "yyyy-MM-dd") Date startTime,
                                                     @DateTimeFormat(pattern = "yyyy-MM-dd") Date endTime) {
-
         return orderService.selectGoodTypeNumByTime(startTime, endTime);
     }
 

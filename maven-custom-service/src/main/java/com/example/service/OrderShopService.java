@@ -18,4 +18,5 @@ public interface OrderShopService extends IService<OrderShopVo> {
 
     List<OrderShopVo> select(OrderShopVo orderShopVo);
 
+    int add(OrderShopVo orderShopVo);
 }

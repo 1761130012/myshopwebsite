@@ -46,7 +46,7 @@ public class OrderShopVo implements Serializable {
      * 单价
      */
     @TableField("goods_price")
-    private Integer goodsPrice;
+    private Float   goodsPrice;
 
     /**
      * 购买数量
