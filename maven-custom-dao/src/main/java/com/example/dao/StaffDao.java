@@ -35,4 +35,18 @@ public interface StaffDao extends BaseMapper<StaffVo> {
      * @return
      */
     Page<StaffVo> selectAllPageVo(@Param("page") Page<StaffVo> page, @Param("value") String value);
+
+    /**
+     * 根据 登录 名 和 密码 查询
+     * @param staffVo
+     * @return
+     */
+    int selectCountByLoginNamePwd(@Param("staffVo") StaffVo staffVo);
+
+    /**
+     *查询 员工 名称
+     * @param loginName
+     * @return
+     */
+    String selectStaffNameByLoginName(@Param("loginName") String loginName);
 }

@@ -63,21 +63,32 @@ public class StaffController {
 
     @RequestMapping("/adds.action")
     public Map addGoods(StaffVo staffVo, @RequestParam("img") MultipartFile img) throws IOException {
-        Map<String,String> map =new HashMap<String,String>();
-        staffVo.setHeadImage("./src/assets/"+img.getOriginalFilename());  //保存到数据库的【相对路径】
+        Map<String, String> map = new HashMap<String, String>();
+        staffVo.setHeadImage("./src/assets/" + img.getOriginalFilename());  //保存到数据库的【相对路径】
         System.out.println(staffVo);
         System.out.println(img.getBytes().length);
         //将上传的文件保存到服务器上的前端项目的【绝对路径】
-        img.transferTo(new File("E:\\guiguidea\\homework\\vueproject\\project-web\\src\\assets\\"+img.getOriginalFilename()));
+        img.transferTo(new File("E:\\guiguidea\\homework\\vueproject\\project-web\\src\\assets\\" + img.getOriginalFilename()));
 
-        map.put("code","0");
-        map.put("msg","添加成功");
+        map.put("code", "0");
+        map.put("msg", "添加成功");
 
         return map;
     }
+
     @RequestMapping("/queryAllPageVo")
     public Page<StaffVo> queryAllPageVo(Page<StaffVo> page, String value) {
         return staffService.selectAllPageVo(page, value);
 
+    }
+
+    @RequestMapping("/staffLogin")
+    public boolean staffLogin(StaffVo staffVo) {
+        return staffService.staffLogin(staffVo);
+    }
+
+    @RequestMapping("/queryStaffNameByLoginName")
+    public String queryStaffNameByLoginName(String loginName) {
+        return staffService.queryStaffNameByLoginName(loginName);
     }
 }

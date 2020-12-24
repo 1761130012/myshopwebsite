@@ -34,9 +34,6 @@ public class ShopServiceImpl extends ServiceImpl<ShopDao, ShopVo> implements Sho
     @Autowired
     private UserShopDao userShopDao;
 
-
-
-
     @Override
     public Page<ShopVo> selectPageVo(Page<ShopVo> page, ShopVo shopVo) {
         return shopDao.selectPageVo(page, shopVo);
@@ -84,5 +81,11 @@ public class ShopServiceImpl extends ServiceImpl<ShopDao, ShopVo> implements Sho
     @Override
     public ShopVo queryShopVo(UserVo userVos) {
         return shopDao.queryShopVo(userVos);
+    }
+
+    @Override
+    public UserVo queryUserVoByShopId(Integer shopId) {
+        Integer userId = shopDao.selectUserIdByShopId(shopId);
+        return userDao.selectUserVoById(userId);
     }
 }

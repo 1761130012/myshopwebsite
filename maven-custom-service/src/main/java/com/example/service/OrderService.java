@@ -78,21 +78,12 @@ public interface OrderService extends IService<OrderVo> {
 
 
     /**
-     * 修改 根据 订单 id 修改 状态 为 收货
-     *
-     * @param orderId 订单编号
-     * @return
-     */
-    boolean updateStateByOrderId(String orderId);
-
-
-    /**
      * 根据订单商品表 id 进行 更改 数量
      *
      * @param orderShopVos
      * @return
      */
-    boolean updatePayNumberByOrderShopId(List<OrderShopVo> orderShopVos);
+    boolean updatePayNumberByOrderShopId(List<OrderShopVo> orderShopVos, Integer shopId,String orderId);
 
     /**
      * 修改 支付类型 根据 订单 id
@@ -154,4 +145,14 @@ public interface OrderService extends IService<OrderVo> {
      * @return
      */
     Page<OrderShopVo> queryOrderShopByOrderId(Page<OrderShopVo> page, String orderId);
+
+    /**
+     * 进行 添加 菜单
+     *
+     * @param goodsId
+     * @param num
+     * @return
+     */
+    String insertOrderByOneGoods(Integer goodsId, Integer num, String loginName);
+
 }

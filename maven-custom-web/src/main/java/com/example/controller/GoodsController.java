@@ -32,29 +32,34 @@ public class GoodsController {
     @RequestMapping("/queryGoodsVo")
     public Page<GoodsVo> queryPageVo(@RequestParam(value = "page", defaultValue = "1") int page,
                                      @RequestParam(value = "rows", defaultValue = "6") int rows,
-                                     GoodsVo goodsVo){
-        return goodsService.query(new Page<GoodsVo>(page, rows),goodsVo);
+                                     GoodsVo goodsVo) {
+        return goodsService.query(new Page<GoodsVo>(page, rows), goodsVo);
     }
 
     @RequestMapping("/queryGoodsTypeVo")
-    public List<GoodsTypeVo> queryTypeVo(){
+    public List<GoodsTypeVo> queryTypeVo() {
         return goodsService.queryType();
     }
 
 
     @RequestMapping("/addCar")
-    public void addCar(ShopCartVo shopCartVo,UserVo userVo){
+    public void addCar(ShopCartVo shopCartVo, UserVo userVo) {
 
         UserVo userVos = goodsService.queryUser(userVo);
 
         shopCartVo.setUserId(userVos.getUserId());
 
         int num = goodsService.select(shopCartVo).size();
-        if(num!=0){
+        if (num != 0) {
             goodsService.updateCar(shopCartVo);
-        }else {
+        } else {
             goodsService.addCar(shopCartVo);
         }
+    }
+
+    @RequestMapping("/queryGoodsVoByGoodId")
+    public GoodsVo queryGoodsVoByGoodId(Integer goodsId) {
+        return goodsService.selectGoodsVoByGoodId(goodsId);
     }
 
 }

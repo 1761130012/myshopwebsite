@@ -19,7 +19,7 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName(value = "order_shop",resultMap = "joinType")
+@TableName(value = "order_shop", resultMap = "joinType")
 public class OrderShopVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,7 +46,7 @@ public class OrderShopVo implements Serializable {
      * 单价
      */
     @TableField("goods_price")
-    private Integer goodsPrice;
+    private Float goodsPrice;
 
     /**
      * 购买数量
@@ -55,7 +55,7 @@ public class OrderShopVo implements Serializable {
     private Integer payNumber;
 
     /**
-     *   商品详情
+     * 商品详情
      */
     @TableField(exist = false)
     private GoodsVo goodsVo;

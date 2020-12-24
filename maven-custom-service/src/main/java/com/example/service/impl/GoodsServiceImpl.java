@@ -2,10 +2,7 @@ package com.example.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.dao.GoodsDao;
-import com.example.dao.GoodsTypeDao;
-import com.example.dao.ShopCartDao;
-import com.example.dao.UserDao;
+import com.example.dao.*;
 import com.example.service.GoodsService;
 import com.example.vo.GoodsTypeVo;
 import com.example.vo.GoodsVo;
@@ -28,20 +25,22 @@ import java.util.List;
 public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements GoodsService {
 
     @Autowired
-    GoodsDao goodsDao;
+    private GoodsDao goodsDao;
 
     @Autowired
-    GoodsTypeDao goodsTypeDao;
+    private GoodsTypeDao goodsTypeDao;
+    @Autowired
+    private GoodsImageDao goodsImageDao;
 
     @Autowired
-    ShopCartDao shopCartDao;
+    private ShopCartDao shopCartDao;
 
     @Autowired
-    UserDao userDao;
+    private UserDao userDao;
 
     @Override
     public Page<GoodsVo> query(Page<GoodsVo> page, GoodsVo goodsVo) {
-        return goodsDao.selectPageVo(page,goodsVo);
+        return goodsDao.selectPageVo(page, goodsVo);
     }
 
     @Override
@@ -67,6 +66,15 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
     @Override
     public UserVo queryUser(UserVo userVo) {
         return userDao.query(userVo);
+    }
+
+    @Override
+    public GoodsVo selectGoodsVoByGoodId(Integer goodsId) {
+        //根据 商品 id 查询 图片
+        List<String> images = goodsImageDao.selectAddressByGoodsId(goodsId);
+        GoodsVo goodsVo = goodsDao.selectById(goodsId);
+        goodsVo.setImages(images);
+        return goodsVo;
     }
 
 

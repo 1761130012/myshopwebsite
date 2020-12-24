@@ -31,4 +31,12 @@ public interface GoodsService extends IService<GoodsVo> {
     void updateCar(ShopCartVo shopCartVo);
 
     UserVo queryUser(UserVo userVo);
+
+    /**
+     * 根据商品id 查询商品
+     *
+     * @param goodsId
+     * @return
+     */
+    GoodsVo selectGoodsVoByGoodId(Integer goodsId);
 }
