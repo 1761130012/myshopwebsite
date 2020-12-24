@@ -155,4 +155,8 @@ public interface OrderService extends IService<OrderVo> {
      */
     String insertOrderByOneGoods(Integer goodsId, Integer num, String loginName);
 
+    /**
+     * 我的订单
+     */
+    Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page,OrderVo orderVo,String loginName);
 }

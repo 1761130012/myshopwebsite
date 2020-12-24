@@ -1,6 +1,7 @@
 package com.example.dao;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.vo.OrderVo;
 import com.example.vo.UserVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;

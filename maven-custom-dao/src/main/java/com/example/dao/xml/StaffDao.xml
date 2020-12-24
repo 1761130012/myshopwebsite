@@ -46,7 +46,7 @@
     </select>
 
     <!--  boolean selectStaffNameByLoginName(String loginName);-->
-    <select id="selectStaffNameByLoginName" resultType="java.lang.Boolean">
+    <select id="selectStaffNameByLoginName" resultType="java.lang.String">
         select name from staff
         where login_name = #{loginName}
     </select>

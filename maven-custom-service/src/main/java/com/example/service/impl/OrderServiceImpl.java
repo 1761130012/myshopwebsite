@@ -259,4 +259,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
         orderShopDao.insert(orderShopVo);
         return orderId;
     }
+
+    @Override
+    public Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        Integer userId=userDao.selectIdByLoginName(loginName);
+        orderVo.setUserId(userId);
+        return orderDao.selectAllOrderByUserIdState(page,orderVo);
+    }
 }
