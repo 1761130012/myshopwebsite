@@ -41,27 +41,29 @@
     </select>
 
     <!-- List<OrderVo> selectTimeCountMoneyByTime(@Param("shopId") Integer shopId,
-                                             @Param("orderVo") OrderVo orderVo); -->
+                                             @Param("orderVo") OrderVo orderVo);
+                                            0.05 是
+                                             -->
     <select id="selectTimeCountMoneyByTime" resultType="com.example.vo.OrderVo">
         select end_time,money from
         <include refid="tableName"/>
         <where>
             <choose>
-                <when test="orderVo.startTime !=null and orderVo.endTime !=null ">
-                    and end_time >= #{orderVo.startTime} and #{orderVo.endTime} >=
+                <when test="startTime !=null and endTime !=null ">
+                    and end_time >= #{startTime} and #{endTime} >=
                     end_time
                 </when>
-                <when test="orderVo.startTime != null ">
-                    and end_time = #{orderVo.startTime}
+                <when test="startTime != null ">
+                    and end_time = #{startTime}
                 </when>
-                <when test="orderVo.endTime != null ">
-                    and end_time = #{orderVo.endTime}
+                <when test="endTime != null ">
+                    and end_time = #{endTime}
                 </when>
             </choose>
-            and state= #{orderVo.state}
         </where>
         order by end_time asc
     </select>
+
 
     <!-- @Param("startTime") Date startTime, @Param("endTime") Date endTime -->
     <select id="selectOrderIdByTime" resultType="java.lang.String">
@@ -74,6 +76,41 @@
                     and #{endTime} >= end_time
                 </when>
             </choose>
+        </where>
+    </select>
+
+    <!-- List<String> selectOrderTimeCountNumByTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime); -->
+    <select id="selectOrderTimeCountNumByTime" resultType="java.util.Map">
+        select end_time endTime,money from
+        <include refid="tableName"/>
+        <where>
+            <choose>
+                <when test="startTime != null and endTime != null ">
+                    and end_time >= #{startTime,javaType=DATE}
+                    and #{endTime,javaType=DATE} >= end_time
+                </when>
+            </choose>
+        </where>
+    </select>
+
+    <resultMap id="selectAllOrderByShopIdStateMap" type="com.example.vo.OrderVo">
+        <id property="orderId" column="order_id"/>
+        <association property="userVo" column="user_id"
+                     select="com.example.dao.UserDao.selectById"/>
+    </resultMap>
+
+    <!-- Page<OrderVo> selectAllOrderByShopIdState(Page<OrderVo> page, OrderVo orderVo); -->
+    <select id="selectAllOrderByShopIdState" resultMap="selectAllOrderByShopIdStateMap">
+        select order_id,user_id,money,remark,state from
+        <include refid="tableName"/>
+        <where>
+            <if test="orderVo.state !=null and orderVo.state!=-1">
+                and state=#{orderVo.state}
+            </if>
+            <if test="orderVo.orderId !=null and orderVo.orderId !='' ">
+                and order_id like concat(#{orderVo.orderId},'%')
+            </if>
+            and shop_id=#{orderVo.shopId}
         </where>
     </select>
 </mapper>

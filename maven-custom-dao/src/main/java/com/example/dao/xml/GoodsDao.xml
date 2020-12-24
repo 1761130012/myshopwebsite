@@ -22,7 +22,7 @@
         <where>
             <if test="goodsVo!=null">
                 <if test="goodsVo.typeId!=null">
-                    <if test="goodsVo.typeId!=0">
+                    <if test="goodsVo.typeId!=0 and goodsVo.typeId!=null">
                         and type_id = #{goodsVo.typeId}
                     </if>
                 </if>
@@ -35,8 +35,15 @@
 
     <!-- @Param("typeId") Integer typeId -->
     <select id="selectShopIdByTypeId" resultType="com.example.vo.GoodsVo">
-        select goods_id from
+        select goods_id,name from
         <include refid="tableName"/>
         where type_id = #{typeId}
+    </select>
+
+    <!-- Integer selectGoodsTypeIdByGoodsId(@Param("goodsId") Integer goodsId); -->
+    <select id="selectGoodsTypeIdByGoodsId" resultType="java.lang.Integer">
+        select type_id from
+        <include refid="tableName"/>
+        where goods_id =#{goodsId}
     </select>
 </mapper>

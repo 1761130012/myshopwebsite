@@ -2,7 +2,11 @@ package com.example.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.vo.ShopVo;
+import com.example.vo.UserShopVo;
 import com.example.vo.UserVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,4 +18,6 @@ import com.example.vo.UserVo;
  */
 public interface UserService extends IService<UserVo> {
     Page<UserVo> selectPageVo(Page<UserVo> userVoPage,UserVo userVo);
+
+
 }

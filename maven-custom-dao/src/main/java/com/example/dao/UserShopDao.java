@@ -1,5 +1,6 @@
 package com.example.dao;
 
+import com.example.vo.ShopVo;
 import com.example.vo.UserShopVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,5 +20,6 @@ public interface UserShopDao extends BaseMapper<UserShopVo> {
     List<UserShopVo> selectAllByUserId(@Param("userId") Integer userId);
 
     Integer selectShopVoByState(@Param("userId") Integer userId, @Param("state") int state);
+
 }
 

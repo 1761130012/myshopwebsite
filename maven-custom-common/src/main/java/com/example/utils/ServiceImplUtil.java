@@ -4,7 +4,9 @@ import com.example.vo.MenuVo;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class ServiceImplUtil {
@@ -26,4 +28,13 @@ public class ServiceImplUtil {
         return menuVos;
     }
 
+
+    public Map<Object, Object> getMapIdAndNum(List<Map<String, Object>> mapList, String keyName, String valueName) {
+        Map<Object, Object> goodsVoMap = new HashMap<>();
+        for (Map<String, Object> map : mapList) {
+            //goodsId  countNum 依照数据库 查询 语句 定
+            goodsVoMap.put(map.get(keyName), map.get(valueName));
+        }
+        return goodsVoMap;
+    }
 }
