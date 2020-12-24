@@ -92,5 +92,30 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
         return shopCartDao.deleteById(shopCartVo);
     }
 
+    @Override
+    public Page<GoodsTypeVo> selectTypeAll(Page<GoodsTypeVo> page, GoodsTypeVo goodsTypeVo) {
+        return goodsTypeDao.selectTypeAll(page,goodsTypeVo);
+    }
+
+    @Override
+    public int addType(GoodsTypeVo goodsTypeVo) {
+        return goodsTypeDao.insert(goodsTypeVo);
+    }
+
+    @Override
+    public int updateType(GoodsTypeVo goodsTypeVo) {
+        return goodsTypeDao.updateById(goodsTypeVo);
+    }
+
+    @Override
+    public int deleteType(Integer id) {
+        return goodsTypeDao.deleteById(id);
+    }
+
+    @Override
+    public GoodsTypeVo queryBTypeId(Integer id) {
+        return goodsTypeDao.selectById(id);
+    }
+
 
 }

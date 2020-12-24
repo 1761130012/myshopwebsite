@@ -6,13 +6,12 @@ import com.example.dao.UserDao;
 import com.example.service.GoodsService;
 import com.example.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -115,4 +114,35 @@ public class GoodsController {
         return goodsService.deleteCar(shopCartVo);
     }
 
+
+    @RequestMapping("/queryTypeAll")
+    public Page<GoodsTypeVo> queryTypeAll(Page<GoodsTypeVo> page,GoodsTypeVo goodsTypeVo){
+        return goodsService.selectTypeAll(page,goodsTypeVo);
+    }
+
+    @RequestMapping("/addType")
+    public boolean addType(@RequestBody GoodsTypeVo goodsTypeVo){
+        return goodsService.addType(goodsTypeVo)>0;
+    }
+
+    @RequestMapping("/queryByTypeId")
+    public GoodsTypeVo querybidType(Integer id){
+        return goodsService.queryBTypeId(id);
+    }
+
+    @RequestMapping("/updateType")
+    public boolean updateType(@RequestBody GoodsTypeVo goodsTypeVo){
+        return goodsService.updateType(goodsTypeVo)>0;
+    }
+    @RequestMapping("/deleteType")
+    public Map deleteType(String ids){
+        Map<Object,Object> map=new HashMap<Object,Object>();
+        String[] nums = ids.split(",");
+        int num=0;
+        for (int i = 0; i < nums.length; i++) {
+            num += goodsService.deleteType(Integer.parseInt(nums[i]));
+        }
+        map.put("isdelete",num);
+        return map;
+    }
 }
