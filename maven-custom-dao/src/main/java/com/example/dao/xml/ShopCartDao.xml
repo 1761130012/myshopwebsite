@@ -33,4 +33,9 @@
         </where>
     </update>
 
+    <update id="updateNum" parameterType="shopCartVo">
+        update shop_cart set goods_count = #{goodsCount}
+        where user_id = #{userId} and goods_id = #{goodsId}
+    </update>
+
 </mapper>

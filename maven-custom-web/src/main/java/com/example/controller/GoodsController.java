@@ -57,4 +57,23 @@ public class GoodsController {
         }
     }
 
+    @RequestMapping("/queryCar")
+    public List<ShopCartVo> queryCar(ShopCartVo shopCartVo,UserVo userVo){
+        UserVo userVos = goodsService.queryUser(userVo);
+        shopCartVo.setUserId(userVos.getUserId());
+        return goodsService.queryCar(shopCartVo);
+    }
+
+    @RequestMapping("/updateCarNum")
+    public int updateCarNum(ShopCartVo shopCartVo,UserVo userVo){
+        UserVo userVos = goodsService.queryUser(userVo);
+        shopCartVo.setUserId(userVos.getUserId());
+        return goodsService.updateCarNum(shopCartVo);
+    }
+
+    @RequestMapping("/deleteCar")
+    public int deleteCar(ShopCartVo shopCartVo){
+        return goodsService.deleteCar(shopCartVo);
+    }
+
 }

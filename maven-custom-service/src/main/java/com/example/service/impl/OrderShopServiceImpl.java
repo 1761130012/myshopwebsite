@@ -28,4 +28,9 @@ public class OrderShopServiceImpl extends ServiceImpl<OrderShopDao, OrderShopVo>
         return orderShopDao.select(orderShopVo);
     }
 
+    @Override
+    public int add(OrderShopVo orderShopVo) {
+        return orderShopDao.insert(orderShopVo);
+    }
+
 }
