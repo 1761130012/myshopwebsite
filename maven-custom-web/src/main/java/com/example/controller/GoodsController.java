@@ -31,7 +31,7 @@ public class GoodsController {
     private GoodsService goodsService;
 
     //帮你修改了个名字
-    @RequestMapping("/queryGoodsVo")
+    @RequestMapping("/queryPageVo")
     public Page<GoodsVo> queryPageVo(@RequestParam(value = "page", defaultValue = "1") int page,
                                      @RequestParam(value = "rows", defaultValue = "6") int rows,
                                      GoodsVo goodsVo) {
