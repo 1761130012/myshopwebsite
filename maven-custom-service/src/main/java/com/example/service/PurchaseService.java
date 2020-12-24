@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.vo.PurchaseShopVo;
 import com.example.vo.PurchaseVo;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,5 +16,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface PurchaseService extends IService<PurchaseVo> {
     Page<PurchaseVo> selectPageVo(@Param("purchaseVo") Page<PurchaseVo> purchaseVoPage, @Param("purchaseVo") PurchaseVo purchaseVo);
+
+    Page<PurchaseShopVo> selectShopPageVo(@Param("purchaseShopVo") Page<PurchaseShopVo> purchaseShopVoPage, @Param("purchaseShopVo") PurchaseShopVo purchaseShopVo);
 
 }

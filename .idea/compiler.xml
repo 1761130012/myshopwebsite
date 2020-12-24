@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="maven-custom-service" />
         <module name="maven-custom-web" />
+        <module name="maven-custom-service" />
         <module name="maven-custom-common" />
         <module name="maven-custom-dao" />
       </profile>
