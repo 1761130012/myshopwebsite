@@ -12,11 +12,14 @@
         SELECT * FROM purchase
         <where>
             <if test="purchaseVo!=null">
-                <if test="purchaseVo.title!=null and purchaseVo.title!='' ">and title like concat ('%',#{purchaseVo.title},'%')</if>
+                <if test="purchaseVo.title!=null and purchaseVo.title!='' ">and title like concat
+                    ('%',#{purchaseVo.title},'%')
+                </if>
                 <if test="purchaseVo.startDataTime!=null">AND data_time > #{purchaseVo.startDataTime}</if>
-                <if test="purchaseVo.startDataTime!=null">AND #{purchaseVo.startDataTime} > data_time</if>
+                <if test="purchaseVo.endDataTime!=null">AND #{purchaseVo.endDataTime} > data_time</if>
+                <if test="purchaseVo.state!=null">And state=#{purchaseVo.state}</if>
             </if>
-            and state=0
+
         </where>
 
 
