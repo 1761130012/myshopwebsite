@@ -55,7 +55,7 @@ public class OrderShopVo implements Serializable {
     private Integer payNumber;
 
     /**
-     * 商品详情
+     *   商品详情
      */
     @TableField(exist = false)
     private GoodsVo goodsVo;

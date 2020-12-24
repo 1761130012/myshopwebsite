@@ -18,4 +18,6 @@ public interface ShopCartDao extends BaseMapper<ShopCartVo> {
     List<ShopCartVo> select(ShopCartVo shopCartVo);
 
     void updateCar(ShopCartVo shopCartVo);
+
+    int updateNum(ShopCartVo shopCartVo);
 }

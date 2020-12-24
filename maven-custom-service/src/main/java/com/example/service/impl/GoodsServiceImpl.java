@@ -77,5 +77,20 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
         return goodsVo;
     }
 
+    @Override
+    public List<ShopCartVo> queryCar(ShopCartVo shopCartVo) {
+        return shopCartDao.select(shopCartVo);
+    }
+
+    @Override
+    public int updateCarNum(ShopCartVo shopCartVo) {
+        return shopCartDao.updateNum(shopCartVo);
+    }
+
+    @Override
+    public int deleteCar(ShopCartVo shopCartVo) {
+        return shopCartDao.deleteById(shopCartVo);
+    }
+
 
 }

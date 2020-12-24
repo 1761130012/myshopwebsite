@@ -39,4 +39,10 @@ public interface GoodsService extends IService<GoodsVo> {
      * @return
      */
     GoodsVo selectGoodsVoByGoodId(Integer goodsId);
+
+    List<ShopCartVo> queryCar(ShopCartVo shopCartVo);
+
+    int updateCarNum(ShopCartVo shopCartVo);
+
+    int deleteCar(ShopCartVo shopCartVo);
 }
