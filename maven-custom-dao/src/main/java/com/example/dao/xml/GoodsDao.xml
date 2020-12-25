@@ -47,6 +47,10 @@
         where goods_id =#{goodsId}
     </select>
 
+    <select id="list" resultMap="joinType">
+        select * from goods
+    </select>
+
     <!-- Float selectPriceByGoodsId(Integer goodsId); -->
     <select id="selectPriceByGoodsId" resultType="java.lang.Float">
         select price from

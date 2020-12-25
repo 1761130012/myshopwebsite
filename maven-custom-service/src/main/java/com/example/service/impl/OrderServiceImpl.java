@@ -269,4 +269,11 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
     public String selectRemarkByOrderId(String orderId) {
         return orderDao.selectRemarkByOrderId(orderId);
     }
+
+    @Override
+    public Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        Integer userId=userDao.selectIdByLoginName(loginName);
+        orderVo.setUserId(userId);
+        return orderDao.selectAllOrderByUserIdState(page,orderVo);
+    }
 }

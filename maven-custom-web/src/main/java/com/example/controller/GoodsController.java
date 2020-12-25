@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -31,14 +33,6 @@ public class GoodsController {
     private GoodsService goodsService;
 
     //帮你修改了个名字
-    @RequestMapping("/queryPageVo")
-    public Page<GoodsVo> queryPageVo(@RequestParam(value = "page", defaultValue = "1") int page,
-                                     @RequestParam(value = "rows", defaultValue = "6") int rows,
-                                     GoodsVo goodsVo) {
-        return goodsService.query(new Page<GoodsVo>(page, rows), goodsVo);
-    }
-
-    //帮你修改了个名字
     @RequestMapping("/queryGoodsVo")
     public Page<GoodsVo> queryGoodsVo(@RequestParam(value = "page", defaultValue = "1") int page,
                                       @RequestParam(value = "rows", defaultValue = "6") int rows,
@@ -46,9 +40,24 @@ public class GoodsController {
         return goodsService.query(new Page<GoodsVo>(page, rows), goodsVo);
     }
 
+    //分页查询商品信息
+    @RequestMapping("/queryPageVo")
+    public Page<GoodsVo> queryPageVo(@RequestParam(value = "page", defaultValue = "1") int page,
+                                     @RequestParam(value = "rows", defaultValue = "5") int rows,
+                                     GoodsVo goodsVo) {
+        return goodsService.query(new Page<GoodsVo>(page, rows), goodsVo);
+    }
+
+
+    //分页查询商品信息
+    @RequestMapping("/queryGoodList")
+    public List<GoodsVo> queryGoodList() {
+        return goodsService.list();
+    }
+
     //查询全部商品类型
     @RequestMapping("/queryGoodsTypeVo")
-    public List<GoodsTypeVo> queryTypeVo(){
+    public List<GoodsTypeVo> queryTypeVo() {
         return goodsService.queryType();
     }
 
@@ -77,16 +86,16 @@ public class GoodsController {
     }
 
     @RequestMapping("/addCar")
-    public void addCar(ShopCartVo shopCartVo,UserVo userVo){
+    public void addCar(ShopCartVo shopCartVo, UserVo userVo) {
 
         UserVo userVos = goodsService.queryUser(userVo);
 
         shopCartVo.setUserId(userVos.getUserId());
 
         int num = goodsService.select(shopCartVo).size();
-        if(num!=0){
+        if (num != 0) {
             goodsService.updateCar(shopCartVo);
-        }else {
+        } else {
             goodsService.addCar(shopCartVo);
         }
     }
@@ -115,4 +124,35 @@ public class GoodsController {
         return goodsService.deleteCar(shopCartVo);
     }
 
+
+    @RequestMapping("/queryTypeAll")
+    public Page<GoodsTypeVo> queryTypeAll(Page<GoodsTypeVo> page,GoodsTypeVo goodsTypeVo){
+        return goodsService.selectTypeAll(page,goodsTypeVo);
+    }
+
+    @RequestMapping("/addType")
+    public boolean addType(@RequestBody GoodsTypeVo goodsTypeVo){
+        return goodsService.addType(goodsTypeVo)>0;
+    }
+
+    @RequestMapping("/queryByTypeId")
+    public GoodsTypeVo querybidType(Integer id){
+        return goodsService.queryBTypeId(id);
+    }
+
+    @RequestMapping("/updateType")
+    public boolean updateType(@RequestBody GoodsTypeVo goodsTypeVo){
+        return goodsService.updateType(goodsTypeVo)>0;
+    }
+    @RequestMapping("/deleteType")
+    public Map deleteType(String ids){
+        Map<Object,Object> map=new HashMap<Object,Object>();
+        String[] nums = ids.split(",");
+        int num=0;
+        for (int i = 0; i < nums.length; i++) {
+            num += goodsService.deleteType(Integer.parseInt(nums[i]));
+        }
+        map.put("isdelete",num);
+        return map;
+    }
 }

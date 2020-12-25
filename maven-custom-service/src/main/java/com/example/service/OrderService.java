@@ -168,4 +168,8 @@ public interface OrderService extends IService<OrderVo> {
      * @return
      */
     String selectRemarkByOrderId(String orderId);
+    /**
+     * 我的订单
+     */
+    Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page,OrderVo orderVo,String loginName);
 }

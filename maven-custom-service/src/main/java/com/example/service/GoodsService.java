@@ -6,6 +6,7 @@ import com.example.vo.GoodsTypeVo;
 import com.example.vo.GoodsVo;
 import com.example.vo.ShopCartVo;
 import com.example.vo.UserVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -45,4 +46,12 @@ public interface GoodsService extends IService<GoodsVo> {
     int updateCarNum(ShopCartVo shopCartVo);
 
     int deleteCar(ShopCartVo shopCartVo);
+
+    List<GoodsVo> list();
+
+    Page<GoodsTypeVo> selectTypeAll(Page<GoodsTypeVo> page, GoodsTypeVo goodsTypeVo);
+    int addType(GoodsTypeVo goodsTypeVo);
+    int updateType(GoodsTypeVo goodsTypeVo);
+    int deleteType(Integer id);
+    GoodsTypeVo queryBTypeId(Integer id);
 }

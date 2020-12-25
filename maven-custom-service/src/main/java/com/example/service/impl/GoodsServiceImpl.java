@@ -25,22 +25,20 @@ import java.util.List;
 public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements GoodsService {
 
     @Autowired
-    private GoodsDao goodsDao;
+    GoodsDao goodsDao;
 
     @Autowired
-    private GoodsTypeDao goodsTypeDao;
-    @Autowired
-    private GoodsImageDao goodsImageDao;
+    GoodsTypeDao goodsTypeDao;
 
     @Autowired
-    private ShopCartDao shopCartDao;
+    ShopCartDao shopCartDao;
 
     @Autowired
-    private UserDao userDao;
+    UserDao userDao;
 
     @Override
     public Page<GoodsVo> query(Page<GoodsVo> page, GoodsVo goodsVo) {
-        return goodsDao.selectPageVo(page, goodsVo);
+        return goodsDao.selectPageVo(page,goodsVo);
     }
 
     @Override
@@ -90,6 +88,36 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
     @Override
     public int deleteCar(ShopCartVo shopCartVo) {
         return shopCartDao.deleteById(shopCartVo);
+    }
+
+    @Override
+    public Page<GoodsTypeVo> selectTypeAll(Page<GoodsTypeVo> page, GoodsTypeVo goodsTypeVo) {
+        return goodsTypeDao.selectTypeAll(page,goodsTypeVo);
+    }
+
+    @Override
+    public int addType(GoodsTypeVo goodsTypeVo) {
+        return goodsTypeDao.insert(goodsTypeVo);
+    }
+
+    @Override
+    public int updateType(GoodsTypeVo goodsTypeVo) {
+        return goodsTypeDao.updateById(goodsTypeVo);
+    }
+
+    @Override
+    public int deleteType(Integer id) {
+        return goodsTypeDao.deleteById(id);
+    }
+
+    @Override
+    public GoodsTypeVo queryBTypeId(Integer id) {
+        return goodsTypeDao.selectById(id);
+    }
+
+    @Override
+    public List<GoodsVo> list() {
+        return goodsDao.list();
     }
 
 

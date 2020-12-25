@@ -103,4 +103,6 @@ public interface OrderDao extends BaseMapper<OrderVo> {
      * @return
      */
     String selectRemarkByOrderId(@Param("orderId") String orderId);
+
+    Page<OrderVo> selectAllOrderByUserIdState(@Param("page") Page<OrderVo> page, @Param("orderVo") OrderVo orderVo);
 }

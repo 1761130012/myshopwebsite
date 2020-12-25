@@ -3,7 +3,9 @@ package com.example.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dao.SupplierDao;
+import com.example.dao.SupplierGoodsDao;
 import com.example.service.SupplierService;
+import com.example.vo.SupplierGoodsVo;
 import com.example.vo.SupplierVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +26,17 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierDao, SupplierVo> im
     @Autowired
     SupplierDao supplierDao;
 
+    @Autowired
+    SupplierGoodsDao supplierGoodsDao;
 
     @Override
     public Page<SupplierVo> selectPageVo(Page<SupplierVo> supplierVoPage, SupplierVo supplierVo) {
         return supplierDao.selectPageVo(supplierVoPage,supplierVo);
+    }
+
+    @Override
+    public Page<SupplierGoodsVo> selectGoodsPageVo(Page<SupplierGoodsVo> supplierVoPage, SupplierGoodsVo supplierGoodsVo) {
+        return supplierGoodsDao.selectPageVo(supplierVoPage,supplierGoodsVo);
     }
 
     @Override
@@ -43,6 +52,21 @@ public class SupplierServiceImpl extends ServiceImpl<SupplierDao, SupplierVo> im
     @Override
     public int add(SupplierVo supplierVo) {
         return supplierDao.insert(supplierVo);
+    }
+
+    @Override
+    public int deleteGoods(Integer id) {
+        return supplierGoodsDao.deleteById(id);
+    }
+
+    @Override
+    public int updateGoods(SupplierGoodsVo supplierGoodsVo) {
+        return supplierGoodsDao.updateById(supplierGoodsVo);
+    }
+
+    @Override
+    public int addGoods(SupplierGoodsVo supplierGoodsVo) {
+        return supplierGoodsDao.insert(supplierGoodsVo);
     }
 
 }

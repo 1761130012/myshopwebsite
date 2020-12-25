@@ -208,4 +208,57 @@ public class OrderController {
     public boolean updateNumberById(OrderShopVo orderShopVo) {
         return orderService.updateNumberById(orderShopVo);
     }
+//我的订单
+    @RequestMapping("/edittihuostate")
+    public boolean edittihuostate(OrderVo orderVo){
+        orderVo.setState(3);
+        return orderService.updateById(orderVo);
+    }
+
+    @RequestMapping("/queryAllOrderByUserId")
+    public Page<OrderVo> queryAllOrderByUserId(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        //设置 为 -1 也就是 所有
+        orderVo.setState(-1);
+        orderVo.setPayState(-1);
+        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        return page1;
+    }
+
+    @RequestMapping("/queryAllOrderByUserIdshou")
+    public Page<OrderVo> queryAllOrderByUserIdshou(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        //设置 为 -1 也就是 所有
+        orderVo.setState(-1);
+        orderVo.setPayState(0);
+        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        return page1;
+    }
+
+    @RequestMapping("/queryAllOrderByUserIdfa")
+    public Page<OrderVo> queryAllOrderByUserIdfa(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        //设置 为 -1 也就是 所有
+        orderVo.setState(1);
+        orderVo.setPayState(1);
+        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        return page1;
+    }
+
+    @RequestMapping("/queryAllOrderByUserIdti")
+    public Page<OrderVo> queryAllOrderByUserIdti(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        //设置 为 -1 也就是 所有
+        orderVo.setState(2);
+        orderVo.setPayState(1);
+        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        return page1;
+    }
+
+
+
+    @RequestMapping("/queryAllOrderByUserIdyi")
+    public Page<OrderVo> queryAllOrderByUserIdyi(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        //设置 为 -1 也就是 所有
+        orderVo.setState(3);
+        orderVo.setPayState(1);
+        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        return page1;
+    }
 }
