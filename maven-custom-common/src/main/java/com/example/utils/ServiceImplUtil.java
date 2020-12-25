@@ -11,6 +11,7 @@ import java.util.Map;
 @Component
 public class ServiceImplUtil {
 
+
     /**
      * 所有菜单迭代 进行 组成树
      */
@@ -20,7 +21,7 @@ public class ServiceImplUtil {
         }
         List<MenuVo> menuVos = new ArrayList<>();
         for (MenuVo menuVo : list) {
-            if (menuVo.getParentId().equals(parentId)) {
+            if (parentId.equals(menuVo.getParentId())) {
                 menuVos.add(menuVo);
                 menuVo.setChildren(menuIterationAll(list, menuVo.getMenuId()));
             }

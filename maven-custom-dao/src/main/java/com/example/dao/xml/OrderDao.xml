@@ -124,4 +124,18 @@
         <include refid="tableName"/>
         where order_id =#{orderId}
     </select>
+
+    <!-- Integer selectShopIdByOrderId(@Param("orderId") String orderId); -->
+    <select id="selectShopIdByOrderId" resultType="java.lang.Integer">
+        select shop_id from
+        <include refid="tableName"/>
+        where order_id = #{orderId}
+    </select>
+
+    <!--  String selectRemarkByOrderId(@Param("orderId") String orderId); -->
+    <select id="selectRemarkByOrderId" resultType="java.lang.String">
+        select remark from
+        <include refid="tableName"/>
+        where order_id = #{orderId}
+    </select>
 </mapper>

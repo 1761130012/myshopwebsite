@@ -259,4 +259,14 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
         orderShopDao.insert(orderShopVo);
         return orderId;
     }
+
+    @Override
+    public boolean updateNumberById(OrderShopVo orderShopVo) {
+        return orderShopDao.updateById(orderShopVo) > 0;
+    }
+
+    @Override
+    public String selectRemarkByOrderId(String orderId) {
+        return orderDao.selectRemarkByOrderId(orderId);
+    }
 }

@@ -17,7 +17,9 @@ public class AlipayConfigUtil {
 
 //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
-    // 应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
+    /**
+     * 应用ID,您的APPID，收款账号既是您的APPID对应支付宝账号
+     */
     public static String app_id = "2021000116660323";
 
     /**
@@ -33,23 +35,31 @@ public class AlipayConfigUtil {
     /**
      * 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
      */
-    public static String notify_url = "http://localhost:8080/maven_custom_web_war_exploded/alipay/notifyUrl";
+    public static String notify_url = "http://localhost:8080/maven_custom_web_war_exploded/notify_url.jsp";
 
     /**
      * 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
      */
-    public static String return_url = "http://localhost:8080/maven_custom_web_war_exploded/alipay/returnUrl";
+    public static String return_url = "http://localhost:8080/maven_custom_web_war_exploded/return_url.jsp";
 
-    // 签名方式
+    /**
+     * 签名方式
+     */
     public static String sign_type = "RSA2";
 
-    // 字符编码格式
+    /**
+     * 字符编码格式
+     */
     public static String charset = "utf-8";
 
-    // 支付宝网关
+    /**
+     * 支付宝网关
+     */
     public static String gatewayUrl = "https://openapi.alipaydev.com/gateway.do";
 
-    // 支付宝网关
+    /**
+     * 支付宝网关
+     */
     public static String log_path = "C:\\";
 
     public static String format = "json";

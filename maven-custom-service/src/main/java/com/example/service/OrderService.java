@@ -155,4 +155,17 @@ public interface OrderService extends IService<OrderVo> {
      */
     String insertOrderByOneGoods(Integer goodsId, Integer num, String loginName);
 
+    /**
+     * 根据 商品 id 和 订单id 修改 数量
+     * @param orderShopVo
+     * @return
+     */
+    boolean updateNumberById(OrderShopVo orderShopVo);
+
+    /**
+     * 根据  订单id 查询 备注
+     * @param orderId
+     * @return
+     */
+    String selectRemarkByOrderId(String orderId);
 }

@@ -89,4 +89,18 @@ public interface OrderDao extends BaseMapper<OrderVo> {
      * @return
      */
     Float selectCountMoneyByOrderId(@Param("orderId") String orderId);
+
+    /**
+     * 查询 商品 id 根据 订单id
+     * @param orderId
+     * @return
+     */
+    Integer selectShopIdByOrderId(@Param("orderId") String orderId);
+
+    /**
+     * 查询 备注 根据 订单id
+     * @param orderId
+     * @return
+     */
+    String selectRemarkByOrderId(@Param("orderId") String orderId);
 }

@@ -198,4 +198,14 @@ public class OrderController {
     public String insertOrderByOneGoods(Integer goodsId, Integer num, String loginName) {
         return orderService.insertOrderByOneGoods(goodsId, num, loginName);
     }
+
+
+    @RequestMapping("/updateOrderShopIdById")
+    public boolean updateOrderShopIdById(OrderVo orderVo) {
+        return orderService.updateById(orderVo);
+    }
+    @RequestMapping("/updateNumberById")
+    public boolean updateNumberById(OrderShopVo orderShopVo) {
+        return orderService.updateNumberById(orderShopVo);
+    }
 }
