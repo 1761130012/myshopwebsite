@@ -34,4 +34,6 @@ public interface GoodsDao extends BaseMapper<GoodsVo> {
      * @return
      */
     Integer selectGoodsTypeIdByGoodsId(@Param("goodsId") Integer goodsId);
+
+    List<GoodsVo> list();
 }

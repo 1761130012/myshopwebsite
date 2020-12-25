@@ -19,7 +19,7 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("supplier_goods")
+@TableName(value = "supplier_goods",resultMap = "joinType")
 public class SupplierGoodsVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,5 +48,16 @@ public class SupplierGoodsVo implements Serializable {
     @TableField("factory_price")
     private Double factoryPrice;
 
+    /**
+     *供应商
+     */
+    @TableField(exist = false)
+    private SupplierVo supplierVo;
+
+    /**
+     *商品
+     */
+    @TableField(exist = false)
+    private GoodsVo goodsVo;
 
 }

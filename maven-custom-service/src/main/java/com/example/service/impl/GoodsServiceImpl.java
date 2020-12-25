@@ -84,5 +84,10 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
         return shopCartDao.deleteById(shopCartVo);
     }
 
+    @Override
+    public List<GoodsVo> list() {
+        return goodsDao.list();
+    }
+
 
 }

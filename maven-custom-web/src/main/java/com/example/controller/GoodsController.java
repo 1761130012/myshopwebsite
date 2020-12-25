@@ -30,7 +30,7 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    //帮你修改了个名字
+    //分页查询商品信息
     @RequestMapping("/queryGoodsVo")
     public Page<GoodsVo> queryGoodsVo(@RequestParam(value = "page", defaultValue = "1") int page,
                                       @RequestParam(value = "rows", defaultValue = "6") int rows,
@@ -44,6 +44,13 @@ public class GoodsController {
                                      @RequestParam(value = "rows", defaultValue = "5") int rows,
                                      GoodsVo goodsVo) {
         return goodsService.query(new Page<GoodsVo>(page, rows), goodsVo);
+    }
+
+
+    //分页查询商品信息
+    @RequestMapping("/queryGoodList")
+    public List<GoodsVo> queryGoodList() {
+        return goodsService.list();
     }
 
     //查询全部商品类型

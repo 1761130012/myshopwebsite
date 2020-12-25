@@ -37,4 +37,6 @@ public interface GoodsService extends IService<GoodsVo> {
     int updateCarNum(ShopCartVo shopCartVo);
 
     int deleteCar(ShopCartVo shopCartVo);
+
+    List<GoodsVo> list();
 }
