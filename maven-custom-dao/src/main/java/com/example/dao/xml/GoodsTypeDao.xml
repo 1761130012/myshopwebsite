@@ -3,6 +3,16 @@
 <mapper namespace="com.example.dao.GoodsTypeDao">
 
     <select id="select" resultType="com.example.vo.GoodsTypeVo">
+        select *
+        from goods_type
+    </select>
+
+    <select id="selectTypeAll" resultType="com.example.vo.GoodsTypeVo">
         select * from goods_type
+        <where>
+            <if test="goodsTypeVo.name != null and goodsTypeVo.name !='' ">
+                and name like concat(#{goodsTypeVo.name},'%')
+            </if>
+        </where>
     </select>
 </mapper>

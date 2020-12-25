@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dao.*;
 import com.example.service.OrderService;
 import com.example.utils.ServiceImplUtil;
+import com.example.utils.TimeGroupUtil;
 import com.example.vo.GoodsTypeVo;
 import com.example.vo.GoodsVo;
 import com.example.vo.OrderShopVo;
@@ -85,11 +86,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
 
     @Override
     public Float selectCountMoneyByOrderId(String orderId) {
-        Float countMoney = orderShopDao.selectCountMoneyByOrderId(orderId);
-
-        //进行 写到总 价格 中
-        orderDao.updateCountMoneyById(orderId, countMoney);
-        return countMoney;
+        return orderDao.selectCountMoneyByOrderId(orderId);
     }
 
     @Override
@@ -103,22 +100,21 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
     }
 
     @Override
-    public boolean updateStateByOrderId(String orderId) {
-        OrderVo orderVo = new OrderVo();
-        orderVo.setOrderId(orderId);
-        //设置状态为 收货
-        orderVo.setState(3);
-        return orderDao.updateById(orderVo) > 0;
-    }
+    public boolean updatePayNumberByOrderShopId(List<OrderShopVo> orderShopVos, Integer shopId, String orderId) {
+        //进行 修改 订单 的 商户 id
+        orderDao.updateShopIdByOrderId(orderId, shopId);
 
-    @Override
-    public boolean updatePayNumberByOrderShopId(List<OrderShopVo> orderShopVos) {
+        float countMoney = 0;
         for (OrderShopVo orderShopVo : orderShopVos) {
             //进行 修改
             if (orderShopDao.updateById(orderShopVo) == 0) {
                 return false;
             }
+            countMoney += goodsDao.selectPriceByGoodsId(orderShopVo.getGoodsId()) * orderShopVo.getPayNumber();
         }
+
+        //进行 修改
+        orderDao.updateCountMoneyById(orderId, (float) (Math.round(100 * countMoney) / 100));
         return true;
     }
 
@@ -138,7 +134,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
         List<OrderVo> orderVos = orderDao.selectTimeCountMoneyByTime(shopId, startTime, endTime);
         for (OrderVo vo : orderVos) {
             //0.005 是 用 代收 费
-            vo.setMoney(vo.getMoney() * 0.05);
+            vo.setMoney((float) (vo.getMoney() * 0.05));
         }
         return orderVos;
     }
@@ -231,5 +227,43 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
     @Override
     public Page<OrderShopVo> queryOrderShopByOrderId(Page<OrderShopVo> page, String orderId) {
         return orderShopDao.selectPageVoByOrderId(page, orderId);
+    }
+
+    @Override
+    public String insertOrderByOneGoods(Integer goodsId, Integer num, String loginName) {
+        //进行获取 订单 
+        String orderId = TimeGroupUtil.getTimeGroupId();
+
+        //根据 商品 id 进行 查询
+        Float price = goodsDao.selectPriceByGoodsId(goodsId);
+
+        //进行 添加
+        OrderVo orderVo = new OrderVo();
+        orderVo.setOrderId(orderId);
+        orderVo.setUserId(userDao.selectIdByLoginName(loginName));
+        orderVo.setStartTime(new Date());
+        orderVo.setPayState(0);
+        orderVo.setState(0);
+        orderVo.setIsDelete(0);
+
+        //进行 添加
+        orderDao.insert(orderVo);
+
+        //进行 添加 订单 商品表
+        OrderShopVo orderShopVo = new OrderShopVo();
+        orderShopVo.setOrderId(orderId);
+        orderShopVo.setGoodsId(goodsId);
+        orderShopVo.setGoodsPrice(price);
+        orderShopVo.setPayNumber(num);
+        //添加 订单商品表
+        orderShopDao.insert(orderShopVo);
+        return orderId;
+    }
+
+    @Override
+    public Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        Integer userId=userDao.selectIdByLoginName(loginName);
+        orderVo.setUserId(userId);
+        return orderDao.selectAllOrderByUserIdState(page,orderVo);
     }
 }

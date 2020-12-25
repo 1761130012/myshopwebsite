@@ -23,7 +23,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName(value = "purchase",resultMap = "purchaseMap")
+@TableName(value = "purchase", resultMap = "purchaseMap")
 public class PurchaseVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,7 +52,7 @@ public class PurchaseVo implements Serializable {
     @TableField("data_time")
     @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @JSONField(format = "yyyy-MM-dd hh:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date dataTime;
 
     /**
@@ -86,28 +86,28 @@ public class PurchaseVo implements Serializable {
     private Integer isDelete;
 
     /*
-    *申请人
-    */
+     *申请人
+     */
     @TableField(exist = false)
     private StaffVo purStaff;
     /*
-    *审批人
-    */
+     *审批人
+     */
     @TableField(exist = false)
     private StaffVo aprStaff;
 
     //开始日期
     @TableField(exist = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date startDataTime;
 
     //结束日期
     @TableField(exist = false)
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss",timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date endDataTime;
 
 }

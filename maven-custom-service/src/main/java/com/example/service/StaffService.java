@@ -25,5 +25,20 @@ public interface StaffService extends IService<StaffVo> {
      * @return
      */
     Page<StaffVo> selectAllPageVo(Page<StaffVo> page, String value);
+
+    /**
+     * 员工登录
+     *
+     * @param staffVo
+     * @return
+     */
+    boolean staffLogin(StaffVo staffVo);
+
+    /**
+     * 查询 昵称
+     * @param loginName
+     * @return
+     */
+    String queryStaffNameByLoginName(String loginName);
 }
 

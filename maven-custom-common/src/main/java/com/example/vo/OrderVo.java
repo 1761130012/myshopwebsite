@@ -23,7 +23,7 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName(value = "order_goods",resultMap = "joinType")
+@TableName(value = "order_goods", resultMap = "joinType")
 public class OrderVo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,7 +41,7 @@ public class OrderVo implements Serializable {
     private Integer userId;
 
     /**
-     * 用户id
+     * 商户id
      */
     @TableField("shop_id")
     private Integer shopId;
@@ -72,18 +72,10 @@ public class OrderVo implements Serializable {
 
 
     /**
-     * 订单时间
-     */
-    @TableField("time")
-    @JSONField(format = "yyyy-MM-dd hh:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
-    private Date time;
-
-    /**
      * 订单总金额
      */
     @TableField("money")
-    private Double money;
+    private Float money;
 
     /**
      * 备注
@@ -92,7 +84,7 @@ public class OrderVo implements Serializable {
     private String remark;
 
     /**
-     * 物流状态 0 未发货 1 已发货 2 到达商户 3 已收货
+     * 物流状态  0 未发货  1 已发货  2 到达商户  3 已收货
      */
     @TableField("state")
     private Integer state;
@@ -106,5 +98,6 @@ public class OrderVo implements Serializable {
     @TableField(exist = false)
     private UserVo userVo;
 
-
+    @TableField(exist = false)
+    private String userName;
 }

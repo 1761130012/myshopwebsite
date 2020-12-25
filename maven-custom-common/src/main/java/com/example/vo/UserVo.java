@@ -55,14 +55,18 @@ public class UserVo implements Serializable {
     private String name;
 
     /**
-     * 电话
+     * 图片
      */
     @TableField("picture")
     private String picture;
-
+    /**
+     * 电话
+     */
     @TableField("phone")
     private String phone;
-
+    /**
+     * 签名
+     */
     @TableField("signature")
     private String signature;
     /**
@@ -70,7 +74,7 @@ public class UserVo implements Serializable {
      */
     @TableField("create_time")
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 

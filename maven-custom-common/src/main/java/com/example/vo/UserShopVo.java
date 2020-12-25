@@ -53,6 +53,4 @@ public class UserShopVo implements Serializable {
 
     @TableField(exist = false)
     private UserVo userVo;
-
-
 }

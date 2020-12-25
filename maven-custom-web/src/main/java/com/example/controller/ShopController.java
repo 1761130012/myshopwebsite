@@ -4,6 +4,7 @@ package com.example.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.service.GoodsService;
 import com.example.service.ShopService;
+import com.example.utils.DelSpaceEmpty;
 import com.example.vo.ShopVo;
 import com.example.vo.UserShopVo;
 import com.example.vo.UserVo;
@@ -64,11 +65,7 @@ public class ShopController {
 
     @RequestMapping("/queryPageVo")
     public Page<ShopVo> queryPageVo(Page<ShopVo> page, ShopVo shopVo) {
-        //进行 数据 处理
-        if (shopVo != null && StringUtils.isNotEmpty(shopVo.getName())) {
-            shopVo.setName(shopVo.getName().trim());
-        }
-        return shopService.selectPageVo(page, shopVo);
+        return shopService.selectPageVo(page, DelSpaceEmpty.disposeVoString(shopVo));
     }
 
 
@@ -101,4 +98,26 @@ public class ShopController {
     public ShopVo queryShopVoByLoginName(String loginName) {
         return shopService.selectShopVoByLoginName(loginName);
     }
+
+    @RequestMapping("/updatePassState")
+    public boolean updatePassState(Integer shopId) {
+        ShopVo shopVo = new ShopVo();
+        shopVo.setShopId(shopId);
+        shopVo.setState(1);
+        return shopService.updateById(shopVo);
+    }
+
+    @RequestMapping("/updateErrorState")
+    public boolean updateErrorState(Integer shopId) {
+        ShopVo shopVo = new ShopVo();
+        shopVo.setShopId(shopId);
+        shopVo.setState(2);
+        return shopService.updateById(shopVo);
+    }
+
+    @RequestMapping("/queryUserVoByShopId")
+    public UserVo queryUserVoByShopId(Integer shopId) {
+        return shopService.queryUserVoByShopId(shopId);
+    }
+
 }

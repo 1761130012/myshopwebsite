@@ -76,4 +76,19 @@ public interface OrderDao extends BaseMapper<OrderVo> {
      * @return
      */
     Page<OrderVo> selectAllOrderByShopIdState(@Param("page") Page<OrderVo> page, @Param("orderVo") OrderVo orderVo);
+
+    /**
+     * 进行 修改 商户id 根据 订单id
+     * @param orderId
+     */
+    void updateShopIdByOrderId(@Param("orderId") String orderId, @Param("shopId") Integer shopId);
+
+    /**
+     * 进行 查询
+     * @param orderId
+     * @return
+     */
+    Float selectCountMoneyByOrderId(@Param("orderId") String orderId);
+
+    Page<OrderVo> selectAllOrderByUserIdState(@Param("page") Page<OrderVo> page, @Param("orderVo") OrderVo orderVo);
 }

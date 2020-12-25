@@ -2,6 +2,9 @@ package com.example.dao;
 
 import com.example.vo.GoodsImageVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,11 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface GoodsImageDao extends BaseMapper<GoodsImageVo> {
 
+    /**
+     * 根据 商品 id 查询 商品 地址
+     *
+     * @param goodsId
+     * @return
+     */
+    List<String> selectAddressByGoodsId(@Param("goodsId") Integer goodsId);
 }

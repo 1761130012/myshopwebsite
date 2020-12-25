@@ -33,4 +33,12 @@ public interface ShopService extends IService<ShopVo> {
     ShopVo selectShopVoByLoginName(String loginName);
 
     ShopVo queryShopVo(UserVo userVos);
+
+    /**
+     * 根据 商户 id 查询 用户vo
+     *
+     * @param shopId
+     * @return
+     */
+    UserVo queryUserVoByShopId(Integer shopId);
 }

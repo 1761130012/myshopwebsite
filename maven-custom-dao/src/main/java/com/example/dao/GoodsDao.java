@@ -35,5 +35,13 @@ public interface GoodsDao extends BaseMapper<GoodsVo> {
      */
     Integer selectGoodsTypeIdByGoodsId(@Param("goodsId") Integer goodsId);
 
+    /**
+     * 根据 商品 id 查询 单价
+     *
+     * @param goodsId
+     * @return
+     */
+    Float selectPriceByGoodsId(Integer goodsId);
+
     List<GoodsVo> list();
 }
