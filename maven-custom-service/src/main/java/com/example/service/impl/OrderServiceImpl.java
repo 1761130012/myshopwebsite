@@ -272,8 +272,15 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
 
     @Override
     public Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page, OrderVo orderVo, String loginName) {
-        Integer userId=userDao.selectIdByLoginName(loginName);
+        Integer userId = userDao.selectIdByLoginName(loginName);
         orderVo.setUserId(userId);
-        return orderDao.selectAllOrderByUserIdState(page,orderVo);
+        return orderDao.selectAllOrderByUserIdState(page, orderVo);
+    }
+
+    @Override
+    public List<GoodsVo> selectGoodsUpdateFive() {
+        //查询 销量 前五的 id
+        List<Integer> goodsIds = orderShopDao.selectGoodsIdUpdateFive();
+        return goodsDao.selectGoodsVoByIds(goodsIds);
     }
 }

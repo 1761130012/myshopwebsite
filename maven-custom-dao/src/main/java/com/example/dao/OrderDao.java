@@ -61,7 +61,7 @@ public interface OrderDao extends BaseMapper<OrderVo> {
 
     /**
      * 根据 时间 进行 查询 具体时间和 总金额
-     *
+     *  默认 扣除 0.05
      * @param startTime
      * @param endTime
      * @return

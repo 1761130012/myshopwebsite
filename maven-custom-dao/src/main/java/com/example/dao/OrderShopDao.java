@@ -45,4 +45,9 @@ public interface OrderShopDao extends BaseMapper<OrderShopVo> {
      */
     List<Map<String, Object>> selectGoodsIdCountByOrderId(@Param("orderIds") List<String> orderIds);
 
+    /**
+     * 查询 销量 前五的 id
+     * @return
+     */
+    List<Integer> selectGoodsIdUpdateFive();
 }

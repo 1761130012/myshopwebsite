@@ -68,12 +68,12 @@ public class OrderController {
     }
 
     @RequestMapping("/addCarOrderShopVo")
-    public int addCarOrderShopVo(OrderShopVo orderShopVo){
+    public int addCarOrderShopVo(OrderShopVo orderShopVo) {
         return orderShopService.add(orderShopVo);
     }
 
     @RequestMapping("/addCarOrderVo")
-    public String addCarOrderVo(OrderVo orderVo,UserVo userVo){
+    public String addCarOrderVo(OrderVo orderVo, UserVo userVo) {
         UserVo userVos = goodsService.queryUser(userVo);
         orderVo.setUserId(userVos.getUserId());
         orderVo.setOrderId(TimeGroupUtil.getTimeGroupId());
@@ -204,13 +204,15 @@ public class OrderController {
     public boolean updateOrderShopIdById(OrderVo orderVo) {
         return orderService.updateById(orderVo);
     }
+
     @RequestMapping("/updateNumberById")
     public boolean updateNumberById(OrderShopVo orderShopVo) {
         return orderService.updateNumberById(orderShopVo);
     }
-//我的订单
+
+    //我的订单
     @RequestMapping("/edittihuostate")
-    public boolean edittihuostate(OrderVo orderVo){
+    public boolean edittihuostate(OrderVo orderVo) {
         orderVo.setState(3);
         return orderService.updateById(orderVo);
     }
@@ -220,7 +222,7 @@ public class OrderController {
         //设置 为 -1 也就是 所有
         orderVo.setState(-1);
         orderVo.setPayState(-1);
-        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        Page<OrderVo> page1 = orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
         return page1;
     }
 
@@ -229,7 +231,7 @@ public class OrderController {
         //设置 为 -1 也就是 所有
         orderVo.setState(-1);
         orderVo.setPayState(0);
-        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        Page<OrderVo> page1 = orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
         return page1;
     }
 
@@ -238,7 +240,7 @@ public class OrderController {
         //设置 为 -1 也就是 所有
         orderVo.setState(1);
         orderVo.setPayState(1);
-        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        Page<OrderVo> page1 = orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
         return page1;
     }
 
@@ -247,10 +249,9 @@ public class OrderController {
         //设置 为 -1 也就是 所有
         orderVo.setState(2);
         orderVo.setPayState(1);
-        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        Page<OrderVo> page1 = orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
         return page1;
     }
-
 
 
     @RequestMapping("/queryAllOrderByUserIdyi")
@@ -258,7 +259,14 @@ public class OrderController {
         //设置 为 -1 也就是 所有
         orderVo.setState(3);
         orderVo.setPayState(1);
-        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        Page<OrderVo> page1 = orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
         return page1;
     }
+
+
+    @RequestMapping("/queryGoodsUpdateFive")
+    public List<GoodsVo> queryGoodsUpdateFive() {
+        return orderService.selectGoodsUpdateFive();
+    }
+
 }

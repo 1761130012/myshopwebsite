@@ -85,7 +85,7 @@
 
     <!-- List<String> selectOrderTimeCountNumByTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime); -->
     <select id="selectOrderTimeCountNumByTime" resultType="java.util.Map">
-        select end_time endTime,money from
+        select end_time endTime,money*0.95 money from
         <include refid="tableName"/>
         <where>
             <choose>
@@ -93,6 +93,9 @@
                     and end_time >= #{startTime,javaType=DATE}
                     and #{endTime,javaType=DATE} >= end_time
                 </when>
+                <otherwise>
+                    and end_time is not NULL
+                </otherwise>
             </choose>
         </where>
     </select>
