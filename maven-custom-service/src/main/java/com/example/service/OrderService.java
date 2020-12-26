@@ -159,4 +159,11 @@ public interface OrderService extends IService<OrderVo> {
      * 我的订单
      */
     Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page,OrderVo orderVo,String loginName);
+
+    /**
+     * 订单 发货
+     * @param orderVo
+     * @return
+     */
+    int updateDeliver(OrderVo orderVo);
 }

@@ -266,4 +266,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
         orderVo.setUserId(userId);
         return orderDao.selectAllOrderByUserIdState(page,orderVo);
     }
+
+    @Override
+    public int updateDeliver(OrderVo orderVo) {
+        return orderDao.updateDeliver(orderVo);
+    }
 }

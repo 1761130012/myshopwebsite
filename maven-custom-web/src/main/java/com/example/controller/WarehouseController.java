@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * <p>
@@ -29,6 +30,7 @@ import java.util.Arrays;
 public class WarehouseController {
     @Autowired
     WarehouseService warehouseService;
+
     @RequestMapping("queryPageVo")
     public Page<WarehouseVo> queryPageVo(@RequestParam(value = "page", defaultValue = "1") int page,
                                          @RequestParam(value = "rows", defaultValue = "5") int rows,
@@ -42,6 +44,7 @@ public class WarehouseController {
         String[] nums = ids.split(",");
         return warehouseService.removeByIds(Arrays.asList(nums));
     }
+
     @RequestMapping("queryWarehouseById")
     public WarehouseVo queryWarehouseById(Integer id) {
 
@@ -49,24 +52,41 @@ public class WarehouseController {
     }
 
     @RequestMapping("addWarehouse")
-    public boolean addWarehouse( WarehouseVo warehouseVo) {
+    public boolean addWarehouse(WarehouseVo warehouseVo) {
         return warehouseService.save(warehouseVo);
     }
+
     @RequestMapping("updWarehouse")
     public boolean updWarehouse(WarehouseVo warehouseVo) {
-        System.out.println("----------------------------"+warehouseVo);
+        System.out.println("----------------------------" + warehouseVo);
         return warehouseService.updateById(warehouseVo);
     }
 
     @RequestMapping("particulars")
     public Page<WarehouseShopVo> queryPageVo(@RequestParam(value = "page", defaultValue = "1") int page,
                                              @RequestParam(value = "rows", defaultValue = "5") int rows,
-                                             WarehouseShopVo warehouseShopVo,String name) {
-        GoodsVo good=new GoodsVo();
+                                             WarehouseShopVo warehouseShopVo, String name) {
+        GoodsVo good = new GoodsVo();
         good.setName(name);
         warehouseShopVo.setGoodsVo(good);
-        System.out.println("---------------------------"+warehouseShopVo);
+        System.out.println("---------------------------" + warehouseShopVo);
         return warehouseService.selectPageVo1(new Page<WarehouseShopVo>(page, rows), warehouseShopVo);
+    }
+
+    @RequestMapping("queryWarehouse")
+    public List<WarehouseShopVo> queryWarehouse(WarehouseShopVo warehouseShopVo) {
+        return warehouseService.selectList(warehouseShopVo);
+    }
+
+    @RequestMapping("updateWarehouse")
+    public void updateWarehouse(WarehouseShopVo warehouseShopVo, String ids, String counts) {
+        String[] id = ids.split(",");
+        String[] count = counts.split(",");
+        for (int i = 0; i < id.length; i++) {
+            warehouseShopVo.setId(Integer.valueOf(id[i]));
+            warehouseShopVo.setGoodsCount(Integer.valueOf(count[i]));
+            warehouseService.updateWarehouse(warehouseShopVo);
+        }
     }
 
 

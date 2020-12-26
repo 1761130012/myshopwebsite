@@ -91,4 +91,6 @@ public interface OrderDao extends BaseMapper<OrderVo> {
     Float selectCountMoneyByOrderId(@Param("orderId") String orderId);
 
     Page<OrderVo> selectAllOrderByUserIdState(@Param("page") Page<OrderVo> page, @Param("orderVo") OrderVo orderVo);
+
+    int updateDeliver(OrderVo orderVo);
 }
