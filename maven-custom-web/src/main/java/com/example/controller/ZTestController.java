@@ -30,7 +30,7 @@ public class ZTestController {
      * this.$axios({
      * url:'test/setList',
      * method:'post',
-     * data: JSON.stringify([1,2,3,4]) ,
+             * data: JSON.stringify([1,2,3,4]) ,
      * headers:{
      * "Content-Type":"application/json;charset=utf-8"
      * },

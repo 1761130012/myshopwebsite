@@ -96,7 +96,7 @@
 
     <!-- List<String> selectOrderTimeCountNumByTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime); -->
     <select id="selectOrderTimeCountNumByTime" resultType="java.util.Map">
-        select end_time endTime,money*0.95 money from
+        select end_time endTime,sum( money*0.95) money from
         <include refid="tableName"/>
         <where>
             <choose>
@@ -109,6 +109,7 @@
                 </otherwise>
             </choose>
         </where>
+        GROUP BY date_format(end_time, '%Y-%m-%d')
     </select>
 
     <resultMap id="selectAllOrderByShopIdStateMap" type="com.example.vo.OrderVo">

@@ -24,4 +24,18 @@ public interface StaffRoleDao extends BaseMapper<StaffRoleVo> {
     List<Integer> selectRoleIdByStaffId(@Param("staffId") Integer staffId);
 
 
+    /**
+     * 修改
+     *
+     * @param roleIds
+     * @param staffId
+     * @return
+     */
+    Integer insertStaffRoleIds(@Param("roleIds") List<Integer> roleIds, @Param("staffId") Integer staffId);
+
+    /**
+     * 根据 员工id 进行 删除
+     * @param staffId
+     */
+    void deleteByStaffId(@Param("staffId") Integer staffId);
 }

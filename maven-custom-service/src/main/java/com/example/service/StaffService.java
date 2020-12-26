@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.vo.StaffVo;
 
+import java.util.Map;
+
 /**
  * <p>
  * 员工表 服务类
@@ -36,9 +38,18 @@ public interface StaffService extends IService<StaffVo> {
 
     /**
      * 查询 昵称
+     *
      * @param loginName
      * @return
      */
     String queryStaffNameByLoginName(String loginName);
+
+    /**
+     * 修改员工 角色 id
+     *
+     * @param map
+     * @return
+     */
+    boolean updateStaffRoleIds(Map<String, Object> map);
 }
 

@@ -91,4 +91,9 @@ public class StaffController {
     public String queryStaffNameByLoginName(String loginName) {
         return staffService.queryStaffNameByLoginName(loginName);
     }
+
+    @RequestMapping("/updateStaffRoleIds")
+    public boolean updateStaffRoleIds(@RequestBody Map<String, Object> map) {
+        return staffService.updateStaffRoleIds(map);
+    }
 }
