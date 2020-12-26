@@ -283,4 +283,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
         List<Integer> goodsIds = orderShopDao.selectGoodsIdUpdateFive();
         return goodsDao.selectGoodsVoByIds(goodsIds);
     }
+
+    @Override
+    public boolean updateDeleteIdByOrderIds(List<String> list, Integer state) {
+        return orderDao.updateDeleteIdByOrderIds(list, state) > 0;
+    }
 }

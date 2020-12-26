@@ -253,7 +253,6 @@ public class OrderController {
         return page1;
     }
 
-
     @RequestMapping("/queryAllOrderByUserIdyi")
     public Page<OrderVo> queryAllOrderByUserIdyi(Page<OrderVo> page, OrderVo orderVo, String loginName) {
         //设置 为 -1 也就是 所有
@@ -269,4 +268,8 @@ public class OrderController {
         return orderService.selectGoodsUpdateFive();
     }
 
+    @RequestMapping("/deleteBathOrder")
+    public boolean deleteBathOrder(@RequestBody List<String> list) {
+        return orderService.updateDeleteIdByOrderIds(list, 1);
+    }
 }

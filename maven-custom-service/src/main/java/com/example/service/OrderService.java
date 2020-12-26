@@ -182,4 +182,12 @@ public interface OrderService extends IService<OrderVo> {
      * @return
      */
     List<GoodsVo> selectGoodsUpdateFive();
+
+    /**
+     * 进行 修改 为 已删除状态
+     *
+     * @param list
+     * @return
+     */
+    boolean updateDeleteIdByOrderIds(List<String> list, Integer state);
 }
