@@ -113,4 +113,6 @@ public interface OrderDao extends BaseMapper<OrderVo> {
      * @return
      */
     Integer updateDeleteIdByOrderIds(@Param("orderIds") List<String> orderIds, @Param("state") Integer state);
+
+    int updateDeliver(OrderVo orderVo);
 }

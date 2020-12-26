@@ -37,6 +37,11 @@
         update order_goods  set shop_id=#{shopId} where order_id=#{orderId}
     </update>
 
+    <update id="updateDeliver">
+        update order_goods set state=1 where order_id=#{orderId}
+    </update>
+
+
     <!-- Integer updateDeleteIdByOrderIds(@Param("list") List<Integer> list, @Param("state") Integer state); -->
     <update id="updateDeleteIdByOrderIds">
         update order_goods set is_delete=#{state} where order_id in

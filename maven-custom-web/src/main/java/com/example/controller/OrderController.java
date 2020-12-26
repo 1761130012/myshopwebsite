@@ -58,8 +58,13 @@ public class OrderController {
     }
 
     @RequestMapping("/updateOrderVo")
-    public int delete(OrderVo orderVo) {
+    public int update(OrderVo orderVo) {
         return orderService.update(orderVo);
+    }
+
+    @RequestMapping("/updateDeliver")
+    public int updateDeliver(OrderVo orderVo) {
+        return orderService.updateDeliver(orderVo);
     }
 
     @RequestMapping("/addOrderVo")

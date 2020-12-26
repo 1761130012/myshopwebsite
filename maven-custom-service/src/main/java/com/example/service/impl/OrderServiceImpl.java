@@ -288,4 +288,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
     public boolean updateDeleteIdByOrderIds(List<String> list, Integer state) {
         return orderDao.updateDeleteIdByOrderIds(list, state) > 0;
     }
+
+    @Override
+    public int updateDeliver(OrderVo orderVo) {
+        return orderDao.updateDeliver(orderVo);
+    }
 }
