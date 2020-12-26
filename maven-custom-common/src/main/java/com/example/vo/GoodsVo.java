@@ -58,6 +58,8 @@ public class GoodsVo implements Serializable {
     @TableField(exist = false)
     private GoodsTypeVo goodsTypeVo;
 
+    @TableField(exist = false)
+    private String image;
 
     /**
      * 数量总和

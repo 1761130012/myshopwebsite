@@ -33,6 +33,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
     private GoodsImageDao goodsImageDao;
 
     @Autowired
+    private GoodsImageDao goodsImageDao;
+
+    @Autowired
     ShopCartDao shopCartDao;
 
     @Autowired
@@ -40,7 +43,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
 
     @Override
     public Page<GoodsVo> query(Page<GoodsVo> page, GoodsVo goodsVo) {
-        return goodsDao.selectPageVo(page,goodsVo);
+        return goodsDao.selectPageVo(page, goodsVo);
     }
 
     @Override
@@ -94,7 +97,7 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
 
     @Override
     public Page<GoodsTypeVo> selectTypeAll(Page<GoodsTypeVo> page, GoodsTypeVo goodsTypeVo) {
-        return goodsTypeDao.selectTypeAll(page,goodsTypeVo);
+        return goodsTypeDao.selectTypeAll(page, goodsTypeVo);
     }
 
     @Override

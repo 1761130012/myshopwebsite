@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.service.GoodsService;
 import com.example.service.ShopService;
 import com.example.utils.DelSpaceEmpty;
+import com.example.vo.OrderVo;
 import com.example.vo.ShopVo;
 import com.example.vo.UserShopVo;
 import com.example.vo.UserVo;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -75,8 +77,8 @@ public class ShopController {
      * @return
      */
     @RequestMapping("/queryAllShopVoByLoginName")
-    public List<UserShopVo> queryAllShopVoByLoginName(@RequestParam("loginName") String loginName) {
-        return shopService.selectAllShopVoByLoginName(loginName);
+    public Map<String, Object> queryAllShopVoByLoginName(String loginName, String orderId) {
+        return shopService.selectAllShopVoByLoginName(loginName, orderId);
     }
 
     /**
@@ -95,8 +97,8 @@ public class ShopController {
 
     //默认 查询 状态 为 默认 选择 的
     @RequestMapping("/queryShopVoByLoginName")
-    public ShopVo queryShopVoByLoginName(String loginName) {
-        return shopService.selectShopVoByLoginName(loginName);
+    public Map<String, Object> queryShopVoByLoginName(String loginName, String orderId) {
+        return shopService.selectShopVoByLoginName(loginName, orderId);
     }
 
     @RequestMapping("/updatePassState")
@@ -119,5 +121,4 @@ public class ShopController {
     public UserVo queryUserVoByShopId(Integer shopId) {
         return shopService.queryUserVoByShopId(shopId);
     }
-
 }
