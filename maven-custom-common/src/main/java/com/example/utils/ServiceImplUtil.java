@@ -11,6 +11,8 @@ import java.util.Map;
 @Component
 public class ServiceImplUtil {
 
+    public final static String filePath = "D:\\DAIMA\\vue.js\\myshopwebsitepage\\src\\resource\\image/";
+
     /**
      * 所有菜单迭代 进行 组成树
      */
