@@ -8,4 +8,12 @@
     <select id="queryGoodsImgBygId" resultType="com.example.vo.GoodsImageVo">
         select * from goods_image where goods_id=#{goodsId}
     </select>
+    <sql id="allFiledSql">
+        id,goods_id,adders
+    </sql>
+
+    <!-- List<String> selectAddressByGoodsId(@Param("goodsId") Integer goodsId); -->
+    <select id="selectAddressByGoodsId" resultType="java.lang.String">
+        select adders from goods_image where goods_id=#{goodsId}
+    </select>
 </mapper>

@@ -28,15 +28,6 @@ public interface OrderShopDao extends BaseMapper<OrderShopVo> {
      */
     List<OrderShopVo> selectListByOrderId(@Param("orderId") String orderId);
 
-
-    /**
-     * 根据 订单 id 查询 商品 默认获取订单商品表 外层的 价格  商品内部的 价格不统计
-     *
-     * @param orderId 订单id
-     * @return 总金额
-     */
-    Float selectCountMoneyByOrderId(@Param("orderId") String orderId);
-
     /**
      * 根据 订单 id 进行查询 分页
      *
@@ -54,4 +45,9 @@ public interface OrderShopDao extends BaseMapper<OrderShopVo> {
      */
     List<Map<String, Object>> selectGoodsIdCountByOrderId(@Param("orderIds") List<String> orderIds);
 
+    /**
+     * 查询 销量 前五的 id
+     * @return
+     */
+    List<Integer> selectGoodsIdUpdateFive();
 }

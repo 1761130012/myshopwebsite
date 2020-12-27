@@ -2,11 +2,13 @@ package com.example.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.vo.OrderVo;
 import com.example.vo.ShopVo;
 import com.example.vo.UserShopVo;
 import com.example.vo.UserVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -28,9 +30,18 @@ public interface ShopService extends IService<ShopVo> {
 
     int add(ShopVo shopVo);
 
-    List<UserShopVo> selectAllShopVoByLoginName(String loginName);
+    Map<String, Object> selectAllShopVoByLoginName(String loginName, String orderId);
 
-    ShopVo selectShopVoByLoginName(String loginName);
+    Map<String, Object> selectShopVoByLoginName(String loginName, String orderId);
 
     ShopVo queryShopVo(UserVo userVos);
+
+    /**
+     * 根据 商户 id 查询 用户vo
+     *
+     * @param shopId
+     * @return
+     */
+    UserVo queryUserVoByShopId(Integer shopId);
+
 }

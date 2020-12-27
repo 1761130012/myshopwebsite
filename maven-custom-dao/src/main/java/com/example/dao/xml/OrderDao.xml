@@ -22,10 +22,8 @@
         SELECT * FROM order_goods o INNER JOIN `user` u ON o.user_id = u.user_id
         <where>
             <if test="orderVo!=null">
-                <if test="orderVo.userVo!=null">
-                    <if test="orderVo.userVo.name!=null">and u.name like concat ('%',#{orderVo.userVo.name},'%')</if>
-                </if>
-                <if test="orderVo.state!=null">and o.state = #{orderVo.state}</if>
+                <if test="orderVo.userName!=null">and u.name like concat ('%',#{orderVo.userName},'%')</if>
+                <if test="orderVo.state!=null and orderVo.state >=0 ">and o.state = #{orderVo.state}</if>
             </if>
         </where>
     </select>
@@ -33,7 +31,23 @@
 
     <!-- void updateCountMoneyById(@Param("orderId") String orderId, @Param("countMoney") Float countMoney); -->
     <update id="updateCountMoneyById">
-        update money=#{countMoney} where order_id=#{orderId}
+        update order_goods set money=#{countMoney} where order_id=#{orderId}
+    </update>
+    <update id="updateShopIdByOrderId">
+        update order_goods  set shop_id=#{shopId} where order_id=#{orderId}
+    </update>
+
+    <update id="updateDeliver">
+        update order_goods set state=1 where order_id=#{orderId}
+    </update>
+
+
+    <!-- Integer updateDeleteIdByOrderIds(@Param("list") List<Integer> list, @Param("state") Integer state); -->
+    <update id="updateDeleteIdByOrderIds">
+        update order_goods set is_delete=#{state} where order_id in
+        <foreach collection="orderIds" item="orderId" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
     </update>
     <select id="selectPayStateByOrderId" resultType="com.example.vo.OrderVo">
         select pay_state,state from order_goods
@@ -59,6 +73,9 @@
                 <when test="endTime != null ">
                     and end_time = #{endTime}
                 </when>
+                <otherwise>
+                    and end_time is not NULL
+                </otherwise>
             </choose>
         </where>
         order by end_time asc
@@ -75,13 +92,16 @@
                     and end_time >= #{startTime}
                     and #{endTime} >= end_time
                 </when>
+                <otherwise>
+                    and end_time is not NULL
+                </otherwise>
             </choose>
         </where>
     </select>
 
     <!-- List<String> selectOrderTimeCountNumByTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime); -->
     <select id="selectOrderTimeCountNumByTime" resultType="java.util.Map">
-        select end_time endTime,money from
+        select end_time endTime,money*0.95 money from
         <include refid="tableName"/>
         <where>
             <choose>
@@ -89,6 +109,9 @@
                     and end_time >= #{startTime,javaType=DATE}
                     and #{endTime,javaType=DATE} >= end_time
                 </when>
+                <otherwise>
+                    and end_time is not NULL
+                </otherwise>
             </choose>
         </where>
     </select>
@@ -112,5 +135,45 @@
             </if>
             and shop_id=#{orderVo.shopId}
         </where>
+    </select>
+
+    <!-- Float selectCountMoneyByOrderId(@Param("orderId") String orderId); -->
+    <select id="selectCountMoneyByOrderId" resultType="java.lang.Float">
+        select money from
+        <include refid="tableName"/>
+        where order_id =#{orderId}
+    </select>
+
+    <!-- Integer selectShopIdByOrderId(@Param("orderId") String orderId); -->
+    <select id="selectShopIdByOrderId" resultType="java.lang.Integer">
+        select shop_id from
+        <include refid="tableName"/>
+        where order_id = #{orderId}
+    </select>
+
+    <!--  String selectRemarkByOrderId(@Param("orderId") String orderId); -->
+    <select id="selectRemarkByOrderId" resultType="java.lang.String">
+        select remark from
+        <include refid="tableName"/>
+        where order_id = #{orderId}
+    </select>
+
+    <select id="selectAllOrderByUserIdState" resultMap="selectAllOrderByShopIdStateMap">
+        select order_id,user_id,money,pay_state,state from
+        <include refid="tableName"/>
+        <where>
+            <if test="orderVo.state !=null and orderVo.state!=-1">
+                and state=#{orderVo.state}
+            </if>
+            <if test="orderVo.orderId !=null and orderVo.orderId !=0 ">
+                and order_id like concat(#{orderVo.orderId},'%')
+            </if>
+            <if test="orderVo.payState != null and orderVo.payState!=-1">
+                and pay_state=#{orderVo.payState}
+            </if>
+            and user_id=#{orderVo.userId}
+            and is_delete = 0
+        </where>
+        order by pay_state asc
     </select>
 </mapper>

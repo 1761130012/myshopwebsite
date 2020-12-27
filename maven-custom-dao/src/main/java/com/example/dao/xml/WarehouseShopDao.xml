@@ -7,6 +7,7 @@
         <association property="warehouseVo" column="warehouse_id"
                      select="com.example.dao.WarehouseDao.selectById"/>
     </resultMap>
+
     <select id="selectPageVo" resultMap="warehouseShopMap">
         SELECT ws.*,g.name FROM warehouse_shop ws INNER JOIN goods g ON g.goods_id=ws.goods_id
         <where>
@@ -18,4 +19,15 @@
             and warehouse_id=#{warehouseShopVo.warehouseId}
         </where>
     </select>
+
+    <select id="selectwarehouse" resultMap="warehouseShopMap">
+        select * from warehouse_shop
+        where goods_id = #{goodsId} and goods_count >= #{goodsCount}
+    </select>
+
+    <update id="updateWarehouse">
+        update warehouse_shop set goods_count = goods_count - #{goodsCount} where id = #{id}
+    </update>
+
+
 </mapper>

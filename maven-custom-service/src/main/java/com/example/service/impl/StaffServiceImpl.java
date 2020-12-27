@@ -24,11 +24,21 @@ public class StaffServiceImpl extends ServiceImpl<StaffDao, StaffVo> implements 
 
     @Override
     public Page<StaffVo> selectPageVo(Page<StaffVo> staffVoPage, StaffVo staffVo) {
-        return staffDao.selectPageVo(staffVoPage,staffVo);
+        return staffDao.selectPageVo(staffVoPage, staffVo);
     }
 
     @Override
     public Page<StaffVo> selectAllPageVo(Page<StaffVo> page, String value) {
         return staffDao.selectAllPageVo(page, value);
+    }
+
+    @Override
+    public boolean staffLogin(StaffVo staffVo) {
+        return staffDao.selectCountByLoginNamePwd(staffVo) > 0;
+    }
+
+    @Override
+    public String queryStaffNameByLoginName(String loginName) {
+        return staffDao.selectStaffNameByLoginName(loginName);
     }
 }

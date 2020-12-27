@@ -3,6 +3,8 @@ package com.example.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.service.UserService;
+import com.example.vo.ShopCartVo;
+import com.example.vo.StaffVo;
 import com.example.vo.UserShopVo;
 import com.example.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,17 +68,36 @@ public class UserController {
 
     @RequestMapping("/edit")
     public Map addGoods(UserVo userVo, @RequestParam("img") MultipartFile img) throws IOException {
-        Map<String,String> map =new HashMap<String,String>();
-        userVo.setPicture("./src/assets/"+img.getOriginalFilename());  //保存到数据库的【相对路径】
+        Map<String, String> map = new HashMap<String, String>();
+        userVo.setPicture("./src/assets/" + img.getOriginalFilename());  //保存到数据库的【相对路径】
         System.out.println(userVo);
         System.out.println(img.getBytes().length);
         //将上传的文件保存到服务器上的前端项目的【绝对路径】
-        img.transferTo(new File("E:\\新建文件夹\\myshopwebsitepage\\src\\assets\\"+img.getOriginalFilename()));
-        boolean bool=userService.updateById(userVo);
-        if(bool){
-            map.put("msg","添加成功");
+        img.transferTo(new File("E:\\新建文件夹\\myshopwebsitepage\\src\\assets\\" + img.getOriginalFilename()));
+        boolean bool = userService.updateById(userVo);
+        if (bool) {
+            map.put("msg", "添加成功");
         }
         return map;
     }
 
+    @RequestMapping("/userLogin")
+    public boolean userLogin(UserVo userVo) {
+        return userService.userLogin(userVo);
+    }
+
+    @RequestMapping("/register")
+    public boolean register(UserVo userVo) {
+        return userService.updateRegisterByUserId(userVo);
+    }
+
+    @RequestMapping("/queryUserIdError")
+    public boolean queryUserIdError(String loginName) {
+        return userService.queryUserIdError(loginName);
+    }
+
+    @RequestMapping("/insertUserGoodsByInfo")
+    public boolean insertUserGoodsByInfo(ShopCartVo shopCartVo, String loginName) {
+        return userService.insertUserGoodsByInfo(shopCartVo, loginName);
+    }
 }

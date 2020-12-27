@@ -1,7 +1,9 @@
 package com.example.dao;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.vo.GoodsTypeVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,4 +18,6 @@ import java.util.List;
 public interface GoodsTypeDao extends BaseMapper<GoodsTypeVo> {
 
     List<GoodsTypeVo> select();
+
+    Page<GoodsTypeVo> selectTypeAll(@Param("page") Page<GoodsTypeVo> page, @Param("goodsTypeVo") GoodsTypeVo goodsTypeVo);
 }

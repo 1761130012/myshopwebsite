@@ -14,7 +14,7 @@
         select * from user
         <where>
             <if test="userVo.name !=null ">and name like concat(#{userVo.name},'%')</if>
-            <if test="userVo.phone !=null "> and phone like concat(#{userVo.phone},'%')</if>
+            <if test="userVo.phone !=null ">and phone like concat(#{userVo.phone},'%')</if>
         </where>
     </select>
 
@@ -28,6 +28,27 @@
     <select id="query" resultType="com.example.vo.UserVo">
         select * from user
         where login_name = #{loginName}
+    </select>
+
+    <!-- UserVo selectUserVoById(@Param("userId") Integer userId); -->
+    <select id="selectUserVoById" resultType="com.example.vo.UserVo">
+        select login_name,name,phone,create_time from
+        <include refid="tableName"/>
+        where user_id =#{userId}
+    </select>
+
+    <!-- Integer selectCountById(@Param("userId") Integer userId); -->
+    <select id="selectCountById" resultType="java.lang.Integer">
+        select count(user_id) from
+        <include refid="tableName"/>
+        where login_name= #{loginName}
+    </select>
+
+    <!-- Integer selectCountByLoginNamePwd(@Param("userVo") UserVo userVo); -->
+    <select id="selectCountByLoginNamePwd" resultType="java.lang.Integer">
+        select * from
+        <include refid="tableName"/>
+        where login_name = #{userVo.loginName} and password=#{userVo.password}
     </select>
 
 </mapper>

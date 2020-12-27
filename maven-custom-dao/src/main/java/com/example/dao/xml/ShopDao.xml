@@ -47,11 +47,9 @@
         <where>
             <if test="shopVo !=null ">
                 <if test="shopVo.name != null and shopVo.name !='' ">and name like concat('%',#{shopVo.name},'%')</if>
-                <if test="shopVo.state != null and shopVo.state > -1 ">and state = #{shopVo.state}</if>
             </if>
-            and state in (0,1,2)
+            and state = 0
         </where>
-        order by state asc
     </select>
 
     <resultMap id="shopVoMap" type="com.example.vo.ShopVo">
@@ -72,6 +70,14 @@
         <include refid="tableName"/>
         where shop_id = #{id} and state = 3
     </select>
+
+    <!--  ShopVo selectShopInfoById(@Param("id") Integer id); -->
+    <select id="selectUserIdByShopId" resultType="java.lang.Integer">
+        select user_id from
+        <include refid="tableName"/>
+        where shop_id = #{shopId}
+    </select>
+
 
     <!-- Integer selectIdByUserId(@Param("selectIdByLoginName") Integer selectIdByLoginName); -->
     <select id="selectIdByUserId" resultType="java.lang.Integer">

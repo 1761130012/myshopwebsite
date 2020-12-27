@@ -34,4 +34,11 @@ public interface ShopDao extends BaseMapper<ShopVo> {
 
 
     ShopVo queryShopVo(UserVo userVos);
+
+    /**
+     * 根据 商户 id 查询 用户id
+     * @param shopId
+     * @return
+     */
+    Integer selectUserIdByShopId(@Param("shopId") Integer shopId);
 }

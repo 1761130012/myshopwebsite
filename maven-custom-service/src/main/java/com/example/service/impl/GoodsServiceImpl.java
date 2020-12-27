@@ -2,9 +2,15 @@ package com.example.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.dao.*;
+import com.example.dao.GoodsDao;
+import com.example.dao.GoodsTypeDao;
+import com.example.dao.ShopCartDao;
+import com.example.dao.UserDao;
 import com.example.service.GoodsService;
-import com.example.vo.*;
+import com.example.vo.GoodsTypeVo;
+import com.example.vo.GoodsVo;
+import com.example.vo.ShopCartVo;
+import com.example.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,18 +33,20 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
     @Autowired
     GoodsTypeDao goodsTypeDao;
 
+    private GoodsImageDao goodsImageDao;
+
+    @Autowired
+    private GoodsImageDao goodsImageDao;
+
     @Autowired
     ShopCartDao shopCartDao;
 
     @Autowired
     UserDao userDao;
 
-    @Autowired
-    GoodsImageDao goodsImageDao;
-
     @Override
     public Page<GoodsVo> query(Page<GoodsVo> page, GoodsVo goodsVo) {
-        return goodsDao.selectPageVo(page,goodsVo);
+        return goodsDao.selectPageVo(page, goodsVo);
     }
 
     @Override
@@ -64,6 +72,15 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
     @Override
     public UserVo queryUser(UserVo userVo) {
         return userDao.query(userVo);
+    }
+
+    @Override
+    public GoodsVo selectGoodsVoByGoodId(Integer goodsId) {
+        //根据 商品 id 查询 图片
+        List<String> images = goodsImageDao.selectAddressByGoodsId(goodsId);
+        GoodsVo goodsVo = goodsDao.selectById(goodsId);
+        goodsVo.setImages(images);
+        return goodsVo;
     }
 
     @Override
@@ -104,6 +121,36 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
     @Override
     public int updateGoodsImage(GoodsImageVo goodsImageVo) {
         return goodsImageDao.updateById(goodsImageVo);
+    }
+
+    @Override
+    public Page<GoodsTypeVo> selectTypeAll(Page<GoodsTypeVo> page, GoodsTypeVo goodsTypeVo) {
+        return goodsTypeDao.selectTypeAll(page, goodsTypeVo);
+    }
+
+    @Override
+    public int addType(GoodsTypeVo goodsTypeVo) {
+        return goodsTypeDao.insert(goodsTypeVo);
+    }
+
+    @Override
+    public int updateType(GoodsTypeVo goodsTypeVo) {
+        return goodsTypeDao.updateById(goodsTypeVo);
+    }
+
+    @Override
+    public int deleteType(Integer id) {
+        return goodsTypeDao.deleteById(id);
+    }
+
+    @Override
+    public GoodsTypeVo queryBTypeId(Integer id) {
+        return goodsTypeDao.selectById(id);
+    }
+
+    @Override
+    public List<GoodsVo> list() {
+        return goodsDao.list();
     }
 
 

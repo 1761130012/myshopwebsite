@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -57,10 +58,18 @@ public class GoodsVo implements Serializable {
     @TableField(exist = false)
     private GoodsTypeVo goodsTypeVo;
 
+    @TableField(exist = false)
+    private String image;
 
     /**
      * 数量总和
      */
     @TableField(exist = false)
     private Integer countNum;
+
+    /**
+     * 图片数
+     */
+    @TableField(exist = false)
+    private List<String> images;
 }

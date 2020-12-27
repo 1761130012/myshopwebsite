@@ -37,13 +37,6 @@
         where order_id = #{orderId}
     </select>
 
-    <!-- Float selectCountMoneyByOrderId(@Param("orderId") String orderId); -->
-    <select id="selectCountMoneyByOrderId" resultType="java.lang.Float">
-        select FORMAT(sum(goods_price * pay_number),2) from
-        <include refid="tableName"/>
-        where order_id = #{orderId}
-    </select>
-
     <!-- Page<OrderShopVo> selectPageVoByOrderId(@Param("page") Page<OrderShopVo> page, @Param("orderId") String orderId); -->
     <select id="selectPageVoByOrderId" resultMap="selectListByOrderIdMap">
         select
@@ -62,5 +55,13 @@
             #{orderId}
         </foreach>
         GROUP BY goods_id
+    </select>
+
+    <!-- List<Integer> selectGoodsIdUpdateFive(); -->
+    <select id="selectGoodsIdUpdateFive" resultType="java.lang.Integer">
+        SELECT goods_id,pay_number  FROM order_shop
+        GROUP BY goods_id
+        ORDER BY pay_number DESC
+        LIMIT 5
     </select>
 </mapper>

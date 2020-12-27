@@ -8,6 +8,8 @@ import com.example.service.OrderShopService;
 import com.example.service.SupplierService;
 import com.example.utils.TimeGroupUtil;
 import com.example.vo.*;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -56,8 +58,13 @@ public class OrderController {
     }
 
     @RequestMapping("/updateOrderVo")
-    public int delete(OrderVo orderVo) {
+    public int update(OrderVo orderVo) {
         return orderService.update(orderVo);
+    }
+
+    @RequestMapping("/updateDeliver")
+    public int updateDeliver(OrderVo orderVo) {
+        return orderService.updateDeliver(orderVo);
     }
 
     @RequestMapping("/addOrderVo")
@@ -66,12 +73,12 @@ public class OrderController {
     }
 
     @RequestMapping("/addCarOrderShopVo")
-    public int addCarOrderShopVo(OrderShopVo orderShopVo){
+    public int addCarOrderShopVo(OrderShopVo orderShopVo) {
         return orderShopService.add(orderShopVo);
     }
 
     @RequestMapping("/addCarOrderVo")
-    public String addCarOrderVo(OrderVo orderVo,UserVo userVo){
+    public String addCarOrderVo(OrderVo orderVo, UserVo userVo) {
         UserVo userVos = goodsService.queryUser(userVo);
         orderVo.setUserId(userVos.getUserId());
         orderVo.setOrderId(TimeGroupUtil.getTimeGroupId());
@@ -121,12 +128,23 @@ public class OrderController {
 
     @RequestMapping("/updateStateByOrderId")
     public boolean updateStateByOrderId(String orderId) {
-        return orderService.updateStateByOrderId(orderId);
+        OrderVo orderVo = new OrderVo();
+        orderVo.setOrderId(orderId);
+        orderVo.setState(3);
+        orderVo.setEndTime(new Date());
+        return orderService.updateById(orderVo);
     }
 
     @RequestMapping("/updatePayNumberByOrderShopId")
-    public boolean updatePayNumberByOrderShopId(@RequestBody List<OrderShopVo> orderShopVos) {
-        return orderService.updatePayNumberByOrderShopId(orderShopVos);
+    public boolean updatePayNumberByOrderShopId(@RequestBody Map<String, Object> map) {
+        List<OrderShopVo> orderShopVos = new ObjectMapper().convertValue(
+                (List<OrderShopVo>) map.get("orderShopVos"),
+                new TypeReference<List<OrderShopVo>>() {
+                });
+
+        return orderService.updatePayNumberByOrderShopId(orderShopVos,
+                (Integer) map.get("shopId"),
+                (String) map.get("orderId"));
     }
 
     @RequestMapping("/queryTimeCountMoneyByTime")
@@ -159,13 +177,104 @@ public class OrderController {
 
     @RequestMapping("/queryAllOrderByShopId")
     public Page<OrderVo> queryAllOrderByShopId(Page<OrderVo> page, OrderVo orderVo, String loginName) {
-        //设置 为 -1 也就是 所有
-        orderVo.setState(-1);
         return orderService.queryAllOrderByShopIdState(page, orderVo, loginName);
     }
 
     @RequestMapping("/queryOrderShopByOrderId")
     public Page<OrderShopVo> queryOrderShopByOrderId(Page<OrderShopVo> page, String orderId) {
         return orderService.queryOrderShopByOrderId(page, orderId);
+    }
+
+    /**
+     * 商户 进行 确提货
+     *
+     * @param orderId
+     * @return
+     */
+    @RequestMapping("/updateShopCommitStateByOrderId")
+    public boolean updateShopCommitStateByOrderId(String orderId) {
+        OrderVo orderVo = new OrderVo();
+        orderVo.setOrderId(orderId);
+        orderVo.setState(2);
+        return orderService.updateById(orderVo);
+    }
+
+    @RequestMapping("/insertOrderByOneGoods")
+    public String insertOrderByOneGoods(Integer goodsId, Integer num, String loginName) {
+        return orderService.insertOrderByOneGoods(goodsId, num, loginName);
+    }
+
+
+    @RequestMapping("/updateOrderShopIdById")
+    public boolean updateOrderShopIdById(OrderVo orderVo) {
+        return orderService.updateById(orderVo);
+    }
+
+    @RequestMapping("/updateNumberById")
+    public boolean updateNumberById(OrderShopVo orderShopVo) {
+        return orderService.updateNumberById(orderShopVo);
+    }
+
+    //我的订单
+    @RequestMapping("/edittihuostate")
+    public boolean edittihuostate(OrderVo orderVo) {
+        orderVo.setState(3);
+        return orderService.updateById(orderVo);
+    }
+
+    @RequestMapping("/queryAllOrderByUserId")
+    public Page<OrderVo> queryAllOrderByUserId(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        //设置 为 -1 也就是 所有
+        orderVo.setState(-1);
+        orderVo.setPayState(-1);
+        Page<OrderVo> page1 = orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        return page1;
+    }
+
+    @RequestMapping("/queryAllOrderByUserIdshou")
+    public Page<OrderVo> queryAllOrderByUserIdshou(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        //设置 为 -1 也就是 所有
+        orderVo.setState(-1);
+        orderVo.setPayState(0);
+        Page<OrderVo> page1 = orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        return page1;
+    }
+
+    @RequestMapping("/queryAllOrderByUserIdfa")
+    public Page<OrderVo> queryAllOrderByUserIdfa(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        //设置 为 -1 也就是 所有
+        orderVo.setState(1);
+        orderVo.setPayState(1);
+        Page<OrderVo> page1 = orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        return page1;
+    }
+
+    @RequestMapping("/queryAllOrderByUserIdti")
+    public Page<OrderVo> queryAllOrderByUserIdti(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        //设置 为 -1 也就是 所有
+        orderVo.setState(2);
+        orderVo.setPayState(1);
+        Page<OrderVo> page1 = orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        return page1;
+    }
+
+    @RequestMapping("/queryAllOrderByUserIdyi")
+    public Page<OrderVo> queryAllOrderByUserIdyi(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+        //设置 为 -1 也就是 所有
+        orderVo.setState(3);
+        orderVo.setPayState(1);
+        Page<OrderVo> page1 = orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        return page1;
+    }
+
+
+    @RequestMapping("/queryGoodsUpdateFive")
+    public List<GoodsVo> queryGoodsUpdateFive() {
+        return orderService.selectGoodsUpdateFive();
+    }
+
+    @RequestMapping("/deleteBathOrder")
+    public boolean deleteBathOrder(@RequestBody List<String> list) {
+        return orderService.updateDeleteIdByOrderIds(list, 1);
     }
 }
