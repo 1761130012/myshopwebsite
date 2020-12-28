@@ -50,4 +50,11 @@ public interface UserDao extends BaseMapper<UserVo> {
      * @return
      */
     Integer selectCountByLoginNamePwd(@Param("userVo") UserVo userVo);
+
+    /**
+     * 查询 登录 名 数量
+     * @param loginName
+     * @return
+     */
+    int selectCountByLoginName(@Param("loginName") String loginName);
 }

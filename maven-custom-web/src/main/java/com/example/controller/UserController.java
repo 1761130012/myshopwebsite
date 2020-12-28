@@ -100,4 +100,9 @@ public class UserController {
     public boolean insertUserGoodsByInfo(ShopCartVo shopCartVo, String loginName) {
         return userService.insertUserGoodsByInfo(shopCartVo, loginName);
     }
+
+    @RequestMapping("/queryIsLoginName")
+    public boolean queryIsLoginName(String loginName) {
+        return userService.queryIsLoginName(loginName);
+    }
 }

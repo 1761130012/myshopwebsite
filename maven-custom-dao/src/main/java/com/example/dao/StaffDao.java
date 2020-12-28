@@ -5,6 +5,8 @@ import com.example.vo.StaffVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  * 员工表 Mapper 接口
@@ -49,4 +51,18 @@ public interface StaffDao extends BaseMapper<StaffVo> {
      * @return
      */
     String selectStaffNameByLoginName(@Param("loginName") String loginName);
+
+    /**
+     * 根据 loginName 模糊 查询 出 所有的 登录 名
+     * @param loginName
+     * @return
+     */
+    List<String> selectAllLoginNameByIdByLoginName(@Param("loginName") String loginName);
+
+    /**
+     * 查询 登录 名 个数
+     * @param loginName
+     * @return
+     */
+    int selectCountByLoginName(@Param("loginName") String loginName);
 }

@@ -47,6 +47,7 @@ public interface GoodsService extends IService<GoodsVo> {
 
     int deleteCar(ShopCartVo shopCartVo);
 
+    @Override
     List<GoodsVo> list();
 
     Page<GoodsTypeVo> selectTypeAll(Page<GoodsTypeVo> page, GoodsTypeVo goodsTypeVo);
@@ -54,4 +55,13 @@ public interface GoodsService extends IService<GoodsVo> {
     int updateType(GoodsTypeVo goodsTypeVo);
     int deleteType(Integer id);
     GoodsTypeVo queryBTypeId(Integer id);
+
+    /**
+     * 读文件 获取
+     * @param absolutePath
+     * @return
+     */
+    List<GoodsVo> readFileGoods(String absolutePath);
+
+    List<GoodsTypeVo> queryAllType();
 }

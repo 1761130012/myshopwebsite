@@ -190,7 +190,6 @@ public interface OrderService extends IService<OrderVo> {
      * @return
      */
     boolean updateDeleteIdByOrderIds(List<String> list, Integer state);
-    Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page,OrderVo orderVo,String loginName);
 
     /**
      * 订单 发货

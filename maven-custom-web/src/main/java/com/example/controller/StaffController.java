@@ -3,15 +3,20 @@ package com.example.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.service.StaffService;
+import com.example.utils.ServiceImplUtil;
 import com.example.vo.StaffVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import sun.plugin2.util.SystemUtil;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,6 +34,7 @@ public class StaffController {
 
     @Autowired
     private StaffService staffService;
+
 
     @RequestMapping("/queryPageVo")
     public Page<StaffVo> queryPageVo(@RequestParam(value = "page", defaultValue = "1") int page,
@@ -95,5 +101,37 @@ public class StaffController {
     @RequestMapping("/updateStaffRoleIds")
     public boolean updateStaffRoleIds(@RequestBody Map<String, Object> map) {
         return staffService.updateStaffRoleIds(map);
+    }
+
+    @RequestMapping("/readFileStaff")
+    public List<StaffVo> readFileStaff(@RequestParam MultipartFile file, HttpServletRequest request) throws IOException {
+        //进行 写 到 文件 中 项目地址
+        String path = request.getServletContext().getRealPath("/resource/file");
+        String fileName = "staffVoInfoFile." + file.getOriginalFilename().split("\\.")[1];
+        //判断 是否 有这个 文件
+        File newFile = new File(path, fileName);
+        if (!newFile.exists()) {
+            newFile.mkdirs();
+            newFile.createNewFile();
+        }
+
+        //进行 写入 在 读取
+        file.transferTo(newFile);
+        //读取
+        return staffService.readFile(newFile.getAbsolutePath());
+    }
+
+
+    @RequestMapping("/insertBathStaffVo")
+    public boolean insertBathStaffVo(@RequestBody List<StaffVo> list) {
+        for (StaffVo staffVo : list) {
+            staffVo.setCreateTime(new Date());
+        }
+        return staffService.saveBatch(list);
+    }
+
+    @RequestMapping("/queryIsExistByLoginName")
+    public boolean queryIsExistByLoginName(String loginName) {
+        return staffService.queryIsExistByLoginName(loginName);
     }
 }

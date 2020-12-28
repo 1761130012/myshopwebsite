@@ -1,16 +1,17 @@
-2020-12-21 13:22:32  [ main:2669 ] - [ DEBUG ]  ==> Parameters: 2020121011051(String)
-2020-12-21 13:22:32  [ main:2716 ] - [ DEBUG ]  <==      Total: 2
-2020-12-21 13:22:32  [ main:2719 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39f9b4fc]
-2020-12-21 13:23:28  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
-2020-12-21 13:23:28  [ main:755 ] - [ WARN ]  [com.example.dao.ShopDao.selectPage] Has been loaded by XML or SqlProvider or Mybatis's Annotation, so ignoring this injection for [class com.baomidou.mybatisplus.core.injector.methods.SelectPage]
-2020-12-21 13:23:29  [ main:1684 ] - [ DEBUG ]  Creating a new SqlSession
-2020-12-21 13:23:29  [ main:1691 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39f9b4fc] was not registered for synchronization because synchronization is not active
-2020-12-21 13:23:29  [ main:1771 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-12-21 13:23:30  [ main:2432 ] - [ INFO ]  {dataSource-1} inited
-2020-12-21 13:23:30  [ main:2436 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@33246f17] will not be managed by Spring
-2020-12-21 13:23:30  [ main:2444 ] - [ DEBUG ]  ==>  Preparing: select goods_id goodsId,sum(pay_number) countNum from order_shop where order_id in ( ? ) GROUP BY goods_id
-2020-12-21 13:23:30  [ main:2468 ] - [ DEBUG ]  ==> Parameters: 2020121011051(String)
-2020-12-21 13:23:30  [ main:2492 ] - [ DEBUG ]  <==      Total: 2
-2020-12-21 13:23:30  [ main:2494 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39f9b4fc]
-2020-12-21 13:33:17  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
-2020-12-21 13:33:18  [ main:968 ] - [ WARN ]  [com.example.dao.ShopDao.selectPage] Has been loaded by XML or SqlProvider or Mybatis's Annotation, so ignoring this injection for [class com.baomidou.mybatisplus.core.injector.methods.SelectPage]
+2020-12-21 13:33:20  [ main:2266 ] - [ DEBUG ]  Creating a new SqlSession
+2020-12-21 13:33:20  [ main:2274 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39f9b4fc] was not registered for synchronization because synchronization is not active
+2020-12-21 13:33:20  [ main:2395 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-12-21 13:33:21  [ main:3483 ] - [ INFO ]  {dataSource-1} inited
+2020-12-21 13:33:21  [ main:3488 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@33246f17] will not be managed by Spring
+2020-12-21 13:33:21  [ main:3501 ] - [ DEBUG ]  ==>  Preparing: select goods_id goodsId,sum(pay_number) countNum from order_shop where order_id in ( ? ) GROUP BY goods_id
+2020-12-21 13:33:21  [ main:3540 ] - [ DEBUG ]  ==> Parameters: 2020121011051(String)
+2020-12-21 13:33:21  [ main:3574 ] - [ DEBUG ]  <==      Total: 2
+2020-12-21 13:33:21  [ main:3577 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39f9b4fc]
+2020-12-27 16:12:34  [ main:0 ] - [ DEBUG ]  Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2020-12-27 16:12:35  [ main:680 ] - [ WARN ]  [com.example.dao.ShopDao.selectPage] Has been loaded by XML or SqlProvider or Mybatis's Annotation, so ignoring this injection for [class com.baomidou.mybatisplus.core.injector.methods.SelectPage]
+2020-12-27 16:12:36  [ main:1515 ] - [ DEBUG ]  Creating a new SqlSession
+2020-12-27 16:12:36  [ main:1521 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@4cf1c5d8] was not registered for synchronization because synchronization is not active
+2020-12-27 16:12:36  [ main:1589 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
+2020-12-27 16:12:37  [ main:2220 ] - [ INFO ]  {dataSource-1} inited
+2020-12-27 16:12:37  [ main:2223 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@77aa94d4] will not be managed by Spring
+2020-12-27 16:12:37  [ main:2231 ] - [ DEBUG ]  ==>  Preparing: select count(staff_id) from staff where login_name = ?

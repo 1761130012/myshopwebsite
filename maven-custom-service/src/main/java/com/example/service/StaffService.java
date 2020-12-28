@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.vo.StaffVo;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -51,5 +52,20 @@ public interface StaffService extends IService<StaffVo> {
      * @return
      */
     boolean updateStaffRoleIds(Map<String, Object> map);
+
+
+    /**
+     * 读取 地址 的 文件 进行 解析
+     * @param absolutePath
+     * @return
+     */
+    List<StaffVo> readFile(String absolutePath);
+
+    /**
+     * 查询 是否 存在 登录名
+     * @param loginName
+     * @return
+     */
+    boolean queryIsExistByLoginName(String loginName);
 }
 

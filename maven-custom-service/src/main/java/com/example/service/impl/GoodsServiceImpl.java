@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dao.*;
 import com.example.service.GoodsService;
+import com.example.utils.ServiceImplUtil;
 import com.example.vo.GoodsTypeVo;
 import com.example.vo.GoodsVo;
 import com.example.vo.ShopCartVo;
@@ -30,8 +31,6 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
     @Autowired
     GoodsTypeDao goodsTypeDao;
 
-    private GoodsImageDao goodsImageDao;
-
     @Autowired
     private GoodsImageDao goodsImageDao;
 
@@ -40,6 +39,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    private ServiceImplUtil serviceImplUtil;
 
     @Override
     public Page<GoodsVo> query(Page<GoodsVo> page, GoodsVo goodsVo) {
@@ -125,5 +127,13 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
         return goodsDao.list();
     }
 
+    @Override
+    public List<GoodsVo> readFileGoods(String absolutePath) {
+        return serviceImplUtil.readFile(GoodsVo.class, absolutePath);
+    }
 
+    @Override
+    public List<GoodsTypeVo> queryAllType() {
+        return goodsTypeDao.selectList(null);
+    }
 }
