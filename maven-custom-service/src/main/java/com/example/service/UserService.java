@@ -58,4 +58,6 @@ public interface UserService extends IService<UserVo> {
      * @return
      */
     boolean queryIsLoginName(String loginName);
+
+    List<UserVo> selectList(UserVo userVo);
 }

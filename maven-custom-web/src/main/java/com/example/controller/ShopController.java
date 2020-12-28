@@ -47,6 +47,11 @@ public class ShopController {
         return shopService.selectPage(new Page<ShopVo>(page, rows), shopVo);
     }
 
+    @RequestMapping("/selectShopVoId")
+    public List<ShopVo> selectById (ShopVo shopVo) {
+
+        return shopService.selectById(shopVo);
+    }
 
     @RequestMapping("/deleteShopVo")
     public int delete(String id) {
@@ -54,9 +59,7 @@ public class ShopController {
     }
 
     @RequestMapping("/updateShopVo")
-    public int delete(ShopVo shopVo, UserVo userVo) {
-        UserVo userVos = goodsService.queryUser(userVo);
-        shopVo.setUserId(userVos.getUserId());
+    public int delete(ShopVo shopVo) {
         return shopService.update(shopVo);
     }
 

@@ -58,4 +58,8 @@
         where login_name = #{loginName}
     </select>
 
+    <select id="selectUserVo" resultType="com.example.vo.UserVo">
+        select * from user
+    </select>
+
 </mapper>

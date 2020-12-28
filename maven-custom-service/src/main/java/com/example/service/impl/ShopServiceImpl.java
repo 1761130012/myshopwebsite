@@ -124,4 +124,9 @@ public class ShopServiceImpl extends ServiceImpl<ShopDao, ShopVo> implements Sho
         Integer userId = shopDao.selectUserIdByShopId(shopId);
         return userDao.selectUserVoById(userId);
     }
+
+    @Override
+    public List<ShopVo> selectById(ShopVo shopVo) {
+        return shopDao.selectId(shopVo);
+    }
 }

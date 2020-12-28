@@ -65,4 +65,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserVo> implements Use
         return userDao.selectCountByLoginName(loginName) > 0;
     }
 
+    @Override
+    public List<UserVo> selectList(UserVo userVo) {
+        return userDao.selectUserVo(userVo);
+    }
+
 }
