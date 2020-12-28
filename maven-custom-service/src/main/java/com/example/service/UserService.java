@@ -51,4 +51,6 @@ public interface UserService extends IService<UserVo> {
      * @return
      */
     boolean userLogin(UserVo userVo);
+
+    List<UserVo> selectList(UserVo userVo);
 }

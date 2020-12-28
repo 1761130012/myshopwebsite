@@ -30,8 +30,6 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
     @Autowired
     GoodsTypeDao goodsTypeDao;
 
-    private GoodsImageDao goodsImageDao;
-
     @Autowired
     private GoodsImageDao goodsImageDao;
 

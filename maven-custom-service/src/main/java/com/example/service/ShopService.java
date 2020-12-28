@@ -44,4 +44,5 @@ public interface ShopService extends IService<ShopVo> {
      */
     UserVo queryUserVoByShopId(Integer shopId);
 
+    List<ShopVo> selectById(ShopVo shopVo);
 }

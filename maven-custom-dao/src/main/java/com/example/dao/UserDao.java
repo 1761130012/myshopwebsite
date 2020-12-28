@@ -6,6 +6,8 @@ import com.example.vo.UserVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  * 用户表 Mapper 接口
@@ -50,4 +52,11 @@ public interface UserDao extends BaseMapper<UserVo> {
      * @return
      */
     Integer selectCountByLoginNamePwd(@Param("userVo") UserVo userVo);
+
+    /**
+     * 查询所有用户
+     * @param userVo
+     * @return
+     */
+    List<UserVo> selectUserVo(UserVo userVo);
 }
