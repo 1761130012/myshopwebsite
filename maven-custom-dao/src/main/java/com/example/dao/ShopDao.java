@@ -43,4 +43,8 @@ public interface ShopDao extends BaseMapper<ShopVo> {
     Integer selectUserIdByShopId(@Param("shopId") Integer shopId);
 
     List<ShopVo> selectId(ShopVo shopVo);
+
+    ShopVo selectByShopId(Integer shopId);
+
+    List<ShopVo> updateErrorState(@Param("shopIds")Integer[] shopIds);
 }

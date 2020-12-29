@@ -30,6 +30,9 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserVo> implements Use
     private UserDao userDao;
 
     @Autowired
+    private UserShopDao userShopDao;
+
+    @Autowired
     private ShopCartDao shopCartDao;
 
     @Override
@@ -68,6 +71,31 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserVo> implements Use
     @Override
     public List<UserVo> selectList(UserVo userVo) {
         return userDao.selectUserVo(userVo);
+    }
+
+    @Override
+    public Integer getShopId(Integer shopId) {
+        return userShopDao.getShopId(shopId);
+    }
+
+    @Override
+    public List<UserShopVo> userShop(UserShopVo userShopVo) {
+        return userShopDao.seleteUserShopList(userShopVo);
+    }
+
+    @Override
+    public Integer getUserId(UserVo userVo) {
+        return userDao.query(userVo).getUserId();
+    }
+
+    @Override
+    public int updateUserShopState(UserShopVo userShopVo) {
+        return userShopDao.updateUserShopState(userShopVo);
+    }
+
+    @Override
+    public int updateUserShopState2(UserShopVo userShopVo) {
+        return userShopDao.updateUserShopState2(userShopVo);
     }
 
 }

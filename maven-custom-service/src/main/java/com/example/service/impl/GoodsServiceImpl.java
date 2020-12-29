@@ -2,16 +2,10 @@ package com.example.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.dao.GoodsDao;
-import com.example.dao.GoodsTypeDao;
-import com.example.dao.ShopCartDao;
-import com.example.dao.UserDao;
+import com.example.dao.*;
 import com.example.service.GoodsService;
 import com.example.utils.ServiceImplUtil;
-import com.example.vo.GoodsTypeVo;
-import com.example.vo.GoodsVo;
-import com.example.vo.ShopCartVo;
-import com.example.vo.UserVo;
+import com.example.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

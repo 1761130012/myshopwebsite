@@ -6,6 +6,7 @@ import com.example.vo.OrderVo;
 import com.example.vo.ShopVo;
 import com.example.vo.UserShopVo;
 import com.example.vo.UserVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -34,7 +35,7 @@ public interface ShopService extends IService<ShopVo> {
 
     Map<String, Object> selectShopVoByLoginName(String loginName, String orderId);
 
-    ShopVo queryShopVo(UserVo userVos);
+    ShopVo queryShopVo(UserVo userVo);
 
     /**
      * 根据 商户 id 查询 用户vo
@@ -45,4 +46,16 @@ public interface ShopService extends IService<ShopVo> {
     UserVo queryUserVoByShopId(Integer shopId);
 
     List<ShopVo> selectById(ShopVo shopVo);
+
+    ShopVo queryId(Integer shopId);
+
+    UserVo getUserId(UserVo userVo);
+
+    Integer getShopId(UserShopVo userShopVo);
+
+    List<ShopVo> updateErrorState(Integer[] shopIds);
+
+    List<UserShopVo> selectShopById(UserVo userVo);
+
+    int addUserShop(UserShopVo userShopVo);
 }

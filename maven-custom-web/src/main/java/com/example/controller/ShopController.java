@@ -2,14 +2,15 @@ package com.example.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.dao.UserShopDao;
 import com.example.service.GoodsService;
 import com.example.service.ShopService;
+import com.example.service.UserService;
 import com.example.utils.DelSpaceEmpty;
-import com.example.vo.OrderVo;
 import com.example.vo.ShopVo;
+import com.example.vo.SupplierGoodsVo;
 import com.example.vo.UserShopVo;
 import com.example.vo.UserVo;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,8 @@ public class ShopController {
     @Autowired
     GoodsService goodsService;
 
+    @Autowired
+    UserService userService;
 
     @RequestMapping("/selectShopVo")
     public Page<ShopVo> select(@RequestParam(value = "page", defaultValue = "1") int page,
@@ -71,6 +74,15 @@ public class ShopController {
     @RequestMapping("/queryPageVo")
     public Page<ShopVo> queryPageVo(Page<ShopVo> page, ShopVo shopVo) {
         return shopService.selectPageVo(page, DelSpaceEmpty.disposeVoString(shopVo));
+    }
+
+
+    @RequestMapping("/addUserShop")
+    public int addUserShop(UserShopVo userShopVo,UserVo userVo) {
+        //根据 登录名 查询 id
+        userShopVo.setUserId(userService.getUserId(userVo));
+        userShopVo.setState(0);
+        return shopService.addUserShop(userShopVo);
     }
 
 
@@ -123,5 +135,41 @@ public class ShopController {
     @RequestMapping("/queryUserVoByShopId")
     public UserVo queryUserVoByShopId(Integer shopId) {
         return shopService.queryUserVoByShopId(shopId);
+    }
+
+    @RequestMapping("/queryShopId")
+    public ShopVo queryShopId(UserShopVo userShopVo, UserVo userVo){
+        userShopVo.setUserId(shopService.getUserId(userVo).getUserId());
+        int id = shopService.getShopId(userShopVo);
+        System.out.println("--------------"+id+"-------------");
+
+        return shopService.queryId(id);
+    }
+
+
+    @RequestMapping("/updateErrorStateByLoginName")
+    public List<ShopVo> updateErrorStateByLoginName(UserVo userVo) {
+        //根据 登录名 查询 id
+        userVo.setUserId(userService.getUserId(userVo));
+
+        //根据  用户 id 查询 user_shop shopId 商户 id 集合
+        List<UserShopVo> list = shopService.selectShopById(userVo);
+
+        System.out.println(list.size()+"------------");
+        //就 根据 商户 id  查询 所有的 商户 id shop
+        // where shop_Id not in  (商户 id 集合)
+        Integer[] shopIds = new Integer[list.size()];
+        for(int i=0;i<list.size();i++){
+            System.out.println("------------------------------");
+            System.out.println(list.get(i));
+            System.out.println("------------------------------");
+            shopIds[i] = list.get(i).getShopVo().getShopId();
+        }
+        System.out.println("------------------------------");
+        for(int i=0;i<list.size();i++){
+            System.out.println(shopIds[i]);
+        }
+        System.out.println("------------------------------");
+        return shopService.updateErrorState(shopIds);
     }
 }

@@ -60,4 +60,14 @@ public interface UserService extends IService<UserVo> {
     boolean queryIsLoginName(String loginName);
 
     List<UserVo> selectList(UserVo userVo);
+
+    Integer getShopId(Integer shopId);
+
+    List<UserShopVo> userShop(UserShopVo userShopVo);
+
+    Integer getUserId(UserVo userVo);
+
+    int updateUserShopState(UserShopVo userShopVo);
+
+    int updateUserShopState2(UserShopVo userShopVo);
 }

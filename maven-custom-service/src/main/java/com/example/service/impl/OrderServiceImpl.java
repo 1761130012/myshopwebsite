@@ -6,10 +6,7 @@ import com.example.dao.*;
 import com.example.service.OrderService;
 import com.example.utils.ServiceImplUtil;
 import com.example.utils.TimeGroupUtil;
-import com.example.vo.GoodsTypeVo;
-import com.example.vo.GoodsVo;
-import com.example.vo.OrderShopVo;
-import com.example.vo.OrderVo;
+import com.example.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +41,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
     private GoodsDao goodsDao;
     @Autowired
     private GoodsTypeDao goodsTypeDao;
+
+    @Autowired
+    private UserShopDao userShopDao;
 
     @Override
     public Page<OrderVo> selectPageVo(Page<OrderVo> orderVoPage, OrderVo orderVo) {
@@ -290,5 +290,10 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
     @Override
     public int updateDeliver(OrderVo orderVo) {
         return orderDao.updateDeliver(orderVo);
+    }
+
+    @Override
+    public Integer getShopId(Integer userId) {
+        return userShopDao.getShopId(userId);
     }
 }

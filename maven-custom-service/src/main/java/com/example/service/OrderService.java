@@ -197,4 +197,6 @@ public interface OrderService extends IService<OrderVo> {
      * @return
      */
     int updateDeliver(OrderVo orderVo);
+
+    Integer getShopId(Integer userId);
 }

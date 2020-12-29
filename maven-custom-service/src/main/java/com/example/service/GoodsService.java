@@ -2,10 +2,7 @@ package com.example.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.example.vo.GoodsTypeVo;
-import com.example.vo.GoodsVo;
-import com.example.vo.ShopCartVo;
-import com.example.vo.UserVo;
+import com.example.vo.*;
 
 import java.util.List;
 
