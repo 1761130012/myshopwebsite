@@ -51,4 +51,13 @@ public interface UserService extends IService<UserVo> {
      * @return
      */
     boolean userLogin(UserVo userVo);
+
+    /**
+     * 查询 是否存在 这个 登录 名
+     * @param loginName
+     * @return
+     */
+    boolean queryIsLoginName(String loginName);
+
+    List<UserVo> selectList(UserVo userVo);
 }

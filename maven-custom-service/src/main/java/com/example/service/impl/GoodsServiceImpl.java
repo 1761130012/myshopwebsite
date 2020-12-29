@@ -2,8 +2,12 @@ package com.example.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.example.dao.*;
+import com.example.dao.GoodsDao;
+import com.example.dao.GoodsTypeDao;
+import com.example.dao.ShopCartDao;
+import com.example.dao.UserDao;
 import com.example.service.GoodsService;
+import com.example.utils.ServiceImplUtil;
 import com.example.vo.GoodsTypeVo;
 import com.example.vo.GoodsVo;
 import com.example.vo.ShopCartVo;
@@ -25,18 +29,22 @@ import java.util.List;
 public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements GoodsService {
 
     @Autowired
-    private GoodsDao goodsDao;
+    GoodsDao goodsDao;
 
     @Autowired
-    private GoodsTypeDao goodsTypeDao;
+    GoodsTypeDao goodsTypeDao;
+
     @Autowired
     private GoodsImageDao goodsImageDao;
 
     @Autowired
-    private ShopCartDao shopCartDao;
+    ShopCartDao shopCartDao;
 
     @Autowired
-    private UserDao userDao;
+    UserDao userDao;
+
+    @Autowired
+    private ServiceImplUtil serviceImplUtil;
 
     @Override
     public Page<GoodsVo> query(Page<GoodsVo> page, GoodsVo goodsVo) {
@@ -93,8 +101,33 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
     }
 
     @Override
+    public int addGoodsImage(GoodsImageVo goodsImageVo) {
+        return goodsImageDao.insert(goodsImageVo);
+    }
+
+    @Override
+    public List<GoodsImageVo> goodsImgList(int goodsId) {
+        return goodsImageDao.queryGoodsImgBygId(goodsId);
+    }
+
+    @Override
+    public int deleteGoodsImage(int id) {
+        return goodsImageDao.deleteGoodsImage(id);
+    }
+
+    @Override
+    public GoodsImageVo queryGoodsImgById(int id) {
+        return goodsImageDao.selectById(id);
+    }
+
+    @Override
+    public int updateGoodsImage(GoodsImageVo goodsImageVo) {
+        return goodsImageDao.updateById(goodsImageVo);
+    }
+
+    @Override
     public Page<GoodsTypeVo> selectTypeAll(Page<GoodsTypeVo> page, GoodsTypeVo goodsTypeVo) {
-        return goodsTypeDao.selectTypeAll(page,goodsTypeVo);
+        return goodsTypeDao.selectTypeAll(page, goodsTypeVo);
     }
 
     @Override
@@ -117,5 +150,18 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsDao, GoodsVo> implements 
         return goodsTypeDao.selectById(id);
     }
 
+    @Override
+    public List<GoodsVo> list() {
+        return goodsDao.list();
+    }
 
+    @Override
+    public List<GoodsVo> readFileGoods(String absolutePath) {
+        return serviceImplUtil.readFile(GoodsVo.class, absolutePath);
+    }
+
+    @Override
+    public List<GoodsTypeVo> queryAllType() {
+        return goodsTypeDao.selectList(null);
+    }
 }

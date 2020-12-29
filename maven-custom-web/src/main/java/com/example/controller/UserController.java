@@ -40,6 +40,11 @@ public class UserController {
         return userService.selectPageVo(new Page<UserVo>(page, rows), userVo);
     }
 
+    @RequestMapping("/queryList")
+    public List<UserVo> queryList(UserVo userVo) {
+        return userService.selectList(userVo);
+    }
+
     @RequestMapping("/add")
     public boolean add(@RequestBody UserVo userVo) {
         userVo.setCreateTime(new Date());
@@ -99,5 +104,10 @@ public class UserController {
     @RequestMapping("/insertUserGoodsByInfo")
     public boolean insertUserGoodsByInfo(ShopCartVo shopCartVo, String loginName) {
         return userService.insertUserGoodsByInfo(shopCartVo, loginName);
+    }
+
+    @RequestMapping("/queryIsLoginName")
+    public boolean queryIsLoginName(String loginName) {
+        return userService.queryIsLoginName(loginName);
     }
 }

@@ -91,6 +91,20 @@ public interface OrderDao extends BaseMapper<OrderVo> {
      */
     Float selectCountMoneyByOrderId(@Param("orderId") String orderId);
 
+    /**
+     * 查询 商品 id 根据 订单id
+     * @param orderId
+     * @return
+     */
+    Integer selectShopIdByOrderId(@Param("orderId") String orderId);
+
+    /**
+     * 查询 备注 根据 订单id
+     * @param orderId
+     * @return
+     */
+    String selectRemarkByOrderId(@Param("orderId") String orderId);
+
     Page<OrderVo> selectAllOrderByUserIdState(@Param("page") Page<OrderVo> page, @Param("orderVo") OrderVo orderVo);
 
    List<OrderVo> findNewBeeMallOrderList(@Param("orderVo") OrderVo orderVo);
@@ -100,4 +114,14 @@ public interface OrderDao extends BaseMapper<OrderVo> {
 
     OrderVo orderall(@Param("orderVo") OrderVo orderVo);
 
+
+    /**
+     * 修改
+     * @param orderIds
+     * @param state
+     * @return
+     */
+    Integer updateDeleteIdByOrderIds(@Param("orderIds") List<String> orderIds, @Param("state") Integer state);
+
+    int updateDeliver(OrderVo orderVo);
 }

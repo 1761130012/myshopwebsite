@@ -1,5 +1,6 @@
 package com.example.vo;
 
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -35,6 +36,7 @@ public class GoodsVo implements Serializable {
      * 商品名称
      */
     @TableField("name")
+    @ExcelProperty(value = "名称")
     private String name;
 
     /**
@@ -47,17 +49,21 @@ public class GoodsVo implements Serializable {
      * 商品售价
      */
     @TableField("price")
+    @ExcelProperty(value = "售价")
     private Double price;
 
     /**
      * 商品描述
      */
     @TableField("remark")
+    @ExcelProperty(value = "描述")
     private String remark;
 
     @TableField(exist = false)
     private GoodsTypeVo goodsTypeVo;
 
+    @TableField(exist = false)
+    private String image;
 
     /**
      * 数量总和

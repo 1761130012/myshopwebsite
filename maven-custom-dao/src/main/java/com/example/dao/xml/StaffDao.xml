@@ -7,8 +7,6 @@
     <sql id="allFiledSql">
         staff_id,login_name,password,name,head_image,email,phone,sex,create_time
     </sql>
-
-
     <!--  分页-->
     <select id="selectPageVo" resultType="com.example.vo.StaffVo">
         select * from staff
@@ -49,5 +47,14 @@
     <select id="selectStaffNameByLoginName" resultType="java.lang.String">
         select name from staff
         where login_name = #{loginName}
+    </select>
+
+    <select id="selectAllLoginNameByIdByLoginName" resultType="java.lang.String">
+        select login_name from staff where login_name like concat(#{loginName},'%');
+    </select>
+
+    <!-- int selectCountByLoginName(@Param("loginName") String loginName); -->
+    <select id="selectCountByLoginName" resultType="java.lang.Integer">
+        select count(staff_id) from staff where login_name = #{loginName}
     </select>
 </mapper>

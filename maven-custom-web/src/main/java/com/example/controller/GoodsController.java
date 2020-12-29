@@ -2,12 +2,17 @@ package com.example.controller;
 
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.dao.GoodsTypeDao;
 import com.example.dao.UserDao;
 import com.example.service.GoodsService;
 import com.example.vo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -30,14 +35,6 @@ public class GoodsController {
     private GoodsService goodsService;
 
     //帮你修改了个名字
-    @RequestMapping("/queryPageVo")
-    public Page<GoodsVo> queryPageVo(@RequestParam(value = "page", defaultValue = "1") int page,
-                                     @RequestParam(value = "rows", defaultValue = "6") int rows,
-                                     GoodsVo goodsVo) {
-        return goodsService.query(new Page<GoodsVo>(page, rows), goodsVo);
-    }
-
-    //帮你修改了个名字
     @RequestMapping("/queryGoodsVo")
     public Page<GoodsVo> queryGoodsVo(@RequestParam(value = "page", defaultValue = "1") int page,
                                       @RequestParam(value = "rows", defaultValue = "6") int rows,
@@ -45,9 +42,24 @@ public class GoodsController {
         return goodsService.query(new Page<GoodsVo>(page, rows), goodsVo);
     }
 
+    //分页查询商品信息
+    @RequestMapping("/queryPageVo")
+    public Page<GoodsVo> queryPageVo(@RequestParam(value = "page", defaultValue = "1") int page,
+                                     @RequestParam(value = "rows", defaultValue = "5") int rows,
+                                     GoodsVo goodsVo) {
+        return goodsService.query(new Page<GoodsVo>(page, rows), goodsVo);
+    }
+
+
+    //分页查询商品信息
+    @RequestMapping("/queryGoodList")
+    public List<GoodsVo> queryGoodList() {
+        return goodsService.list();
+    }
+
     //查询全部商品类型
     @RequestMapping("/queryGoodsTypeVo")
-    public List<GoodsTypeVo> queryTypeVo(){
+    public List<GoodsTypeVo> queryTypeVo() {
         return goodsService.queryType();
     }
 
@@ -63,29 +75,31 @@ public class GoodsController {
     public GoodsVo queryGoodsById(Integer goodsId) {
         return goodsService.getById(goodsId);
     }
+
     //根据id修改商品信息
     @RequestMapping("updGoodsById")
-    public boolean updGoodsById(GoodsVo goodsVo){
+    public boolean updGoodsById(GoodsVo goodsVo) {
         return goodsService.updateById(goodsVo);
     }
+
     //删除
     @RequestMapping("delGoogsGyId")
-    public boolean delGoogsGyId(String ids){
-        String [] id=ids.split(",");
+    public boolean delGoogsGyId(String ids) {
+        String[] id = ids.split(",");
         return goodsService.removeByIds(Arrays.asList(id));
     }
 
     @RequestMapping("/addCar")
-    public void addCar(ShopCartVo shopCartVo,UserVo userVo){
+    public void addCar(ShopCartVo shopCartVo, UserVo userVo) {
 
         UserVo userVos = goodsService.queryUser(userVo);
 
         shopCartVo.setUserId(userVos.getUserId());
 
         int num = goodsService.select(shopCartVo).size();
-        if(num!=0){
+        if (num != 0) {
             goodsService.updateCar(shopCartVo);
-        }else {
+        } else {
             goodsService.addCar(shopCartVo);
         }
     }
@@ -96,53 +110,86 @@ public class GoodsController {
     }
 
     @RequestMapping("/queryCar")
-    public List<ShopCartVo> queryCar(ShopCartVo shopCartVo,UserVo userVo){
+    public List<ShopCartVo> queryCar(ShopCartVo shopCartVo, UserVo userVo) {
         UserVo userVos = goodsService.queryUser(userVo);
         shopCartVo.setUserId(userVos.getUserId());
         return goodsService.queryCar(shopCartVo);
     }
 
     @RequestMapping("/updateCarNum")
-    public int updateCarNum(ShopCartVo shopCartVo,UserVo userVo){
+    public int updateCarNum(ShopCartVo shopCartVo, UserVo userVo) {
         UserVo userVos = goodsService.queryUser(userVo);
         shopCartVo.setUserId(userVos.getUserId());
         return goodsService.updateCarNum(shopCartVo);
     }
 
     @RequestMapping("/deleteCar")
-    public int deleteCar(ShopCartVo shopCartVo){
+    public int deleteCar(ShopCartVo shopCartVo) {
         return goodsService.deleteCar(shopCartVo);
     }
 
 
     @RequestMapping("/queryTypeAll")
-    public Page<GoodsTypeVo> queryTypeAll(Page<GoodsTypeVo> page,GoodsTypeVo goodsTypeVo){
-        return goodsService.selectTypeAll(page,goodsTypeVo);
+    public Page<GoodsTypeVo> queryTypeAll(Page<GoodsTypeVo> page, GoodsTypeVo goodsTypeVo) {
+        return goodsService.selectTypeAll(page, goodsTypeVo);
     }
 
     @RequestMapping("/addType")
-    public boolean addType(@RequestBody GoodsTypeVo goodsTypeVo){
-        return goodsService.addType(goodsTypeVo)>0;
+    public boolean addType(@RequestBody GoodsTypeVo goodsTypeVo) {
+        return goodsService.addType(goodsTypeVo) > 0;
     }
 
     @RequestMapping("/queryByTypeId")
-    public GoodsTypeVo querybidType(Integer id){
+    public GoodsTypeVo querybidType(Integer id) {
         return goodsService.queryBTypeId(id);
     }
 
     @RequestMapping("/updateType")
-    public boolean updateType(@RequestBody GoodsTypeVo goodsTypeVo){
-        return goodsService.updateType(goodsTypeVo)>0;
+    public boolean updateType(@RequestBody GoodsTypeVo goodsTypeVo) {
+        return goodsService.updateType(goodsTypeVo) > 0;
     }
+
     @RequestMapping("/deleteType")
-    public Map deleteType(String ids){
-        Map<Object,Object> map=new HashMap<Object,Object>();
+    public Map deleteType(String ids) {
+        Map<Object, Object> map = new HashMap<Object, Object>();
         String[] nums = ids.split(",");
-        int num=0;
+        int num = 0;
         for (int i = 0; i < nums.length; i++) {
             num += goodsService.deleteType(Integer.parseInt(nums[i]));
         }
-        map.put("isdelete",num);
+        map.put("isdelete", num);
         return map;
+    }
+
+    @RequestMapping("/readFileGoods")
+    public List<GoodsVo> readFileGoods(@RequestBody MultipartFile file, HttpServletRequest request) throws IOException {
+        //进行 写 到 文件 中 项目地址
+        String path = request.getServletContext().getRealPath("/resource/file");
+        String fileName = "goodsVoFile." + file.getOriginalFilename().split("\\.")[1];
+        //判断 是否 有这个 文件
+        File newFile = new File(path, fileName);
+        if (!newFile.exists()) {
+            newFile.mkdirs();
+            newFile.createNewFile();
+        }
+
+        //进行 写入 在 读取
+        file.transferTo(newFile);
+        return goodsService.readFileGoods(newFile.getAbsolutePath());
+    }
+
+    @RequestMapping("/queryAllType")
+    public List<GoodsTypeVo> queryAllType() {
+        return goodsService.queryAllType();
+    }
+
+    @RequestMapping("/insertBathGoodsVo")
+    public boolean insertBathGoodsVo(@RequestBody List<GoodsVo> list) {
+        return goodsService.saveBatch(list);
+    }
+
+    @RequestMapping("/downloadFileTemplate")
+    public boolean downloadFileTemplate() {
+        return false;
     }
 }

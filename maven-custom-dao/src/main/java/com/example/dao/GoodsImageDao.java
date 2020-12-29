@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+import java.util.List;
+
 /**
  * <p>
  * 商品图片表 Mapper 接口
@@ -15,6 +17,9 @@ import java.util.List;
  * @since 2020-12-10
  */
 public interface GoodsImageDao extends BaseMapper<GoodsImageVo> {
+    List<GoodsImageVo> queryGoodsImgBygId(int goodId);
+
+    int deleteGoodsImage(int id);
 
     /**
      * 根据 商品 id 查询 商品 地址

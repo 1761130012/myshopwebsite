@@ -41,6 +41,19 @@
         set shop_id=#{shopId}
         where order_id = #{orderId}
     </update>
+
+    <update id="updateDeliver">
+        update order_goods set state=1 where order_id=#{orderId}
+    </update>
+
+
+    <!-- Integer updateDeleteIdByOrderIds(@Param("list") List<Integer> list, @Param("state") Integer state); -->
+    <update id="updateDeleteIdByOrderIds">
+        update order_goods set is_delete=#{state} where order_id in
+        <foreach collection="orderIds" item="orderId" open="(" separator="," close=")">
+            #{orderId}
+        </foreach>
+    </update>
     <select id="selectPayStateByOrderId" resultType="com.example.vo.OrderVo">
         select pay_state, state
         from order_goods
@@ -66,6 +79,9 @@
                 <when test="endTime != null ">
                     and end_time = #{endTime}
                 </when>
+                <otherwise>
+                    and end_time is not NULL
+                </otherwise>
             </choose>
         </where>
         order by end_time asc
@@ -91,7 +107,7 @@
 
     <!-- List<String> selectOrderTimeCountNumByTime(@Param("startTime") Date startTime, @Param("endTime") Date endTime); -->
     <select id="selectOrderTimeCountNumByTime" resultType="java.util.Map">
-        select end_time endTime,money from
+        select end_time endTime,sum( money*0.95) money from
         <include refid="tableName"/>
         <where>
             <choose>
@@ -99,8 +115,12 @@
                     and end_time >= #{startTime,javaType=DATE}
                     and #{endTime,javaType=DATE} >= end_time
                 </when>
+                <otherwise>
+                    and end_time is not NULL
+                </otherwise>
             </choose>
         </where>
+        GROUP BY date_format(end_time, '%Y-%m-%d')
     </select>
 
     <resultMap id="selectAllOrderByShopIdStateMap" type="com.example.vo.OrderVo">
@@ -131,6 +151,20 @@
         where order_id =#{orderId}
     </select>
 
+    <!-- Integer selectShopIdByOrderId(@Param("orderId") String orderId); -->
+    <select id="selectShopIdByOrderId" resultType="java.lang.Integer">
+        select shop_id from
+        <include refid="tableName"/>
+        where order_id = #{orderId}
+    </select>
+
+    <!--  String selectRemarkByOrderId(@Param("orderId") String orderId); -->
+    <select id="selectRemarkByOrderId" resultType="java.lang.String">
+        select remark from
+        <include refid="tableName"/>
+        where order_id = #{orderId}
+    </select>
+
     <select id="selectAllOrderByUserIdState" resultMap="selectAllOrderByShopIdStateMap">
         select order_id,user_id,money,pay_state,state from
         <include refid="tableName"/>
@@ -145,6 +179,7 @@
                 and pay_state=#{orderVo.payState}
             </if>
             and user_id=#{orderVo.userId}
+            and is_delete = 0
         </where>
         order by pay_state asc
     </select>

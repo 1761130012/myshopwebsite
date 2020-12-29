@@ -6,6 +6,8 @@ import com.example.vo.WarehouseShopVo;
 import com.example.vo.WarehouseVo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * <p>
  * 仓库表 服务类
@@ -18,5 +20,9 @@ public interface WarehouseService extends IService<WarehouseVo> {
     Page<WarehouseVo> selectPageVo(@Param("warehouseVoPage") Page<WarehouseVo> warehouseVoPage, @Param("userVo") WarehouseVo warehouseVo);
 
     Page<WarehouseShopVo> selectPageVo1(@Param("warehouseShopVo") Page<WarehouseShopVo> warehouseShopVoPage, @Param("warehouseShopVo") WarehouseShopVo warehouseShopVo);
+
+    List<WarehouseShopVo> selectList(WarehouseShopVo warehouseShopVo);
+
+    int updateWarehouse(WarehouseShopVo warehouseShopVo);
 
 }

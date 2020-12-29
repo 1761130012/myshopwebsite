@@ -58,13 +58,13 @@ public class AlipayController {
 
         //订单名称，必填
         String subject = "购物信息";
-        //商品描述，可空
-        //String body = new String("测试".getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        //商品描述，可空  根据 订单 id 查询 remark
+        String body = orderService.selectRemarkByOrderId(orderId);
 
         alipayRequest.setBizContent("{\"out_trade_no\":\"" + orderId + "\","
                 + "\"total_amount\":\"" + totalAmount + "\","
                 + "\"subject\":\"" + subject + "\","
-                // + "\"body\":\"" + body + "\","
+                + "\"body\":\"" + body + "\","
                 + "\"timeout_express\":\"5m\","
                 + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
 

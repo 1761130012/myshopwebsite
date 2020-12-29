@@ -52,16 +52,6 @@
         </where>
     </select>
 
-    <resultMap id="shopVoMap" type="com.example.vo.ShopVo">
-        <id property="shopId" column="shop_id"/>
-        <association property="provinceVo" javaType="com.example.vo.GpsProvinceVo" column="province_id"
-                     select="com.example.dao.GpsProvinceDao.selectById"/>
-        <association property="cityVo" javaType="com.example.vo.GpsCityVo" column="city_id"
-                     select="com.example.dao.GpsCityDao.selectById"/>
-        <association property="areaVo" javaType="com.example.vo.GpsAreaVo" column="area_id"
-                     select="com.example.dao.GpsAreaDao.selectById"/>
-    </resultMap>
-
     <!--  ShopVo selectShopInfoById(@Param("id") Integer id); -->
     <select id="selectShopInfoById" resultMap="selectPageVoMap">
         select
@@ -87,6 +77,11 @@
     </select>
 
     <select id="queryShopVo" resultType="com.example.vo.ShopVo">
+        select * from shop
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectId" resultMap="selectPageVoMap">
         select * from shop
         where user_id = #{userId}
     </select>

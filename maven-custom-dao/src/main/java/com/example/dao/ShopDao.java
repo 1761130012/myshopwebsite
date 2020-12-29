@@ -41,4 +41,6 @@ public interface ShopDao extends BaseMapper<ShopVo> {
      * @return
      */
     Integer selectUserIdByShopId(@Param("shopId") Integer shopId);
+
+    List<ShopVo> selectId(ShopVo shopVo);
 }

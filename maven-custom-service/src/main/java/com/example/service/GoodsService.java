@@ -6,7 +6,6 @@ import com.example.vo.GoodsTypeVo;
 import com.example.vo.GoodsVo;
 import com.example.vo.ShopCartVo;
 import com.example.vo.UserVo;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -47,9 +46,31 @@ public interface GoodsService extends IService<GoodsVo> {
 
     int deleteCar(ShopCartVo shopCartVo);
 
+    @Override
+    List<GoodsVo> list();
+
     Page<GoodsTypeVo> selectTypeAll(Page<GoodsTypeVo> page, GoodsTypeVo goodsTypeVo);
     int addType(GoodsTypeVo goodsTypeVo);
     int updateType(GoodsTypeVo goodsTypeVo);
     int deleteType(Integer id);
     GoodsTypeVo queryBTypeId(Integer id);
+
+    int addGoodsImage(GoodsImageVo goodsImageVo);
+
+    List<GoodsImageVo> goodsImgList(int goodsId);
+
+    int deleteGoodsImage(int id);
+
+    GoodsImageVo queryGoodsImgById(int id);
+
+    int updateGoodsImage(GoodsImageVo goodsImageVo);
+
+    /**
+     * 读文件 获取
+     * @param absolutePath
+     * @return
+     */
+    List<GoodsVo> readFileGoods(String absolutePath);
+
+    List<GoodsTypeVo> queryAllType();
 }

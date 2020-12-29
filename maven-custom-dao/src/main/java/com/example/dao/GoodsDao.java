@@ -3,6 +3,7 @@ package com.example.dao;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.vo.GoodsVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.vo.UserVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -43,4 +44,14 @@ public interface GoodsDao extends BaseMapper<GoodsVo> {
      * @return
      */
     Float selectPriceByGoodsId(Integer goodsId);
+
+    List<GoodsVo> list();
+
+    /**
+     * 根据商品 id 查询 商品
+     *
+     * @param goodsIds
+     * @return
+     */
+    List<GoodsVo> selectGoodsVoByIds(@Param("goodsIds") List<Integer> goodsIds);
 }

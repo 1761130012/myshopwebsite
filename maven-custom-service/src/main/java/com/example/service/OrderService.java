@@ -158,6 +158,22 @@ public interface OrderService extends IService<OrderVo> {
     String insertOrderByOneGoods(Integer goodsId, Integer num, String loginName);
 
     /**
+     * 根据 商品 id 和 订单id 修改 数量
+     *
+     * @param orderShopVo
+     * @return
+     */
+    boolean updateNumberById(OrderShopVo orderShopVo);
+
+    /**
+     * 根据  订单id 查询 备注
+     *
+     * @param orderId
+     * @return
+     */
+    String selectRemarkByOrderId(String orderId);
+
+    /**
      * 我的订单
      */
     Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page,OrderVo orderVo,String loginName);
@@ -173,4 +189,27 @@ public interface OrderService extends IService<OrderVo> {
 
 
     OrderVo orderall(OrderVo orderVo);
+    Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page, OrderVo orderVo, String loginName);
+
+    /**
+     * 查询 商品 前五
+     *
+     * @return
+     */
+    List<GoodsVo> selectGoodsUpdateFive();
+
+    /**
+     * 进行 修改 为 已删除状态
+     *
+     * @param list
+     * @return
+     */
+    boolean updateDeleteIdByOrderIds(List<String> list, Integer state);
+
+    /**
+     * 订单 发货
+     * @param orderVo
+     * @return
+     */
+    int updateDeliver(OrderVo orderVo);
 }

@@ -1,5 +1,6 @@
 package com.example.vo;
 
+import com.alibaba.excel.annotation.ExcelProperty;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -50,6 +51,7 @@ public class StaffVo implements Serializable {
      * 昵称
      */
     @TableField("name")
+    @ExcelProperty(value = "昵称")
     private String name;
 
     /**
@@ -62,12 +64,14 @@ public class StaffVo implements Serializable {
      * 员工邮箱
      */
     @TableField("email")
+    @ExcelProperty(value = "邮箱")
     private String email;
 
     /**
      * 员工电话
      */
     @TableField("phone")
+    @ExcelProperty(value = "电话")
     private String phone;
 
     /**
@@ -80,9 +84,11 @@ public class StaffVo implements Serializable {
      * 创建时间
      */
     @TableField("create_time")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
-
+    @TableField(exist = false)
+    @ExcelProperty(value = "性别")
+    private String sexStr;
 }

@@ -66,4 +66,12 @@
     </select>
 
 
+
+    <!-- List<Integer> selectGoodsIdUpdateFive(); -->
+    <select id="selectGoodsIdUpdateFive" resultType="java.lang.Integer">
+        SELECT goods_id,pay_number  FROM order_shop
+        GROUP BY goods_id
+        ORDER BY pay_number DESC
+        LIMIT 5
+    </select>
 </mapper>

@@ -10,6 +10,8 @@ import com.example.vo.WarehouseVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 仓库表 服务实现类
@@ -33,4 +35,16 @@ WarehouseShopDao warehouseShopDao;
     public Page<WarehouseShopVo> selectPageVo1(Page<WarehouseShopVo> warehouseShopVoPage, WarehouseShopVo warehouseShopVo) {
         return warehouseShopDao.selectPageVo(warehouseShopVoPage,warehouseShopVo);
     }
+
+    @Override
+    public List<WarehouseShopVo> selectList(WarehouseShopVo warehouseShopVo) {
+        return warehouseShopDao.selectwarehouse(warehouseShopVo);
+    }
+
+    @Override
+    public int updateWarehouse(WarehouseShopVo warehouseShopVo) {
+        return warehouseShopDao.updateWarehouse(warehouseShopVo);
+    }
+
+
 }

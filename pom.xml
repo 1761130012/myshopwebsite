@@ -190,17 +190,27 @@
       <version>2.5.0</version>
     </dependency>
 
+
     <dependency>
       <groupId>com.alipay.sdk</groupId>
       <artifactId>alipay-sdk-java</artifactId>
       <version>4.10.167.ALL</version>
     </dependency>
 
+
+
     <!-- guava 转换 类-->
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>30.0-jre</version>
+    </dependency>
+
+    <!-- 表格 文件读取  -->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>easyexcel</artifactId>
+      <version>2.2.7</version>
     </dependency>
   </dependencies>
 

@@ -50,4 +50,9 @@ public interface OrderShopDao extends BaseMapper<OrderShopVo> {
 
 
 
+    /**
+     * 查询 销量 前五的 id
+     * @return
+     */
+    List<Integer> selectGoodsIdUpdateFive();
 }

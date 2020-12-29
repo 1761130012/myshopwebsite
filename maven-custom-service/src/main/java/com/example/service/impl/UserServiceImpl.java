@@ -57,7 +57,17 @@ public class UserServiceImpl extends ServiceImpl<UserDao, UserVo> implements Use
 
     @Override
     public boolean userLogin(UserVo userVo) {
-        return userDao.selectCountByLoginNamePwd(userVo)>0;
+        return userDao.selectCountByLoginNamePwd(userVo) > 0;
+    }
+
+    @Override
+    public boolean queryIsLoginName(String loginName) {
+        return userDao.selectCountByLoginName(loginName) > 0;
+    }
+
+    @Override
+    public List<UserVo> selectList(UserVo userVo) {
+        return userDao.selectUserVo(userVo);
     }
 
 }
