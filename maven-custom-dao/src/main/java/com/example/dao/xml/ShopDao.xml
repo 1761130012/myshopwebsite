@@ -76,7 +76,7 @@
         where user_id = #{userId};
     </select>
 
-    <select id="queryShopVo" resultType="com.example.vo.ShopVo">
+    <select id="queryShopVo" resultMap="selectPageVoMap">
         select * from shop
         where user_id = #{userId}
     </select>
@@ -85,6 +85,16 @@
         select * from shop
         where user_id = #{userId}
     </select>
+    <select id="selectByShopId" resultMap="selectPageVoMap">
+        select * from shop
+        where shop_id = #{ShopId}
+    </select>
 
-
+    <select id="updateErrorState" resultMap="selectPageVoMap">
+        select * from shop
+        where shop_id not in
+        <foreach collection="shopIds" item="shopId" open="(" separator="," close=")">
+            #{shopId}
+        </foreach>
+    </select>
 </mapper>

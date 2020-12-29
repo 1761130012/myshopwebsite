@@ -76,6 +76,8 @@ public class OrderController {
 
     @RequestMapping("/addCarOrderShopVo")
     public int addCarOrderShopVo(OrderShopVo orderShopVo) {
+        System.out.println(orderShopVo.getOrderId());
+        System.out.println("-------------------");
         return orderShopService.add(orderShopVo);
     }
 
@@ -83,13 +85,15 @@ public class OrderController {
     public String addCarOrderVo(OrderVo orderVo,UserVo userVo){
         UserVo userVos = goodsService.queryUser(userVo);
         orderVo.setUserId(userVos.getUserId());
-        orderVo.setOrderId(TimeGroupUtil.getTimeGroupId());
+        orderVo.setShopId(orderService.getShopId(orderVo.getUserId()));
+        final String orderId = TimeGroupUtil.getTimeGroupHeadId("OR");
+        orderVo.setOrderId(orderId);
         orderVo.setStartTime(new Date());
         orderVo.setPayState(0);
         orderVo.setState(0);
         orderVo.setIsDelete(0);
         orderService.add(orderVo);
-        return orderVo.getOrderId();
+        return orderId;
     }
 
     @RequestMapping("/selectOrderShopVo")

@@ -116,7 +116,9 @@ public class ShopServiceImpl extends ServiceImpl<ShopDao, ShopVo> implements Sho
 
     @Override
     public ShopVo queryShopVo(UserVo userVos) {
-        return shopDao.queryShopVo(userVos);
+        //根据 userid 和 默认 （1） 查询 店铺信息
+        return userShopDao.selectShopVoByUserIdState(userVos.getUserId(), 1).getShopVo();
+        //return shopDao.queryShopVo(userVos);
     }
 
     @Override
@@ -128,5 +130,35 @@ public class ShopServiceImpl extends ServiceImpl<ShopDao, ShopVo> implements Sho
     @Override
     public List<ShopVo> selectById(ShopVo shopVo) {
         return shopDao.selectId(shopVo);
+    }
+
+    @Override
+    public ShopVo queryId(Integer shopId) {
+        return shopDao.selectByShopId(shopId);
+    }
+
+    @Override
+    public UserVo getUserId(UserVo userVo) {
+        return userDao.query(userVo);
+    }
+
+    @Override
+    public Integer getShopId(UserShopVo userShopVo) {
+        return userShopDao.getShopId(userShopVo.getUserId());
+    }
+
+    @Override
+    public List<ShopVo> updateErrorState(Integer[] shopIds) {
+        return shopDao.updateErrorState(shopIds);
+    }
+
+    @Override
+    public List<UserShopVo> selectShopById(UserVo userVo) {
+        return userShopDao.selectShopById(userVo);
+    }
+
+    @Override
+    public int addUserShop(UserShopVo userShopVo) {
+        return userShopDao.insert(userShopVo);
     }
 }

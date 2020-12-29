@@ -110,4 +110,17 @@ public class UserController {
     public boolean queryIsLoginName(String loginName) {
         return userService.queryIsLoginName(loginName);
     }
+
+    @RequestMapping("/queryUserShop")
+    public List<UserShopVo> queryUserShop(UserShopVo userShopVo) {
+        return userService.userShop(userShopVo);
+    }
+
+    @RequestMapping("/updateUserShopState")
+    public int updateUserShopState(UserShopVo userShopVo,UserVo userVo) {
+        userShopVo.setUserId(userService.getUserId(userVo));
+        userService.updateUserShopState(userShopVo);
+        return userService.updateUserShopState2(userShopVo);
+    }
+
 }

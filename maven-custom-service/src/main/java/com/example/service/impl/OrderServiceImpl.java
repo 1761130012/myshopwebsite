@@ -8,9 +8,6 @@ import com.example.utils.BeanUtil;
 import com.example.utils.ServiceImplUtil;
 import com.example.utils.TimeGroupUtil;
 import com.example.vo.*;
-import com.github.pagehelper.PageInfo;
-import org.apache.commons.lang3.StringUtils;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -50,6 +47,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
     private GoodsDao goodsDao;
     @Autowired
     private GoodsTypeDao goodsTypeDao;
+
+    @Autowired
+    private UserShopDao userShopDao;
 
     @Override
     public Page<OrderVo> selectPageVo(Page<OrderVo> orderVoPage, OrderVo orderVo) {
@@ -276,9 +276,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
 
     @Override
     public Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page, OrderVo orderVo, String loginName) {
-        Integer userId=userDao.selectIdByLoginName(loginName);
+        Integer userId = userDao.selectIdByLoginName(loginName);
         orderVo.setUserId(userId);
-        return orderDao.selectAllOrderByUserIdState(page,orderVo);
+        return orderDao.selectAllOrderByUserIdState(page, orderVo);
     }
 
     @Override
@@ -333,4 +333,9 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
     }
 
 
+
+    @Override
+    public Integer getShopId(Integer userId) {
+        return userShopDao.getShopId(userId);
+    }
 }
