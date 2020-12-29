@@ -10,6 +10,8 @@ import com.example.utils.TimeGroupUtil;
 import com.example.vo.*;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -68,12 +70,12 @@ public class OrderController {
     }
 
     @RequestMapping("/addCarOrderShopVo")
-    public int addCarOrderShopVo(OrderShopVo orderShopVo){
+    public int addCarOrderShopVo(OrderShopVo orderShopVo) {
         return orderShopService.add(orderShopVo);
     }
 
     @RequestMapping("/addCarOrderVo")
-    public String addCarOrderVo(OrderVo orderVo,UserVo userVo){
+    public String addCarOrderVo(OrderVo orderVo, UserVo userVo) {
         UserVo userVos = goodsService.queryUser(userVo);
         orderVo.setUserId(userVos.getUserId());
         orderVo.setOrderId(TimeGroupUtil.getTimeGroupId());
@@ -198,9 +200,10 @@ public class OrderController {
     public String insertOrderByOneGoods(Integer goodsId, Integer num, String loginName) {
         return orderService.insertOrderByOneGoods(goodsId, num, loginName);
     }
-//我的订单
+
+    //我的订单
     @RequestMapping("/edittihuostate")
-    public boolean edittihuostate(OrderVo orderVo){
+    public boolean edittihuostate(OrderVo orderVo) {
         orderVo.setState(3);
         return orderService.updateById(orderVo);
     }
@@ -210,45 +213,79 @@ public class OrderController {
         //设置 为 -1 也就是 所有
         orderVo.setState(-1);
         orderVo.setPayState(-1);
-        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
+        Page<OrderVo> page1 = orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
         return page1;
     }
 
     @RequestMapping("/queryAllOrderByUserIdshou")
-    public Page<OrderVo> queryAllOrderByUserIdshou(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+    public PageInfo queryAllOrderByUserIdshou(OrderVo orderVo, String loginName,
+                                              @RequestParam(value = "page") int page,
+                                              @RequestParam(value = "rows") int rows) {
+        PageHelper.startPage(page, rows);
         //设置 为 -1 也就是 所有
         orderVo.setState(-1);
         orderVo.setPayState(0);
-        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
-        return page1;
+        List<OrderGoodsListVO> listVOS = orderService.getMyOrders(orderVo, loginName);
+        PageInfo pageInfo=new PageInfo(listVOS);
+        return pageInfo;
     }
 
     @RequestMapping("/queryAllOrderByUserIdfa")
-    public Page<OrderVo> queryAllOrderByUserIdfa(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+    public PageInfo queryAllOrderByUserIdfa(OrderVo orderVo, String loginName,
+                                            @RequestParam(value = "page") int page,
+                                            @RequestParam(value = "rows") int rows) {
+        PageHelper.startPage(page, rows);
         //设置 为 -1 也就是 所有
         orderVo.setState(1);
         orderVo.setPayState(1);
-        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
-        return page1;
+        List<OrderGoodsListVO> listVOS = orderService.getMyOrders(orderVo, loginName);
+        PageInfo pageInfo=new PageInfo(listVOS);
+        return pageInfo;
     }
 
     @RequestMapping("/queryAllOrderByUserIdti")
-    public Page<OrderVo> queryAllOrderByUserIdti(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+    public PageInfo queryAllOrderByUserIdti(OrderVo orderVo, String loginName,
+                                            @RequestParam(value = "page") int page,
+                                            @RequestParam(value = "rows") int rows) {
+        PageHelper.startPage(page, rows);
         //设置 为 -1 也就是 所有
         orderVo.setState(2);
         orderVo.setPayState(1);
-        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
-        return page1;
+        List<OrderGoodsListVO> listVOS = orderService.getMyOrders(orderVo, loginName);
+        PageInfo pageInfo=new PageInfo(listVOS);
+        return pageInfo;
     }
-
 
 
     @RequestMapping("/queryAllOrderByUserIdyi")
-    public Page<OrderVo> queryAllOrderByUserIdyi(Page<OrderVo> page, OrderVo orderVo, String loginName) {
+    public PageInfo queryAllOrderByUserIdyi(OrderVo orderVo, String loginName,
+                                            @RequestParam(value = "page") int page,
+                                            @RequestParam(value = "rows") int rows) {
+        PageHelper.startPage(page, rows);
         //设置 为 -1 也就是 所有
         orderVo.setState(3);
         orderVo.setPayState(1);
-        Page<OrderVo> page1= orderService.queryAllOrderByUserIdState(page, orderVo, loginName);
-        return page1;
+        List<OrderGoodsListVO> listVOS = orderService.getMyOrders(orderVo, loginName);
+        PageInfo pageInfo=new PageInfo(listVOS);
+        return pageInfo;
     }
+
+    @RequestMapping("/queryAllOrder123")
+    public PageInfo queryAllOrder123(OrderVo orderVo, String loginName,
+                                       @RequestParam(value = "page") int page,
+                                       @RequestParam(value = "rows") int rows) {
+        PageHelper.startPage(page, rows);
+        //设置 为 -1 也就是 所有
+        orderVo.setState(-1);
+        orderVo.setPayState(-1);
+        List<OrderGoodsListVO> listVOS = orderService.getMyOrders(orderVo, loginName);
+        PageInfo pageInfo=new PageInfo(listVOS);
+        return pageInfo;
+    }
+
+    @RequestMapping("/queryAllOrder12")
+    public OrderVo queryAllOrder12(OrderVo orderVo) {
+        return orderService.orderall(orderVo);
+    }
+
 }

@@ -3,6 +3,7 @@ package com.example.dao;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.vo.OrderShopVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.vo.OrderVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -44,5 +45,9 @@ public interface OrderShopDao extends BaseMapper<OrderShopVo> {
      * @return
      */
     List<Map<String, Object>> selectGoodsIdCountByOrderId(@Param("orderIds") List<String> orderIds);
+
+    List<OrderShopVo> selectByOrderIds(@Param("orderIds") List<String> orderIds);
+
+
 
 }

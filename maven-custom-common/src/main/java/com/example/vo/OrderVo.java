@@ -1,6 +1,5 @@
 package com.example.vo;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -10,8 +9,10 @@ import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+
 import java.util.Date;
+import java.util.List;
+
 
 /**
  * <p>
@@ -99,5 +100,9 @@ public class OrderVo implements Serializable {
     private UserVo userVo;
 
     @TableField(exist = false)
+    private ShopVo shopVo;
+
+    @TableField(exist = false)
     private String userName;
+
 }

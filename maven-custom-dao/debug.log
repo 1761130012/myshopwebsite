@@ -1,9 +1,6 @@
-2020-12-21 13:33:20  [ main:2266 ] - [ DEBUG ]  Creating a new SqlSession
-2020-12-21 13:33:20  [ main:2274 ] - [ DEBUG ]  SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39f9b4fc] was not registered for synchronization because synchronization is not active
-2020-12-21 13:33:20  [ main:2395 ] - [ ERROR ]  testWhileIdle is true, validationQuery not set
-2020-12-21 13:33:21  [ main:3483 ] - [ INFO ]  {dataSource-1} inited
-2020-12-21 13:33:21  [ main:3488 ] - [ DEBUG ]  JDBC Connection [com.mysql.cj.jdbc.ConnectionImpl@33246f17] will not be managed by Spring
-2020-12-21 13:33:21  [ main:3501 ] - [ DEBUG ]  ==>  Preparing: select goods_id goodsId,sum(pay_number) countNum from order_shop where order_id in ( ? ) GROUP BY goods_id
-2020-12-21 13:33:21  [ main:3540 ] - [ DEBUG ]  ==> Parameters: 2020121011051(String)
-2020-12-21 13:33:21  [ main:3574 ] - [ DEBUG ]  <==      Total: 2
-2020-12-21 13:33:21  [ main:3577 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@39f9b4fc]
+2020-12-25 09:09:14  [ main:2240 ] - [ DEBUG ]  ==>  Preparing: SELECT COUNT(1) FROM order_goods WHERE user_id = ?
+2020-12-25 09:09:14  [ main:2263 ] - [ DEBUG ]  ==> Parameters: 1(Integer)
+2020-12-25 09:09:14  [ main:2285 ] - [ DEBUG ]  ==>  Preparing: select * from order_goods WHERE user_id=? LIMIT ?
+2020-12-25 09:09:14  [ main:2286 ] - [ DEBUG ]  ==> Parameters: 1(Integer), 5(Long)
+2020-12-25 09:09:14  [ main:2294 ] - [ DEBUG ]  <==      Total: 5
+2020-12-25 09:09:14  [ main:2295 ] - [ DEBUG ]  Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@3d9349a0]

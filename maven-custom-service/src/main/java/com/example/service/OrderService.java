@@ -3,6 +3,8 @@ package com.example.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.vo.*;
+import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 
 import javax.xml.crypto.Data;
 import java.util.Date;
@@ -159,4 +161,16 @@ public interface OrderService extends IService<OrderVo> {
      * 我的订单
      */
     Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page,OrderVo orderVo,String loginName);
+
+
+    /**
+     * 我的订单列表
+     *
+     * @param
+     * @return
+     */
+     List<OrderGoodsListVO> getMyOrders(OrderVo orderVo, String loginName);
+
+
+    OrderVo orderall(OrderVo orderVo);
 }

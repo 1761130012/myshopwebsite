@@ -56,4 +56,14 @@
         </foreach>
         GROUP BY goods_id
     </select>
+    <select id="selectByOrderIds" resultMap="selectListByOrderIdMap">
+        select id,order_id,goods_id,goods_price,pay_number from order_shop
+        where order_id
+        in
+        <foreach item="id" collection="orderIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+
 </mapper>

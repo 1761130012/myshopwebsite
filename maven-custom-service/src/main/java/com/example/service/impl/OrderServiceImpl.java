@@ -4,18 +4,22 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dao.*;
 import com.example.service.OrderService;
+import com.example.utils.BeanUtil;
 import com.example.utils.ServiceImplUtil;
 import com.example.utils.TimeGroupUtil;
-import com.example.vo.GoodsTypeVo;
-import com.example.vo.GoodsVo;
-import com.example.vo.OrderShopVo;
-import com.example.vo.OrderVo;
+import com.example.vo.*;
+import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.awt.print.Book;
 import java.util.*;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.*;
 
 /**
  * <p>
@@ -262,8 +266,44 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderVo> implements 
 
     @Override
     public Page<OrderVo> queryAllOrderByUserIdState(Page<OrderVo> page, OrderVo orderVo, String loginName) {
-        Integer userId=userDao.selectIdByLoginName(loginName);
+        Integer userId = userDao.selectIdByLoginName(loginName);
         orderVo.setUserId(userId);
-        return orderDao.selectAllOrderByUserIdState(page,orderVo);
+        return orderDao.selectAllOrderByUserIdState(page, orderVo);
     }
+
+    @Override
+    public List<OrderGoodsListVO> getMyOrders(OrderVo orderVo, String loginName) {
+        Integer userId = userDao.selectIdByLoginName(loginName);
+        orderVo.setUserId(userId);
+        int total = orderDao.getTotalNewBeeMallOrders(orderVo);
+        List<OrderVo> orderVos = orderDao.findNewBeeMallOrderList(orderVo);
+        List<OrderGoodsListVO> orderListVOS = new ArrayList<>();
+        if (total > 0) {
+            orderListVOS = BeanUtil.copyList(orderVos, OrderGoodsListVO.class);
+            List<String> orderIds = orderVos.stream().map(OrderVo::getOrderId).collect(Collectors.toList());
+            System.out.println(!CollectionUtils.isEmpty(orderIds));
+            if (!CollectionUtils.isEmpty(orderIds)) {
+                List<OrderShopVo> orderItems = orderShopDao.selectByOrderIds(orderIds);
+                Map<String, List<OrderShopVo>> itemByOrderIdMap = orderItems.stream().collect(groupingBy(OrderShopVo::getOrderId));
+                for (OrderGoodsListVO orderGoodsListVO : orderListVOS) {
+                    if (itemByOrderIdMap.containsKey(orderGoodsListVO.getOrderId())) {
+                        List<OrderShopVo> orderItemListTemp = itemByOrderIdMap.get(orderGoodsListVO.getOrderId());
+                        System.out.println(orderItemListTemp);
+                        List<OrderShopVo> newBeeMallOrderItemVOS = BeanUtil.copyList(orderItemListTemp, OrderShopVo.class);
+                        orderGoodsListVO.setGoodsVoList(newBeeMallOrderItemVOS);
+                    }
+                }
+            }
+        }
+        System.out.println("---------------------");
+        System.out.println(orderListVOS);
+        return orderListVOS;
+    }
+
+    @Override
+    public OrderVo orderall(OrderVo orderVo) {
+        return orderDao.orderall(orderVo);
+    }
+
+
 }

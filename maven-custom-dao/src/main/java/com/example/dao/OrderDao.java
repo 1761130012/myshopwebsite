@@ -1,6 +1,7 @@
 package com.example.dao;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.vo.OrderShopVo;
 import com.example.vo.OrderVo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.vo.SupplierVo;
@@ -91,4 +92,12 @@ public interface OrderDao extends BaseMapper<OrderVo> {
     Float selectCountMoneyByOrderId(@Param("orderId") String orderId);
 
     Page<OrderVo> selectAllOrderByUserIdState(@Param("page") Page<OrderVo> page, @Param("orderVo") OrderVo orderVo);
+
+   List<OrderVo> findNewBeeMallOrderList(@Param("orderVo") OrderVo orderVo);
+
+
+    int getTotalNewBeeMallOrders(@Param("orderVo") OrderVo orderVo);
+
+    OrderVo orderall(@Param("orderVo") OrderVo orderVo);
+
 }

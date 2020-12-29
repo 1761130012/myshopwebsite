@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -59,5 +60,7 @@ public class OrderShopVo implements Serializable {
      */
     @TableField(exist = false)
     private GoodsVo goodsVo;
+
+    private String name;
 
 }

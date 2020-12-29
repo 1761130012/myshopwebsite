@@ -3,7 +3,8 @@
 <mapper namespace="com.example.dao.OrderDao">
 
     <sql id="allFiledSql">
-        order_id,user_id,shop_id,start_time,end_time,money,remark,pay_state,state,is_delete
+        order_id
+        ,user_id,shop_id,start_time,end_time,money,remark,pay_state,state,is_delete
     </sql>
 
 
@@ -31,13 +32,18 @@
 
     <!-- void updateCountMoneyById(@Param("orderId") String orderId, @Param("countMoney") Float countMoney); -->
     <update id="updateCountMoneyById">
-        update order_goods set money=#{countMoney} where order_id=#{orderId}
+        update order_goods
+        set money=#{countMoney}
+        where order_id = #{orderId}
     </update>
     <update id="updateShopIdByOrderId">
-        update order_goods  set shop_id=#{shopId} where order_id=#{orderId}
+        update order_goods
+        set shop_id=#{shopId}
+        where order_id = #{orderId}
     </update>
     <select id="selectPayStateByOrderId" resultType="com.example.vo.OrderVo">
-        select pay_state,state from order_goods
+        select pay_state, state
+        from order_goods
         where order_id = #{orderId,jdbcType=VARCHAR}
     </select>
 
@@ -142,4 +148,52 @@
         </where>
         order by pay_state asc
     </select>
+
+
+
+    <select id="getTotalNewBeeMallOrders"  resultType="int">
+        select count(*) from order_goods
+        <where>
+            <if test="orderVo.state !=null and orderVo.state!=-1">
+                and state=#{orderVo.state}
+            </if>
+            <if test="orderVo.orderId !=null and orderVo.orderId !=0 ">
+                and order_id like concat(#{orderVo.orderId},'%')
+            </if>
+            <if test="orderVo.payState != null and orderVo.payState!=-1">
+                and pay_state=#{orderVo.payState}
+            </if>
+            and user_id=#{orderVo.userId}
+        </where>
+    </select>
+    <select id="findNewBeeMallOrderList" resultType="com.example.vo.OrderVo">
+        select order_id,user_id,shop_id,start_time,end_time,money,pay_state,state from
+        <include refid="tableName"/>
+        <where>
+            <if test="orderVo.state !=null and orderVo.state!=-1">
+                and state=#{orderVo.state}
+            </if>
+            <if test="orderVo.orderId !=null and orderVo.orderId !=0 ">
+                and order_id like concat(#{orderVo.orderId},'%')
+            </if>
+            <if test="orderVo.payState != null and orderVo.payState!=-1">
+                and pay_state=#{orderVo.payState}
+            </if>
+            and user_id=#{orderVo.userId}
+        </where>
+        order by pay_state asc
+    </select>
+
+    <resultMap id="selectAllOrderByShopIdStateMap2" type="com.example.vo.OrderVo">
+        <id property="orderId" column="order_id"/>
+        <association property="userVo" column="user_id"
+                     select="com.example.dao.UserDao.selectById"/>
+        <association property="shopVo" column="shop_id"
+                     select="com.example.dao.ShopDao.selectById"/>
+    </resultMap>
+    <select id="orderall" resultMap="selectAllOrderByShopIdStateMap2">
+        select * from order_goods where order_id=#{orderVo.orderId}
+    </select>
+
+
 </mapper>
